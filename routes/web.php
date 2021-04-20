@@ -50,7 +50,7 @@ Route::get('/registro_almacenproducto', 'AlmacenproductoController@create')->nam
 
 /* ------------------------- REGISTRO DE EMPRESA ------------------------- */
 Route::get('/registro_empresa', 'EmpresaController@create')->name('registro_empresa');
-// Route::post('/almacenar_empresa', 'ProductoController@store')->name('almacenar_empresa');
+Route::post('/almacenar_empresa', 'ProductoController@store')->name('almacenar_empresa');
 
 /* ------------------------- COMPRA DE PRODUCTOS ------------------------- */
 Route::get('/registro_compra', 'CompraController@create')->name('registro_compra');

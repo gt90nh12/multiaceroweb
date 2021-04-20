@@ -1,4 +1,6 @@
 
+<br/>
+<br />
 <div class="card">
     <div class="card-body">
         <h4 class="header-title mb-3">Compra de productos</h4>
@@ -278,10 +280,10 @@
                 </div>
 
                 <ul class="list-inline wizard mb-0">
-                    <li class="previous list-inline-item"><a href="#" class="btn btn-info">Previous</a>
+                    <!-- <li class="previous list-inline-item"><a href="#" class="btn btn-info">Previous</a>
                     </li>
                     <li class="next list-inline-item float-right"><a href="#" class="btn btn-info">Next</a></li>
-                    <button type="button">Click Me!</button> 
+                    <button type="button">Click Me!</button>  -->
                 </ul>
             </div> <!-- tab-content -->
         </div> <!-- end #rootwizard-->
