@@ -412,11 +412,14 @@ border: 1px solid #eef2f7;
                             </a>
                             <ul class="side-nav-second-level" aria-expanded="false">
                                 <li>
-                                    <a href="apps-email-inbox.html">Inbox</a>
+                                    <a href="{{url('/ventas')}}">Listar de Ventas</a>
                                 </li>
                                 <li>
-                                    <a href="apps-email-read.html">Read Email</a>
+                                    <a href="{{url('/nueva_factura')}}">Nueva Factura</a>
                                 </li>
+                                <li>
+                                  <a href="{{url('/revisar_facturas')}}">Revisar Facturas</a>
+                              </li>
                             </ul>
                         </li>
 
@@ -652,17 +655,7 @@ border: 1px solid #eef2f7;
                         </li>
                     </ul>
 
-                    <!-- Help Box -->
-                    <div class="help-box text-center">
-                        <a href="javascript: void(0);" class="float-right close-btn text-body">
-                            <i class="mdi mdi-close"></i>
-                        </a>
-                        <img src="assets/images/help-icon.svg" height="90" alt="Helper Icon Image" />
-                        <h5 class="mt-3">Unlimited Access</h5>
-                        <p class="mb-3">Upgrade to plan to get access to unlimited reports</p>
-                        <a href="javascript: void(0);" class="btn btn-outline-primary btn-sm">Upgrade</a>
-                    </div>
-                    <!-- end Help Box -->
+
                     <!-- End Sidebar -->
 
                     <div class="clearfix"></div>
@@ -675,14 +668,14 @@ border: 1px solid #eef2f7;
                     <div class="content">
                         
                         <!-- start page title -->
-                        <!-- <div class="row">
+                        {{-- <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">        
                                     <h3 class="page-title">@yield('titulo_pagina')</h3>
                                     <p class="text-themecolor mb-0 mt-0">@yield('descripcion_pagina')<p>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>  --}}
                         <!-- end page title -->    
 
                         <div class="row">
@@ -750,13 +743,13 @@ border: 1px solid #eef2f7;
                     <div class="custom-control custom-switch mb-1">
                         <input type="radio" class="custom-control-input" name="color-scheme-mode" value="light"
                             id="light-mode-check" checked />
-                        <label class="custom-control-label" for="light-mode-check">Modo claro</label>
+                        <label class="custom-control-label" for="light-mode-check">Modo Día</label>
                     </div>
 
                     <div class="custom-control custom-switch mb-1">
                         <input type="radio" class="custom-control-input" name="color-scheme-mode" value="dark"
                             id="dark-mode-check" />
-                        <label class="custom-control-label" for="dark-mode-check">Modo Oscura</label>
+                        <label class="custom-control-label" for="dark-mode-check">Modo Nocturno</label>
                     </div>
 
                     <!-- Left Sidebar-->
@@ -776,10 +769,7 @@ border: 1px solid #eef2f7;
                     </div>
 
                     <button class="btn btn-primary btn-block mt-4" id="resetBtn">Restablecen predeterminado</button>
-<!-- 
-                    <a href="https://themes.getbootstrap.com/product/hyper-responsive-admin-dashboard-template/"
-                        class="btn btn-danger btn-block mt-3" target="_blank"><i class="mdi mdi-basket mr-1"></i> Purchase
-                        Now</a> -->
+
                 </div> <!-- end padding-->
 
             </div>
