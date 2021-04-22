@@ -82,7 +82,7 @@ border: 1px solid #eef2f7;
 </style>
     </head>
 
-    <body class="loading" data-layout="detached" data-layout-config='{"leftSidebarCondensed":false,"darkMode":false, "showRightSidebarOnStart": true}'>
+    <body class="loading" data-layout="detached" data-layout-config='{"leftSidebarCondensed":false,"darkMode":true, "showRightSidebarOnStart": true}'>
 
         <!-- Topbar Start -->
         <div class="navbar-custom topnav-navbar topnav-navbar-dark">
@@ -264,10 +264,10 @@ border: 1px solid #eef2f7;
                         <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" id="topbar-userdrop" href="#" role="button" aria-haspopup="true"
                             aria-expanded="false">
                             <span class="account-user-avatar"> 
-                                <img src="assets/images/users/avatar-11.png" alt="user-image" class="rounded-circle">
+                                <img src="assets/images/users/avatar-0.jpg" alt="user-image" class="rounded-circle">
                             </span>
                             <span>
-                                <span class="account-user-name">Edgar Peralta</span>
+                                <span class="account-user-name">Kevin Mitnick</span>
                                 <span class="account-position">Administrador de sistema</span>
                             </span>
                         </a>
@@ -333,8 +333,8 @@ border: 1px solid #eef2f7;
 
                     <div class="leftbar-user">
                         <a href="javascript: void(0);">
-                            <img src="assets/images/users/avatar-11.png" alt="user-image" height="42" class="rounded-circle shadow-sm">
-                            <span class="leftbar-user-name">Edgar Peralta</span>
+                            <img src="assets/images/users/avatar-0.jpg" alt="user-image" height="42" class="rounded-circle shadow-sm">
+                            <span class="leftbar-user-name">Kevin Mitnick</span>
                         </a>
                     </div>
 
@@ -792,16 +792,6 @@ border: 1px solid #eef2f7;
         <!-- bundle -->
         <script src="assets/js/vendor.min.js"></script>
         <script src="assets/js/app.min.js"></script>
-
-        <!-- third party js -->
-        <script src="assets/js/vendor/apexcharts.min.js"></script>
-        <script src="assets/js/vendor/jquery-jvectormap-1.2.2.min.js"></script>
-        <script src="assets/js/vendor/jquery-jvectormap-world-mill-en.js"></script>
-        <!-- third party js ends -->
-
-        <!-- demo app -->
-        <script src="assets/js/pages/demo.dashboard.js"></script>
-        <!-- end demo js-->
         
     </body>
 </html>
