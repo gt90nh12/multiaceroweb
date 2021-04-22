@@ -27,11 +27,10 @@
     </div>
 @endif
 
-<!-- <form  action="{{route('almacenar_compra')}}" class="mt-5" enctype="multipart/form-data" method="post" novalidate>
-{{ csrf_field() }} -->
+<form  action="{{route('almacenar_compra')}}" enctype="multipart/form-data" method="post" novalidate>
+    {{ csrf_field() }}
     @include('compra._formulario_compra')
-        
-<!-- </form> -->
+</form>
 <!-- ============================================================== -->
 <!-- End PAge Content -->
 <!-- ============================================================== -->
