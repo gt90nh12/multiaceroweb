@@ -22,7 +22,7 @@ class VentaSeeder extends Seeder
 
       //solo llamamos al sedder desde aqui
       // Venta::factory(30)->create();//laravel8
-      factory(Venta::class, 300)->create();//laravel7
+      factory(Venta::class, 32)->create();//laravel7
 
     }
 }

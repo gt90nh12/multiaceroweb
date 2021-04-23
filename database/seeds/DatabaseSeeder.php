@@ -1,5 +1,6 @@
 <?php
 
+use App\Cliente;
 use Illuminate\Database\Seeder;
 
 use App\Venta;//solo si llammos a Factory en venta si no NO
@@ -19,8 +20,9 @@ class DatabaseSeeder extends Seeder
         //llamar al seeder de Venta
         $this->call(VentaSeeder::class);//lo usamos si llamamos a seeder
         
+        $this->call(ClientesSeeder::class);
         //factory(Venta::class, 30)->create();//lo llamamos directamente al factory de venta
         //desde el factory USER
-        factory(User::class, 33)->create();
+        // factory(User::class, 33)->create();
     }
 }
