@@ -2,61 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Venta;
 use Illuminate\Http\Request;
 
 class VentasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-      return view("ventas.listar_ventas");
+      $venta = Venta::all();
+      //return $venta;//solo es para probar
+
+      //le pasamos los datos almacenados en venta en un compact('venta')
+      return view( "ventas.ventas_hoy", compact('venta') );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
       return view("ventas.nueva_factura");
-
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     // public function show($id)
-    public function show()
+    public function show($id)
     {
       return view("ventas.revisar_facturas");
     }
+    
+    public function ver($id)
+    { 
+      $dato = Venta::find($id);
+      return view( "ventas.ver_factura", compact('dato') );
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    }
+
     public function edit($id)
     {
         //

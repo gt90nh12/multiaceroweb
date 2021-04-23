@@ -4,9 +4,8 @@
 
 
 @section('content')
-revisar facturas
+{{$dato}}
+vemos la factura en cuenstion
 
-<script>
-  console.log("hola");
-</script>
+
 @stop
