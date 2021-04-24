@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator, Hash, Auth;
+use App\Producto;
 use Carbon\carbon;
 
 class ProductoController extends Controller
@@ -15,9 +16,9 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        //
+        $productos = Producto::all();
+        return view('producto.listar')->with(compact('productos'));
     }
-
     /**
      * Show the form for creating a new resource.
      * @return \Illuminate\Http\Response
@@ -80,7 +81,7 @@ class ProductoController extends Controller
             return back()->withErrors($validator)->with('message','Se ha producido un error de validacion')->with('typealert', 'danger');
         else:
             /*------------------------------- Almacenar imagen producto -------------------------------*/
-            $formato = array('.png', '.jpeg');//extenciones validas
+            $formato = array('.png', '.jpeg', '.PNG', '.JPEG');//extenciones validas
             $imagenProducto = ($_FILES['imagen_producto']['name']);//Nombre de la imagen
             $extencion = substr($imagenProducto, strrpos($imagenProducto, '.'));//Extencion de la imagen 
             if(!in_array($extencion, $formato)) {
@@ -90,46 +91,50 @@ class ProductoController extends Controller
                 $ruta="../storage/imagenes/".$_FILES['imagen_producto']['name'];
                 $nombreArchivo = $_FILES['imagen_producto']['name'];
                 move_uploaded_file($_FILES['imagen_producto']['tmp_name'], $ruta);
+                echo("la imagen se direcciono en la ruta:");echo $ruta;
             }
-            if (e($request->input("imagen_producto")) === " "){
-                $nombreImagenProducto = $this->imagenStore("imagen_juego", $imagen_id);
-            }else if (e($request->input("imagen_juego")) != " ") {
-                $nombreImagenProducto="no hay imagen";
-            }{
+            if (e($request->input("imagen_producto")) === ""){
+                $nombreImagenProducto = ($_FILES['imagen_producto']['name']);
+            }else{
                 $nombreImagenProducto="nada";
             }
             /*-----------------------------------------------------------------------------------------*/
             echo ("Formulario totalmente validado");
-            // $registroTablaPersona = Persona::count(); $idPersona=$registroTablaPersona+1;
+            $complementario=[];
+            $jsoncomplementario = json_encode($complementario);
             $producto=[
-                'id'=>1,
+                'usuario'=>1,
                 'nombre'=>$request->input('nombre'),
                 'descripcion'=>$request->input('descripcion'),
-                'imagen_producto'=>$nombreImagenProducto,
+                'imagen'=>$nombreImagenProducto,
                 'lugar_origen_producto'=>$request->input('lugar_origen_producto'),
                 'marca_producto'=>$request->input('marca_producto'),
+                'color_producto'=>$request->input('color_producto'),
                 'material_producto'=>$request->input('material_producto'),
                 'longitud'=>$request->input('longitud'),
                 'espesor'=> $request->input('espesor'),
                 'dimension_producto'=> $request->input('dimension_producto'),
                 'dimension_producto_medida'=> $request->input('dimension_producto_medida'),
+                'peso_producto'=> $request->input('peso_producto'),
+                'peso_producto_medida'=> $request->input('peso_producto_medida'),
                 'unidad_compra'=> $request->input('unidad_compra'),
-                'unidad_factor_compra'=> $request->input('unidad_factor_compra'),
-                'unidad_factor_compra'=> $request->input('unidad_venta'),
-                'unidad_factor_compra'=> $request->input('unidad_factor_venta'),
-                'unidad_factor_compra'=> $request->input('unidad_almacen'),
-                'unidad_factor_compra'=> $request->input('unidad_factor_almacen'),
-                'unidad_factor_compra'=> $request->input('manejo_lote'),
+                'factor_unidad_compra'=> $request->input('unidad_factor_compra'),
+                'unidad_venta'=> $request->input('unidad_venta'),
+                'factor_unidad_venta'=> $request->input('unidad_factor_venta'),
+                'unidad_almacen'=> $request->input('unidad_almacen'),
+                'factor_unidad_almacen'=> $request->input('unidad_factor_almacen'),
+                'precio_venta'=> $request->input('precio_venta'),
+                'manejo_lote'=> true,
+                'complementario'=> $jsoncomplementario,
                 'created_at'=>Carbon::now(),
                 'updated_at'=>Carbon::now(),
                 'estado'=>false
             ];
-            var_dump($producto);
-            // Persona::insert($persona);
-            // return redirect()->route('listar_persona');
-            // if($user->save()):
-            //     return back()->withErrors($validator)->with('message','Usuario registrado')->with('typealert', 'success');
-            // endif;
+            if(Producto::insert($producto)):
+                return back()->withErrors($validator)->with('message','Producto registrado')->with('typealert', 'success');
+            else:
+                return back()->withErrors($validator)->with('message','No se almaceno el producto')->with('typealert', 'danger');
+            endif;
         endif;
     }
 

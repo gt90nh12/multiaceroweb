@@ -20,7 +20,7 @@
 
 /***** disenio para mostrar la imagen *****/
 .datos_imagen{
-background: green;
+    background: green;
 }
 
 #imagen_contenido{
@@ -57,3 +57,19 @@ background: green;
     color: #ffffff;
 }
 
+.separador_titulo_formulario{
+    color: #eef2f7;;
+    left: 4px;
+    right: 4px;
+}
+.claseselect select {
+    color: #a7a7a7;
+}
+.claseselect select option:first-child {
+    color: #a7a7a7;
+    opacity: 0;
+    display: none;
+}
+.claseselect select option {
+    color: #333;
+}

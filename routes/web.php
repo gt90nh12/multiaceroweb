@@ -37,6 +37,8 @@ Route::get('/almacen_lista', 'PersonaController@almacen_lista')->name('almacen_l
 /* ------------------------- REGISTRO DE PRODUCTOS ------------------------- */
 Route::get('/registro_producto', 'ProductoController@create')->name('registro_producto');
 Route::post('/almacenar_producto', 'ProductoController@store')->name('almacenar_producto');
+Route::get('/listar_producto', 'ProductoController@index')->name('listar_producto');
+
 
 /* ------------------------- REGISTRO DE ALMACEN ------------------------- */
 Route::get('/registro_almacen', 'AlmacenController@create')->name('registro_almacen');

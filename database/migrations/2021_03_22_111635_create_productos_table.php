@@ -27,6 +27,8 @@ class CreateProductosTable extends Migration
             $table->double('espesor');
             $table->text('dimension_producto');
             $table->text('dimension_producto_medida');
+            $table->text('peso_producto');
+            $table->text('peso_producto_medida');
             $table->text('unidad_compra');
             $table->text('factor_unidad_compra');
             $table->text('unidad_venta');

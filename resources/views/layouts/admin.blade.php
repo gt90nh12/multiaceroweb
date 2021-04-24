@@ -39,60 +39,60 @@
            border: 1px solid #efefef;
 
        }
-    #ver_archivo img{
-        background: red;
-        height: auto;
-        width: 100%;
-    }
-    .boton_agregar_lote{
-        background: #02a8b5;
-        border-radius: 5px;
-        color: #fff;
-        text-align: center;
-    }
-    .ocultar_contenedor{
-        display: none;| 
-    }
+        #ver_archivo img{
+            background: red;
+            height: auto;
+            width: 100%;
+        }
+        .boton_agregar_lote{
+            background: #02a8b5;
+            border-radius: 5px;
+            color: #fff;
+            text-align: center;
+        }
+        .ocultar_contenedor{
+            display: none;| 
+        }
 
-    /* seccion de contenedor de productos comprados*/
-    .contenedor_productos_comprados{
-        border:0px;
-        border: 1px solid #eef2f7;
-        margin: 0px;
-        padding: 29px;
-        /*margin-top: 25px;*/
-        height: 541px;
-        overflow-y: scroll;
-        width: 100%;
-    }
-    /*Contenedor del producto*/
-    .producto_comprado{
-        background: red;
-        background: linear-gradient(0deg, #eef2f7 0%, #fff 80%);
-        margin-bottom: 5px;
-        border-bottom: #98a6ad 1px solid;
-        border-radius: 15px;
-        /*min-height: 450px;*/
-        /*background: #eef2f7;*/
-        /*margin-bottom: 10px;*/
+        /* seccion de contenedor de productos comprados*/
+        .contenedor_productos_comprados{
+            border:0px;
+            border: 1px solid #eef2f7;
+            margin: 0px;
+            padding: 29px;
+            /*margin-top: 25px;*/
+            height: 541px;
+            overflow-y: scroll;
+            width: 100%;
+        }
+        /*Contenedor del producto*/
+        .producto_comprado{
+            background: red;
+            background: linear-gradient(0deg, #eef2f7 0%, #fff 80%);
+            margin-bottom: 5px;
+            border-bottom: #98a6ad 1px solid;
+            border-radius: 15px;
+            /*min-height: 450px;*/
+            /*background: #eef2f7;*/
+            /*margin-bottom: 10px;*/
 
-    }
-    .imagen_producto_compra{
-        height: 120px;
-    }
-    .eliminar_productoC{
-        width: 100%;
-        border-bottom: #ff5b5b 1px solid;
-        border-top-right-radius:15px; 
-        border-top-left-radius:15px;
-    }
-    .alineacion_derecha{
-        border:0px;
-        margin: 0px;
-        padding: 0px;
-        text-align: left;
-    }
-</style>
+        }
+        .imagen_producto_compra{
+            height: 120px;
+        }
+        .eliminar_productoC{
+            width: 100%;
+            border-bottom: #ff5b5b 1px solid;
+            border-top-right-radius:15px; 
+            border-top-left-radius:15px;
+        }
+        .alineacion_derecha{
+            border:0px;
+            margin: 0px;
+            padding: 0px;
+            text-align: left;
+        }
+    </style>
 </head>
 
 <body class="loading" data-layout="detached" data-layout-config='{"leftSidebarCondensed":false,"darkMode":false, "showRightSidebarOnStart": true}'>
@@ -451,10 +451,10 @@
                                         <li>
                                             <a href="{{url('/registro_almacenproducto')}}">Registrar</a>
                                         </li>
-<!--                                         <li>
-                                            <a href="pages-404-alt.html">Error 404-alt</a>
-                                        </li>
-                                        <li>
+                                        <!-- <li>
+                                            <a href="#">Listar</a>
+                                        </li> -->
+                                        <!-- <li>
                                             <a href="pages-500.html">Error 500</a>
                                         </li> -->
                                     </ul>
@@ -524,14 +524,14 @@
                                     <a href="{{url('/registro_producto')}}">Registrar</a>                                    
                                 </li>
                                 <li>
-                                    <a href="apps-ecommerce-products.html">Lista</a>
+                                    <a href="{{url('/listar_producto')}}">Lista</a>
                                 </li>
-                                <li>
+<!--                                 <li>
                                     <a href="apps-ecommerce-products-details.html">Detalla de producto</a>
-                                </li>
-                                <li>
+                                </li> -->
+<!--                                 <li>
                                     <a href="apps-kanban.html">Reporte</a>
-                                </li>
+                                </li> -->
                             </ul>
                         </li>
 

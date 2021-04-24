@@ -32,92 +32,116 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="lugar_origen_producto">Lugar origen producto</label>
-                                <input type="text" class="form-control" id="lugar_origen_producto" name="lugar_origen_producto">
+                                <input type="text" class="form-control" id="lugar_origen_producto" name="lugar_origen_producto" placeholder="Ingrese el lugar de origen del producto.">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="marca_producto">Marca del producto</label>
-                                <input type="text" class="form-control" id="marca_producto" name="marca_producto"/>    
+                                <input type="text" class="form-control" id="marca_producto" name="marca_producto" placeholder="ingrese la marca del producto" />    
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="color_producto">Color de producto</label>
-                                <textarea class="form-control" id="color_producto" name="color_producto"></textarea>
+                                <textarea class="form-control" id="color_producto" name="color_producto" placeholder="Ingrese color del producto"></textarea>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="material_producto">Material de elaboracion de producto</label>
-                                <textarea type="text" id="" class="form-control" id="material_producto" name="material_producto"></textarea>    
+                                <textarea type="text" id="" class="form-control" id="material_producto" name="material_producto" placeholder="Ingrese material de elaboracion de producto."></textarea>    
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label for="longitud">Longitud</label>
-                                <input type="number" class="form-control" id="longitud" name="longitud">
+                                <input type="number" class="form-control" id="longitud" name="longitud" placeholder="Ingrese longitud del producto">
                                 <span class="font-13 text-muted">La unidad de medidad de longitud es en metros.</span>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label for="espesor">Espesor</label>
-                                <input type="number" class="form-control" id="espesor" name="espesor">
+                                <input type="number" class="form-control" id="espesor" name="espesor" placeholder="ingrese espesor del producto">
                                 <span class="font-13 text-muted">La unidad de medidad del espesor es en milimetros.</span>
                             </div>
-                            <div class="col-md-4">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
                                 <label for="dimension_producto">Dimensión</label>
                                 <div class="row">
                                     <div class="col-md-7">
-                                        <input type="text" id="dimension_producto" class="form-control" name="dimension_producto" placeholder="Ingrese longitud">
+                                        <input type="text" id="dimension_producto" class="form-control" name="dimension_producto" placeholder="Ingrese la dimension de producto">
                                     </div>
-                                    <div class="col-md-5">
+                                    <div class="col-md-5 claseselect">
                                         <select name="dimension_producto_medida" class="form-control" placeholder="Seleccione unidad de medida.">
+                                            <option data-select="unidad_factor_almacen">Seleccione medida.</option>
                                             <option value="pulg">Pulgadas</option>
                                             <option value="mm">Milimetros</option>
                                         </select>
                                     </div>
                                 </div>    
                             </div>
+                            <div class="form-group col-md-6">
+                                <label for="peso_producto">Peso</label>
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <input type="number" id="peso_producto" class="form-control" name="peso_producto" placeholder="Ingrese peso de producto">
+                                    </div>
+                                    <div class="col-md-5 claseselect">
+                                        <select name="peso_producto_medida" class="form-control" placeholder="Seleccione unidad de medida.">
+                                            <option data-select="unidad_factor_almacen" class="color_placeholder">Seleccione medida.</option>
+                                            <option value="pulg">Kilogramos</option>
+                                            <option value="Tm">Toneladas</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-6 claseselect">
                                 <label for="unidad_compra" class="col-form-label">Unidad de compra</label>
                                 <select id="unidad_compra" name="unidad_compra" class="form-control">
+                                    <option data-select="unidad_factor_almacen">Seleccionar unidad de compra.</option>
                                     <option>Toneladas</option>
                                     <option>Kilo</option>
                                 </select>
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-6 claseselect">
                                 <label for="unidad_factor_compra" class="col-form-label">Factor unidad de compra</label>
                                 <select id="unidad_factor_compra" name="unidad_factor_compra" class="form-control">
+                                    <option data-select="unidad_factor_almacen">Seleccionar factor de unidad de compra.</option>
                                     <option>Unidad</option>
                                     <option>Metros</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-6 claseselect">
                                 <label for="unidad_venta" class="col-form-label">Unidad de venta</label>
                                 <select id="unidad_venta" name="unidad_venta" class="form-control">
+                                    0.<option data-select="unidad_factor_almacen">Seleccionar unidad de venta.</option>
                                     <option>Toneladas</option>
                                     <option>Kilo</option>
                                 </select>
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-6 claseselect">
                                 <label for="unidad_factor_venta" class="col-form-label">Factor unidad de venta</label>
                                 <select id="unidad_factor_venta" name="unidad_factor_venta" class="form-control">
+                                    <option data-select="unidad_factor_almacen">Seleccionar factor de unidad de venta.</option>
                                     <option>Unidad</option>
                                     <option>Metros</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-6 claseselect">
                                 <label for="unidad_almacen" class="col-form-label">Unidad de almacen</label>
                                 <select id="unidad_almacen" name="unidad_almacen" class="form-control">
+                                    <option data-select="unidad_factor_almacen">Seleccionar unidad de compra almacen.</option>
                                     <option>Toneladas</option>
                                     <option>Kilo</option>
                                 </select>
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-6 claseselect">
                                 <label for="unidad_factor_almacen" class="col-form-label">Factor unidad de almacen</label>
-                                <select id="unidad_factor_almacen" name="unidad_factor_almacen" class="form-control">
+                                <select id="unidad_factor_almacen" name="unidad_factor_almacen" class="form-control" >
+                                    <option data-select="unidad_factor_almacen">Seleccionar factor de unidad medida almacen</option>
                                     <option>Unidad</option>
                                     <option>Metros</option>
                                 </select>
@@ -126,6 +150,7 @@
                         <div class="form-group">
                             <label for="precio_venta" class="col-form-label">Precio venta</label>
                             <input type="text" class="form-control" id="precio_venta" name="precio_venta" placeholder="Ingrese el precio de compra">
+                            <span class="font-13 text-muted">Unidad monetaria en Bolivianos.</span>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-2">
@@ -208,8 +233,7 @@
                     var srcData = fileLoadedEvent.target.result; // <--- data: base64
                     var newImage = document.createElement('img');
                     newImage.src = srcData;
-                    document.getElementById("ver_archivo").innerHTML = newImage.outerHTML;// Enviara la imagen
-                    //alert("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
+                    document.getElementById("ver_archivo").innerHTML = newImage.outerHTML;
                 }
                 fileReader.readAsDataURL(fileToLoad);
             }
