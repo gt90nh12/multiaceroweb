@@ -27,12 +27,12 @@
     </div>
 @endif
 
-<form  action="{{route('almacenar_compra')}}" class="mt-5" enctype="multipart/form-data" method="post" novalidate>
-{{ csrf_field() }}
-	@include('compra._formulario_compra')
-    <!-- <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i>Guardar</button>         -->
+<form  action="{{route('almacenar_compra')}}" enctype="multipart/form-data" method="post" novalidate>
+    {{ csrf_field() }}
+    @include('compra._formulario_compra')
 </form>
 <!-- ============================================================== -->
 <!-- End PAge Content -->
 <!-- ============================================================== -->
+<script src="assets/js/pages/demo.form-wizard.js"></script>
 @stop

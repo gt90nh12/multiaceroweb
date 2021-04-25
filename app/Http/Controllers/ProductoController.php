@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator, Hash, Auth;
+use App\Producto;
+use Carbon\carbon;
 
 class ProductoController extends Controller
 {
@@ -14,9 +16,9 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        //
+        $productos = Producto::all();
+        return view('producto.listar')->with(compact('productos'));
     }
-
     /**
      * Show the form for creating a new resource.
      * @return \Illuminate\Http\Response
@@ -38,30 +40,40 @@ class ProductoController extends Controller
             'nombre'=>'required',
             'descripcion'=>'required',
             'imagen_producto'=>'required',
-            'categoria_id'=>'required',
-            'tipo_id'=>'required',
+            'lugar_origen_producto'=>'required',
+            'marca_producto'=>'required',
+            'color_producto'=>'required',
+            'material_producto'=>'required',
+            'longitud'=>'required',
+            'espesor'=>'required',
+            'dimension_producto'=>'required',
+            'dimension_producto_medida'=>'required',
             'unidad_compra'=>'required',
             'unidad_factor_compra'=>'required',
             'unidad_venta'=>'required',
             'unidad_factor_venta'=>'required',
             'unidad_almacen'=>'required',
             'unidad_factor_almacen'=>'required',
-            'precio_compra'=>'required|between:0,99.99',
             'precio_venta'=>'required|between:0,99.99',
         ];
         $messages = [
             'nombre.required' => 'Debe ingresar el nombre del producto.',
             'descripcion.required' => 'Debe ingresar la descripción del producto registrado.',
             'imagen_producto.required' => 'Debe ingresar la imagen del producto.',
-            'categoria_id.required' => 'Debe selccionar la categoría del producto.',
-            'tipo_id.required' => 'Debe seleccionar el tipo de producto.',
+            'lugar_origen_producto.required' => 'Debe el lugar de origen del producto.',
+            'marca_producto.required' => 'Debe ingresar la marca del producto.',
+            'color_producto.required' => 'Debe ingresar el color del producto.',
+            'material_producto.required' => 'Debe ingresar el material de elaboración del producto.',
+            'longitud.required' => 'Debe ingresar la longitud producto.',
+            'espesor.required' => 'Debe ingresar el espesor del producto.',
+            'dimension_producto.required' => 'Debe ingresar la dimension externa del producto.',
+            'dimension_producto_medida.required' => 'Debe seleccionar las unidd de medida del producto.',
             'unidad_compra.required' => 'Seleccione la unidad utilizada de compra.',
-            'factor_unidad_compra.required' => 'Seleccione el factor de unidad de compra.',
+            'unidad_factor_compra.required' => 'Seleccione el factor de unidad de compra.',
             'unidad_venta.required' => 'Seleccione la unidad utilizada de venta.',
-            'factor_unidad_venta.required' => 'Seleccione el factor de unidad de venta.',
+            'unidad_factor_venta.required' => 'Seleccione el factor de unidad de venta.',
             'unidad_almacen.required' => 'Seleccione la unidad de almacenamiento.',
-            'factor_unidad_venta.required' => 'Seleccione el factor de almacenamiento.',
-            'precio_compra.required' => 'Debe ingresar el precio de compra.',
+            'unidad_factor_almacen.required' => 'Seleccione el factor de almacenamiento.',
             'precio_venta.required' => 'Debe ingresar el precio de venta.',
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -69,7 +81,7 @@ class ProductoController extends Controller
             return back()->withErrors($validator)->with('message','Se ha producido un error de validacion')->with('typealert', 'danger');
         else:
             /*------------------------------- Almacenar imagen producto -------------------------------*/
-            $formato = array('.png', '.jpeg');//extenciones validas
+            $formato = array('.png', '.jpeg', '.PNG', '.JPEG');//extenciones validas
             $imagenProducto = ($_FILES['imagen_producto']['name']);//Nombre de la imagen
             $extencion = substr($imagenProducto, strrpos($imagenProducto, '.'));//Extencion de la imagen 
             if(!in_array($extencion, $formato)) {
@@ -79,30 +91,50 @@ class ProductoController extends Controller
                 $ruta="../storage/imagenes/".$_FILES['imagen_producto']['name'];
                 $nombreArchivo = $_FILES['imagen_producto']['name'];
                 move_uploaded_file($_FILES['imagen_producto']['tmp_name'], $ruta);
+                echo("la imagen se direcciono en la ruta:");echo $ruta;
+            }
+            if (e($request->input("imagen_producto")) === ""){
+                $nombreImagenProducto = ($_FILES['imagen_producto']['name']);
+            }else{
+                $nombreImagenProducto="nada";
             }
             /*-----------------------------------------------------------------------------------------*/
-
-            // echo ("Formulario totalmente validado");
-            // $registroTablaPersona = Persona::count(); $idPersona=$registroTablaPersona+1;
-            // $persona=[
-            //     'id'=>$idPersona,
-            //     'nombre'=>$request->input('nombre'),
-            //     'apellido_paterno'=>$request->input('apellido_paterno'),
-            //     'apellido_materno'=>$request->input('apellido_materno'),
-            //     'sexo'=>$request->input('genero'),
-            //     'ci'=>$request->input('ci'),
-            //     'fecha_nacimiento'=>$request->input('fecha_nacimiento'),
-            //     'celular'=>$request->input('celular'),
-            //     'correo_electronico'=> $request->input('correo_electronico'),
-            //     'created_at'=>Carbon::now(),
-            //     'updated_at'=>Carbon::now(),
-            //     'estado'=>false
-            // ];
-            // Persona::insert($persona);
-            // return redirect()->route('listar_persona');
-            // if($user->save()):
-            //     return back()->withErrors($validator)->with('message','Usuario registrado')->with('typealert', 'success');
-            // endif;
+            echo ("Formulario totalmente validado");
+            $complementario=[];
+            $jsoncomplementario = json_encode($complementario);
+            $producto=[
+                'usuario'=>1,
+                'nombre'=>$request->input('nombre'),
+                'descripcion'=>$request->input('descripcion'),
+                'imagen'=>$nombreImagenProducto,
+                'lugar_origen_producto'=>$request->input('lugar_origen_producto'),
+                'marca_producto'=>$request->input('marca_producto'),
+                'color_producto'=>$request->input('color_producto'),
+                'material_producto'=>$request->input('material_producto'),
+                'longitud'=>$request->input('longitud'),
+                'espesor'=> $request->input('espesor'),
+                'dimension_producto'=> $request->input('dimension_producto'),
+                'dimension_producto_medida'=> $request->input('dimension_producto_medida'),
+                'peso_producto'=> $request->input('peso_producto'),
+                'peso_producto_medida'=> $request->input('peso_producto_medida'),
+                'unidad_compra'=> $request->input('unidad_compra'),
+                'factor_unidad_compra'=> $request->input('unidad_factor_compra'),
+                'unidad_venta'=> $request->input('unidad_venta'),
+                'factor_unidad_venta'=> $request->input('unidad_factor_venta'),
+                'unidad_almacen'=> $request->input('unidad_almacen'),
+                'factor_unidad_almacen'=> $request->input('unidad_factor_almacen'),
+                'precio_venta'=> $request->input('precio_venta'),
+                'manejo_lote'=> true,
+                'complementario'=> $jsoncomplementario,
+                'created_at'=>Carbon::now(),
+                'updated_at'=>Carbon::now(),
+                'estado'=>false
+            ];
+            if(Producto::insert($producto)):
+                return back()->withErrors($validator)->with('message','Producto registrado')->with('typealert', 'success');
+            else:
+                return back()->withErrors($validator)->with('message','No se almaceno el producto')->with('typealert', 'danger');
+            endif;
         endif;
     }
 

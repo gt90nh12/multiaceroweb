@@ -35,24 +35,36 @@
 
                 <ul class="list-unstyled topbar-right-menu float-right mb-0">
 
-                    <li class="dropdown notification-list d-lg-none">
-                        <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <i class="dripicons-search noti-icon"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-animated dropdown-lg p-0">
-                            <form class="p-3">
-                                <input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
-                            </form>
+                <li class="dropdown notification-list d-lg-none">
+                    <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                        <i class="dripicons-search noti-icon"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-animated dropdown-lg p-0">
+                        <form class="p-3">
+                            <input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
+                        </form>
+                    </div>
+                </li>
+
+                <li class="dropdown notification-list">
+                    <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" id="topbar-notifydrop" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="dripicons-bell noti-icon"></i>
+                        <span class="noti-icon-badge"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated dropdown-lg" aria-labelledby="topbar-notifydrop">
+
+                        <!-- item-->
+                        <div class="dropdown-item noti-title">
+                            <h5 class="m-0">
+                                <span class="float-right">
+                                    <a href="javascript: void(0);" class="text-dark">
+                                        <small>Clear All</small>
+                                    </a>
+                                </span>Notification
+                            </h5>
                         </div>
-                    </li>
-    
-                    <li class="dropdown notification-list">
-                        <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" id="topbar-notifydrop" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="dripicons-bell noti-icon"></i>
-                            <span class="noti-icon-badge"></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated dropdown-lg" aria-labelledby="topbar-notifydrop">
-    
+
+                        <div style="max-height: 230px;" data-simplebar>
                             <!-- item-->
                             <div class="dropdown-item noti-title">
                                 <h5 class="m-0">
@@ -94,7 +106,7 @@
                                         <small>Hi, How are you? What about our next meeting</small>
                                     </p>
                                 </a>
-    
+
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                                     <div class="notify-icon bg-primary">
@@ -104,7 +116,7 @@
                                         <small class="text-muted">4 days ago</small>
                                     </p>
                                 </a>
-    
+
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                                     <div class="notify-icon">
@@ -125,15 +137,9 @@
                                         <small class="text-muted">13 days ago</small>
                                     </p>
                                 </a>
+
                             </div>
-    
-                            <!-- All-->
-                            <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
-                                View All
-                            </a>
-    
-                        </div>
-                    </li>
+                        </li>
 
                     <li class="dropdown notification-list d-none d-sm-inline-block">
                         <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -182,21 +188,19 @@
                                             <span>G Suite</span>
                                         </a>
                                     </div>
-                
                                 </div>
-                            </div>
-    
-                        </div>
-                    </li>
 
-                    <li class="notification-list">
-                        <a class="nav-link right-bar-toggle" href="javascript: void(0);">
-                            <i class="dripicons-gear noti-icon"></i>
-                        </a>
-                    </li>
-    
-                    <li class="dropdown notification-list">
-                        <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" id="topbar-userdrop" href="#" role="button" aria-haspopup="true"
+                            </div>
+                        </li>
+
+                        <li class="notification-list">
+                            <a class="nav-link right-bar-toggle" href="javascript: void(0);">
+                                <i class="dripicons-gear noti-icon"></i>
+                            </a>
+                        </li>
+
+                        <li class="dropdown notification-list">
+                            <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" id="topbar-userdrop" href="#" role="button" aria-haspopup="true"
                             aria-expanded="false">
                             <span class="account-user-avatar"> 
                                 <img src="{{asset('assets/images/users/avatar-0.jpg')}}" alt="user-image" class="rounded-circle">
@@ -211,37 +215,37 @@
                             <div class=" dropdown-header noti-title">
                                 <h6 class="text-overflow m-0">Bienvenido !</h6>
                             </div>
-    
+
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <i class="mdi mdi-account-circle mr-1"></i>
                                 <span>Mi cuenta</span>
                             </a>
-    
+
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <i class="mdi mdi-account-edit mr-1"></i>
                                 <span>Configuración</span>
                             </a>
-    
+
                             <!-- item-->
     <!--                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <i class="mdi mdi-lifebuoy mr-1"></i>
                                 <span>Support</span>
                             </a>
-     -->
-                            <!-- item-->
+                        -->
+                        <!-- item-->
 <!--                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <i class="mdi mdi-lock-outline mr-1"></i>
                                 <span>Lock Screen</span>
                             </a> -->
-    
+
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <i class="mdi mdi-logout mr-1"></i>
                                 <span>cerrar sesión</span>
                             </a>
-    
+
                         </div>
                     </li>
 
@@ -323,7 +327,7 @@
 
                         <li class="side-nav-item">
                             <a href="javascript: void(0);" class="side-nav-link">
-                                <i class="icon-ventas"></i>
+                                <i class="uil-box"></i>
                                 <!-- <i class="uil-envelope almacen"></i> -->
                                 <span> Compras </span>
                                 <span class="menu-arrow"></span>
@@ -376,10 +380,10 @@
                                         <li>
                                             <a href="{{url('/registro_almacenproducto')}}">Registrar</a>
                                         </li>
-<!--                                         <li>
-                                            <a href="pages-404-alt.html">Error 404-alt</a>
-                                        </li>
-                                        <li>
+                                        <!-- <li>
+                                            <a href="#">Listar</a>
+                                        </li> -->
+                                        <!-- <li>
                                             <a href="pages-500.html">Error 500</a>
                                         </li> -->
                                     </ul>
@@ -449,14 +453,14 @@
                                     <a href="{{url('/registro_producto')}}">Registrar</a>                                    
                                 </li>
                                 <li>
-                                    <a href="apps-ecommerce-products.html">Lista</a>
+                                    <a href="{{url('/listar_producto')}}">Lista</a>
                                 </li>
-                                <li>
+<!--                                 <li>
                                     <a href="apps-ecommerce-products-details.html">Detalla de producto</a>
-                                </li>
-                                <li>
+                                </li> -->
+<!--                                 <li>
                                     <a href="apps-kanban.html">Reporte</a>
-                                </li>
+                                </li> -->
                             </ul>
                         </li>
 
@@ -615,65 +619,65 @@
 
                         <div class="row">
                             <div class="col-12">
-                             @section('content')
-                            @show
+                               @section('content')
+                               @show
 
+                           </div>
+                       </div>
+                       <!-- end row -->
+
+
+
+
+
+                   </div> <!-- End Content -->
+
+                   <!-- Footer Start -->
+                   <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                2018 - 2020 © Multiacero
                             </div>
-                        </div>
-                        <!-- end row -->
-
-
-
-                           
-                        
-                    </div> <!-- End Content -->
-
-                    <!-- Footer Start -->
-                    <footer class="footer">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    2018 - 2020 © Hyper - Coderthemes.com
+                            <!-- <div class="col-md-6">
+                                <div class="text-md-right footer-links d-none d-md-block">
+                                    <a href="javascript: void(0);">About</a>
+                                    <a href="javascript: void(0);">Support</a>
+                                    <a href="javascript: void(0);">Contact Us</a>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="text-md-right footer-links d-none d-md-block">
-                                        <a href="javascript: void(0);">About</a>
-                                        <a href="javascript: void(0);">Support</a>
-                                        <a href="javascript: void(0);">Contact Us</a>
-                                    </div>
-                                </div>
-                            </div>
+                            </div> -->
                         </div>
-                    </footer>
-                    <!-- end Footer -->
-
-                </div> <!-- content-page -->
-
-            </div> <!-- end wrapper-->
-        </div>
-        <!-- END Container -->
-
-
-        <!-- Right Sidebar -->
-        <div class="right-bar">
-
-            <div class="rightbar-title">
-                <a href="javascript:void(0);" class="right-bar-toggle float-right">
-                    <i class="dripicons-cross noti-icon"></i>
-                </a>
-                <h5 class="m-0">Ajustes</h5>
-            </div>
-
-            <div class="rightbar-content h-100" data-simplebar>
-
-                <div class="p-3">
-                    <div class="alert alert-warning" role="alert">
-                        <strong>Personalice</strong> la combinación de colores general, el menú de la barra lateral, etc.
                     </div>
+                </footer>
+                <!-- end Footer -->
 
-                    <!-- Settings -->
-                    <h5 class="mt-3">Esquema de colores</h5>
-                    <hr class="mt-1" />
+            </div> <!-- content-page -->
+
+        </div> <!-- end wrapper-->
+    </div>
+    <!-- END Container -->
+
+
+    <!-- Right Sidebar -->
+    <div class="right-bar">
+
+        <div class="rightbar-title">
+            <a href="javascript:void(0);" class="right-bar-toggle float-right">
+                <i class="dripicons-cross noti-icon"></i>
+            </a>
+            <h5 class="m-0">Ajustes</h5>
+        </div>
+
+        <div class="rightbar-content h-100" data-simplebar>
+
+            <div class="p-3">
+                <div class="alert alert-warning" role="alert">
+                    <strong>Personalice</strong> la combinación de colores general, el menú de la barra lateral, etc.
+                </div>
+
+                <!-- Settings -->
+                <h5 class="mt-3">Esquema de colores</h5>
+                <hr class="mt-1" />
 
                     <div class="custom-control custom-switch mb-1">
                         <input type="radio" class="custom-control-input" name="color-scheme-mode" value="light"
@@ -687,21 +691,21 @@
                         <label class="custom-control-label" for="dark-mode-check">Modo Nocturno</label>
                     </div>
 
-                    <!-- Left Sidebar-->
-                    <h5 class="mt-4">Barra lateral izquierda</h5>
-                    <hr class="mt-1" />
+                <!-- Left Sidebar-->
+                <h5 class="mt-4">Barra lateral izquierda</h5>
+                <hr class="mt-1" />
 
-                    <div class="custom-control custom-switch mb-1">
-                        <input type="radio" class="custom-control-input" name="compact" value="fixed" id="fixed-check"
-                            checked />
-                        <label class="custom-control-label" for="fixed-check">Despazable</label>
-                    </div>
+                <div class="custom-control custom-switch mb-1">
+                    <input type="radio" class="custom-control-input" name="compact" value="fixed" id="fixed-check"
+                    checked />
+                    <label class="custom-control-label" for="fixed-check">Despazable</label>
+                </div>
 
-                    <div class="custom-control custom-switch mb-1">
-                        <input type="radio" class="custom-control-input" name="compact" value="condensed"
-                            id="condensed-check" />
-                        <label class="custom-control-label" for="condensed-check">Condensada</label>
-                    </div>
+                <div class="custom-control custom-switch mb-1">
+                    <input type="radio" class="custom-control-input" name="compact" value="condensed"
+                    id="condensed-check" />
+                    <label class="custom-control-label" for="condensed-check">Condensada</label>
+                </div>
 
                     <button class="btn btn-primary btn-block mt-4" id="resetBtn">Restablecen predeterminado</button>
 
@@ -719,4 +723,4 @@
         <script src="{{asset('assets/js/app.min.js')}}"></script>
         
     </body>
-</html>
+    </html>
