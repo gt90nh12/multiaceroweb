@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Producto;
 use App\Venta;
+use App\Cliente;
 use Illuminate\Http\Request;
 
 class VentasController extends Controller
@@ -18,7 +20,9 @@ class VentasController extends Controller
 
     public function create()
     {
-      return view("ventas.nueva_factura");
+      $producto = Producto::all();
+      $cliente = Cliente::all();
+      return view("ventas.nueva_factura",compact('producto','cliente'));
     }
 
     public function store(Request $request)
@@ -44,26 +48,22 @@ class VentasController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
+    }
+
+    public function buscar_producto()
+    {
+      $venta = Venta::all();
+      //return $venta;//solo es para probar
+
+      //le pasamos los datos almacenados en venta en un compact('venta')
+      return view( "ventas.buscar_productos", compact('venta') );
     }
 }

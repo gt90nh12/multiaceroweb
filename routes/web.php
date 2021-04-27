@@ -62,5 +62,6 @@ Route::post('/almacenar_compra', 'CompraController@store')->name('almacenar_comp
 Route::get('/ventas_hoy', 'ventasController@index')->name('ventas.index');
 Route::get('/nueva_factura', 'ventasController@create')->name('nueva_factura.create');
 Route::get('/revisar_facturas', 'ventasController@show')->name('revisar_facturas.show');
-Route::get('/ver_factura/{id}', 'ventasController@ver') ->name('ver_factura');
+Route::get('/ver_factura/{id}', 'ventasController@ver')->name('ver_factura');
+Route::get('/buscar_producto','ventasController@buscar_producto')->name('buscar_producto');
 

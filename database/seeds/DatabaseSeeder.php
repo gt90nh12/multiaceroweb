@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
         $this->call(VentaSeeder::class);//lo usamos si llamamos a seeder
         
         $this->call(ClientesSeeder::class);
+
+        $this->call(ProductosSeeder::class);
+
         //factory(Venta::class, 30)->create();//lo llamamos directamente al factory de venta
         //desde el factory USER
         // factory(User::class, 33)->create();
