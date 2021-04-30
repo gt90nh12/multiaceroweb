@@ -400,7 +400,7 @@
                         </li>
 
                         <li class="side-nav-item">
-                            <a href="apps-social-feed.html" class="side-nav-link">
+                            <a href="{{route('clientes.index')}}" class="side-nav-link">
                                 <i class="dripicons-user"></i>
                                 <span> Clientes </span>
                             </a>
