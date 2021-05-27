@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Producto;
+use Illuminate\Support\Facades\Validator, Hash, Auth;
+use Carbon\carbon;
+use App\tipoProducto;
+use DB;
 
-
-class AlmacenproductoController extends Controller
+class CaracteristicasProductoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,8 +27,7 @@ class AlmacenproductoController extends Controller
      */
     public function create()
     {
-        $productos = Producto::all();
-        return view('almacenproducto.registro_almacenproducto')->with(compact('productos'));
+        
     }
 
     /**
@@ -37,7 +38,7 @@ class AlmacenproductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
     }
 
     /**

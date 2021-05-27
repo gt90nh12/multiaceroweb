@@ -1,4 +1,11 @@
 <div class="row">
+    <div class="col-12">
+        <div class="page-title-box">
+        <h4 class="page-title">Almacen <span class="separador_menu"> | </span> Existencia de productos</h4>
+        </div>
+    </div>
+</div>
+<div class="row">
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
@@ -17,10 +24,14 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="producto" class="col-form-label">Seleccione producto</label>
-                                                        <select class="form-control select2 select2-hidden-accessible" data-toggle="select2" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                                            <option data-select2-id="3">Seleccione producto</option>
-                                                            <option value="AZ" data-select2-id="18">Fierro</option>
-                                                        </select>
+                                                        <select id="producto" name="producto" class="form-control" data-toggle="select3" data-select3-id="1" tabindex="-1" aria-hidden="true">
+                                    <option data-select2-id="3">Seleccione proveedor</option>
+                                    @if(!empty($productos))
+                                    @foreach($productos as $producto)
+                                    <option value="{{$producto->cod_producto}}">{{$producto->nombre}}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
                                                     </div>
  
 
