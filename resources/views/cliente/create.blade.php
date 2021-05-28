@@ -21,119 +21,66 @@
     </div>
     <div class="tab-content">
       <div class="tab-pane show active">
-
-        <form action="{{route('clientes.store')}}" method="POST" class="needs-validation" novalidate>
+        <form action="{{route('clientes.store')}}" method="POST" novalidate>
           @csrf
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="form-group mb-3">
-                <label for="validationNombre">Nombre</label>
-                <input type="text" name="nombre" value=""  class="form-control" id="validationNombre" placeholder="Nombre"  >
-                <div class="valid-feedback">
-                  Muy Bien!
-                </div>
-                <div class="invalid-feedback">
-                  Falta el Nombre
-                </div>
+          <div class="form-group mb-3">
+            <label for="validationNombre">Razón Social</label>
+            <input type="text" name="nombre_razon_social" value="{{old('nombre_razon_social')}}"  class="form-control" id="validationNombre" placeholder="Razón Social"/>
+            @error('nombre_razon_social')
+              <div class="alert alert-danger" role="alert">
+                <strong>* </strong> {{$message}}
               </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="form-group mb-3">
-                <label for="validationApellidos">Apellidos</label>
-                <input type="text" name="apellidos" class="form-control" id="validationApellidos" placeholder="Apellidos" value="" required>
-                <div class="valid-feedback">
-                  Muy Bien!
-                </div>
-                <div class="invalid-feedback">
-                  Falta Apellido
-                </div>
-              </div>
-            </div>
+            @enderror
           </div>
           <div class="row">
             <div class="col-lg-6">
               <div class="form-group mb-3">
                 <label for="validationNumDocumento">Numero de Documento</label>
-                <input type="number" class="form-control" name="num_documento" id="validationNumDocumento" placeholder="Numero de documento" value="" required>
-                <div class="valid-feedback">
-                  Muy Bien!
-                </div>
-                <div class="invalid-feedback">
-                  Falta Numero de Documento
-                </div>
+                <input type="number" class="form-control" name="num_documento" id="validationNumDocumento" placeholder="Numero de documento" value="{{old('num_documento')}}" min="99999"/>
+                @error('num_documento')
+                  <div class="alert alert-danger" role="alert">
+                    <strong>* </strong> {{$message}}
+                  </div>
+                @enderror
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group mb-3">
                 <label for="validationSelect">Tipo de Documento</label>
+                <?php
+                  switch(old('tipo_documento')) {
+                    case "CI":
+                    $selected_ci = 'selected';
+                    $selected_nit = '';
+                    break;
+                    case "NIT":
+                    $selected_ci = '';
+                    $selected_nit = 'selected';
+                    break;
+                    
+                    default:
+                    $selected_ci = '';
+                    $selected_nit = '';
+                  }
+                ?>
                 <select name="tipo_documento" class="form-control" id="validationSelect">
-                  <option value="CI">CI</option>
-                  <option value="NIT">NIT</option>
+                  <option value=""></option>
+                  <option value="CI" {{$selected_ci}}>CI</option>
+                  <option value="NIT" {{$selected_nit}}>NIT</option>
                 </select>
-              </div>
-            </div>
-          </div><hr>
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="form-group mb-3">
-                <label for="validationTelefonoMovil">Telefono Movil</label>
-                <input type="text" name="telefono_movil" value="" class="form-control" id="validationTelefonoMovil" placeholder="Nombre"  required>
-                <div class="valid-feedback">
-                  Muy Bien!
-                </div>
-                <div class="invalid-feedback">
-                  Falta Telefono Movil
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="form-group mb-3">
-                <label for="validationTelefonoFijo">Telefono Fijo</label>
-                <input type="text" name="telefono_fijo" value="" class="form-control" id="validationTelefonoFijo" placeholder="Nombre"  required>
-                <div class="valid-feedback">
-                  Muy Bien!
-                </div>
-                <div class="invalid-feedback">
-                  Falta Telefono Fijo
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group mb-3">
-            <label for="validationEmail">Correo Electronico</label>
-            <input type="email" name="email" class="form-control" id="validationEmail" placeholder="Coreo Electronico" required>
-            <div class="valid-feedback">
-              Muy Bien!
-            </div>
-            <div class="invalid-feedback">
-              Falta Correo Electronico
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="form-group mb-3">
-                <label for="validationFechaNacimiento">Fecha de Nacimiento</label>
-                <input type="date" name="fecha_nacimiento" class="form-control" id="validationFechaNacimiento" value="2021-04-23" required>
-                <div class="valid-feedback">
-                  Muy Bien!
-                </div>
-                <div class="invalid-feedback">
-                  Falta Fecha de Nacimiento
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="form-group mb-3">
-                <label for="validationFechaNacimiento">Genero</label><br>
-                <label> Masculino</label>
-                <input type="radio" name="sexo" value="Masculino"/>
-                <label> Femenino</label>
-                <input type="radio" name="sexo" value="Femenino"/>
+                @error('tipo_documento')
+                  <div class="alert alert-danger" role="alert">
+                    <strong>* </strong> {{$message}}
+                  </div>
+                @enderror
               </div>
             </div>
           </div>
           <button class="btn btn-primary" type="submit">Agregar Cliente</button>
-        </form>
+          <a href="{{route('clientes.index')}}" class="btn btn-danger">
+            Cancelar
+          </a>
+        </form><hr>
       </div> <!-- end preview-->
     </div> <!-- end tab-content-->
   </div>

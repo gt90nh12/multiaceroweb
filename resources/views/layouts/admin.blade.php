@@ -353,14 +353,14 @@
                             </a>
                             <ul class="side-nav-second-level" aria-expanded="false">
                                 <li>
-                                    <a href="{{route('ventas.index')}}">Ventas Hoy</a>
+                                    <a href="{{route('ventas.index')}}">Todas las Ventas</a>
                                 </li>
                                 <li>
-                                    <a href="{{route('nueva_factura.create')}}">Nueva Factura</a>
+                                    <a href="#">Ventas de Hoy</a>
                                 </li>
                                 <li>
-                                  <a href="{{route('revisar_facturas.show')}}">Revisar Facturas</a>
-                              </li>
+                                  <a href="#">Nueva Factura</a>
+                                </li>
                             </ul>
                         </li>
 

@@ -1,36 +1,8 @@
-@extends('layouts\admin')
-@section('titulo_pagina', 'Clientes')
-@section('descripcion_pagina', 'Formulario Ventas')
-
-
-@section('content')
-
   {{-- <link href="{{asset('assets/css/vendor/dataTables.bootstrap4.css')}}" rel="stylesheet" type="text/css" /> --}}
   <link href="{{asset('assets/css/vendor/responsive.bootstrap4.css')}}" rel="stylesheet" type="text/css" />
   <link href="{{asset('assets/css/vendor/buttons.bootstrap4.css')}}" rel="stylesheet" type="text/css" />
   <link href="{{asset('assets/css/vendor/select.bootstrap4.css')}}" rel="stylesheet" type="text/css" />
   <!-- third party css end -->
-
-  <!-- start page title -->
-  <div class="row">
-    <div class="col-12">
-      <div class="page-title-box">
-        <div class="page-title-right">
-          <ol class="breadcrumb m-0">
-            <li class="breadcrumb-item"><a href="javascript: void(0);">Multiacero</a></li>
-            <li class="breadcrumb-item"><a href="javascript: void(0);">Clientes</a></li>
-            <li class="breadcrumb-item active">Lista de Clientess</li>
-          </ol>
-        </div>
-        <h4 class="page-title">Clientes</h4>
-      </div>
-    </div>
-  </div>
-  <!-- end page title -->
-
-
-  
-  
 
   <div class="row">  
     <div class="col-sm-4">
@@ -42,7 +14,7 @@
         <div class="card-body">
           <div class="tab-content">
             <div class="tab-pane show active">
-              <table id="basic-datatable" class="table activate-select dt-responsive nowrap">
+              <table id="datatable2" class="table activate-select dt-responsive nowrap">
                 
                 <thead>
                   <tr>
@@ -92,27 +64,3 @@
         </div> <!-- end card -->
     </div><!-- end col-->
 </div>
-
-
-  
-
-  <!-- third party js -->
-  <script src="{{asset('assets/js/vendor/jquery.dataTables.min.js')}}"></script>
-  <script src="{{asset('assets/js/vendor/dataTables.bootstrap4.js')}}"></script>
-  <script src="{{asset('assets/js/vendor/dataTables.responsive.min.js')}}"></script>
-  <script src="{{asset('assets/js/vendor/responsive.bootstrap4.min.js')}}"></script>
-  <script src="{{asset('assets/js/vendor/dataTables.buttons.min.js')}}"></script>
-  <script src="{{asset('assets/js/vendor/buttons.bootstrap4.min.js')}}"></script>
-  <script src="{{asset('assets/js/vendor/buttons.html5.min.js')}}"></script>
-  {{-- <script src="assets/js/vendor/buttons.flash.min.js"></script> --}}
-  {{-- <script src="assets/js/vendor/buttons.print.min.js"></script> --}}
-  {{-- <script src="assets/js/vendor/dataTables.keyTable.min.js"></script> --}}
-  {{-- <script src="assets/js/vendor/dataTables.select.min.js"></script> --}}
-  <!-- third party js ends -->
-
-  <!-- demo app -->
-  <script src="{{asset('assets/js/pages/demo.datatable-init.js')}}"></script>
-  <!-- end demo js-->
-
-
-@stop

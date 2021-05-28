@@ -4,7 +4,7 @@
 
 
 @section('content')
-{{ date('Y-m-d H:i:s') }}
+{{$todasLasVentas}}
 
   {{-- <link href="{{asset('assets/css/vendor/dataTables.bootstrap4.css')}}" rel="stylesheet" type="text/css" /> --}}
   <link href="{{asset('assets/css/vendor/responsive.bootstrap4.css')}}" rel="stylesheet" type="text/css" />
@@ -19,24 +19,20 @@
         <div class="page-title-right">
           <ol class="breadcrumb m-0">
             <li class="breadcrumb-item"><a href="javascript: void(0);">Multiacero</a></li>
-            <li class="breadcrumb-item"><a href="javascript: void(0);">Clientes</a></li>
-            <li class="breadcrumb-item active">Lista de Clientess</li>
+            <li class="breadcrumb-item"><a href="javascript: void(0);">Ventas</a></li>
+            <li class="breadcrumb-item active">Todas las Ventas</li>
           </ol>
         </div>
-        <h4 class="page-title">Clientes</h4>
+        <h4 class="page-title">Todas las Ventas</h4>
       </div>
     </div>
   </div>
   <!-- end page title -->
 
-
-  
-  
-
   <div class="row">  
     <div class="col-sm-4">
-      <a href="{{route('clientes.create')}}" class="btn btn-danger mb-2">
-        <i class="mdi mdi-plus-circle mr-2"></i> Agregar Cliente</a>
+      <a href="{{route('ventas.create')}}" class="btn btn-danger mb-2">
+        <i class="mdi mdi-cash-usd mr-2"></i> Nueva Factura</a>
     </div>
     <div class="col-12">
       <div class="card">
@@ -71,7 +67,7 @@
                   </thead>
 
                   <tbody>
-                    {{-- @foreach($clientes as $item) --}}
+                    @foreach($todasLasVentas as $item)
                       <tr>
                         <td style="width: 1px">{{'$item->id'}}</td>
                         <td>{{'$item->nombre'}}</td>
@@ -94,7 +90,7 @@
                           </form>
                         </td>
                       </tr>
-                    {{-- @endforeach --}}
+                    @endforeach
                   </tbody>
 
                 </table>                                          
@@ -106,7 +102,6 @@
 </div>
 
 
-  
 
   <!-- third party js -->
   <script src="{{asset('assets/js/vendor/jquery.dataTables.min.js')}}"></script>

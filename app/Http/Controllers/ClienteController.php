@@ -7,79 +7,71 @@ use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
-    {
-        //
+    { 
+      $clientes_total = new Cliente();
+      $clientes_total = Cliente::all();
+      // return $clientes_total;
+      return view('cliente.index', compact('clientes_total'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+      return view('cliente.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        'nombre_razon_social'=>'required|max:30',
+        'tipo_documento'=>'required',
+        'num_documento'=>['required','min:5','unique:clientes,num_documento'],
+      ]);
+      $agregarCliente = new Cliente();
+      $agregarCliente->nombre_razon_social = $request->nombre_razon_social;
+      $agregarCliente->tipo_documento = $request->tipo_documento;
+      $agregarCliente->num_documento = $request->num_documento;
+      $agregarCliente->save();
+      return redirect()->route('clientes.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Cliente  $cliente
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Cliente $cliente)
+    public function show($id)
     {
-        //
+      $verCliente = new Cliente();
+      $verCliente = Cliente::find($id);
+      return view('cliente.show',compact('verCliente'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Cliente  $cliente
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Cliente $cliente)
-    {
-        //
+    public function edit($id)
+    { 
+      $editarCliente = new Cliente();
+      $editarCliente = Cliente::find($id);
+      // return $editarCliente;
+      return view('cliente.edit', compact('editarCliente'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Cliente  $cliente
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Cliente $cliente)
+    public function update(Request $request, $id)
     {
-        //
+      $request->validate([
+        'nombre_razon_social'=>'required|max:30',
+        'tipo_documento'=>'required',
+        'num_documento'=>['required','min:5'],
+      ]);
+      $actualizarCliente = new Cliente();
+      $actualizarCliente = Cliente::find($id);
+
+      $actualizarCliente->nombre_razon_social = $request->nombre_razon_social;
+      $actualizarCliente->tipo_documento = $request->tipo_documento;
+      $actualizarCliente->num_documento = $request->num_documento;
+      $actualizarCliente->save();
+      return redirect()->route('clientes.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Cliente  $cliente
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Cliente $cliente)
+    public function destroy($id)
     {
-        //
+      $eliminarCliente = new Cliente();
+      $eliminarCliente = Cliente::find($id);
+      $eliminarCliente->delete();
+      return redirect()->route('clientes.index');
     }
 }

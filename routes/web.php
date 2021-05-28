@@ -59,11 +59,11 @@ Route::get('/registro_compra', 'CompraController@create')->name('registro_compra
 Route::post('/almacenar_compra', 'CompraController@store')->name('almacenar_compra');
 
 /* ------------------------- VENTAS ----------------------------------------------------- */
-Route::get('/ventas_hoy', 'ventasController@index')->name('ventas.index');
-Route::get('/nueva_factura', 'ventasController@create')->name('nueva_factura.create');
-Route::get('/revisar_facturas', 'ventasController@show')->name('revisar_facturas.show');
-Route::get('/ver_factura/{id}', 'ventasController@ver')->name('ver_factura');
-Route::get('/buscar_producto','ventasController@buscar_producto')->name('buscar_producto');
+// Route::get('/ventas_hoy', 'ventasController@index')->name('ventas.index');
+// Route::get('/nueva_factura', 'ventasController@create')->name('nueva_factura.create');
+// Route::get('/revisar_facturas', 'ventasController@show')->name('revisar_facturas.show');
+// Route::get('/ver_factura/{id}', 'ventasController@ver')->name('ver_factura');
+// Route::get('/buscar_producto','ventasController@buscar_producto')->name('buscar_producto');
 
 //---------------------------------- CLIENTES -------------------------------------------------
 
@@ -75,3 +75,15 @@ Route::get('clientes/{id}/edit', 'ClienteController@edit')->name('clientes.edit'
 Route::put('clientes/update/{id}', 'ClienteController@update')->name('clientes.update');
 Route::delete('clientes/destroy/{id}', 'ClienteController@destroy')->name('clientes.destroy');
 
+//-------------------------------VENTAS--------------------------------------------------------
+Route::get('ventas', 'VentaController@index')->name('ventas.index');
+Route::get('ventas/create', 'VentaController@create')->name('ventas.create');
+Route::post('ventas/store', 'VentaController@store')->name('ventas.store');
+Route::get('ventas/show/{id}', 'VentaController@show')->name('ventas.show');
+Route::get('ventas/{id}/edit', 'VentaController@edit')->name('ventas.edit');
+Route::put('ventas/update/{id}', 'VentaController@update')->name('ventas.update');
+Route::delete('ventas/destroy/{id}', 'VentaController@destroy')->name('ventas.destroy');
+//--------------------------- miniClientes------------------------------------------------------
+Route::get('miniclientes', 'miniClienteController@index')->name('miniCliente.index');
+Route::post('miniclientes/store', 'miniClienteController@store')->name('miniCliente.store');
+Route::post('ventas/uno', 'VentaController@uno')->name('ventas.uno');
