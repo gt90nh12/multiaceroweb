@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator, Hash, Auth;
 use App\Producto;
 use App\tipoProducto;
 use App\Empresa;
+use App\Proveedore;
 use App\Caracteristica;
 use Carbon\carbon;
 
@@ -32,8 +33,8 @@ class ProductoController extends Controller
         $tipo_productos =    tipoProducto::select('tipo_producto')
         ->DISTINCT('tipo_producto')
         ->get();
-        $empresas = Empresa::all();
-        return view('producto.registrar')->with(compact('tipo_productos','empresas')); 
+        $proveedores = Proveedore::all();
+        return view('producto.registrar')->with(compact('tipo_productos','proveedores')); 
         
         //     $tipo_producto = "Fierro Corrugado";
         // return tipoProducto::select('nombre','validacion','tipo_dato','rango_de','rango_hasta','unidad_medida','unidad_medida_alternativa')
@@ -89,6 +90,12 @@ class ProductoController extends Controller
             /*-------------------------- Codigo Empresa ---------------------------*/
             $cod_empresa = $request->input('cod_empresa');
             /*---------------------------------------------------------------------*/
+            
+            /*-------------------------- Codigo Producto --------------------------*/
+            $numeroRegistroTablaProducto = producto::count();
+            $cod_producto="pdt".$numeroRegistroTablaProducto;
+            /*---------------------------------------------------------------------*/
+
             /*----------------------------------- Almacenar caracteristica -----------------------------------*/
             $nombreCaracteristica = $request->input('nombreCaracteristica');
             $datoCaracteristica = $request->input('dato_caracteristica');
@@ -97,7 +104,8 @@ class ProductoController extends Controller
             $longitud = count($nombreCaracteristica);
             for($i=0; $i<$longitud; $i++){
                 $carateristicaProducto=[
-                    'cod_empresa'=>$cod_empresa,
+                    // 'cod_producto'=>$cod_producto,
+                    'id_producto'=>$numeroRegistroTablaProducto,
                     'nombre'=> $nombreCaracteristica[$i],
                     'dato'=> $datoCaracteristica[$i],
                     'unidad_medida'=> $unidadMedidaCaracteristica[$i],
@@ -124,8 +132,6 @@ class ProductoController extends Controller
                     $Nombreimagen = ($_FILES['imagen_producto']['name']);
                 }
             /*------------------------------------------------------------------------------------------------*/
-            $numeroRegistroTablaProducto = producto::count();
-            $cod_producto="pdt".$numeroRegistroTablaProducto;
             /*------------------------------------ Procedencia de producto -----------------------------------*/
             $procedenciaProducto = $request->input('pais_procedencia_producto')."/".$request->input('departamento_procedencia_producto')."/".$request->input('municipio_procedencia_producto');
             

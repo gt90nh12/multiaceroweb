@@ -28,8 +28,7 @@ class ProveedorController extends Controller
      */
     public function create()
     {
-        $empresas = Empresa::all();
-        return view('proveedor.registrar_proveedor')->with(compact('empresas'));
+        return view('proveedor.registrar_proveedor');
     }
 
     /**
@@ -89,7 +88,6 @@ class ProveedorController extends Controller
             //echo($cod_proveedor);
             /*---------------------------------------------------------------------*/
             $proveedor = new proveedore;
-            $proveedor->cod_proveedor=$cod_proveedor;
             $proveedor->usuario=$usuario;
             $proveedor->nombre=e($request->input('nombre'));
             $proveedor->descripcion=e($request->input('descripcion'));

@@ -290,17 +290,58 @@
                             </a>
                             <ul class="side-nav-second-level" aria-expanded="false">
                                 <li>
-                                    <a href="dashboard-analytics.html">Análisis</a>
+                                    <a href="{{url('/registro_empresa')}}">Información</a>
                                 </li>
                                 <li>
-                                    <a href="#">CLientes</a>
+                                    <a href="{{url('/registro_sucursal')}}">Sucursal</a>
                                 </li>
                                 <li>
-                                    <a href="index.html">Productos</a>
+                                    <a href="#">Almacen</a>
                                 </li>
                                 <li>
-                                    <a href="dashboard-projects.html">Personal</a>
+                                    <a href="#">Personal</a>
                                 </li>
+                                  <!-- <li class="side-nav-item mm-active">
+                                    <a href="javascript: void(0);" aria-expanded="true">Empresa
+                                        <span class="menu-arrow"></span>
+                                    </a>
+                                    <ul class="side-nav-third-level mm-collapse mm-show" aria-expanded="false" style="">
+                                        <li>
+                                            <a href="{{url('/registro_empresa')}}" aria-expanded="false">Registrar</a>
+                                        </li>
+                                        <li class="side-nav-item">
+                                            <a href="javascript: void(0);" aria-expanded="false">Sucursal
+                                                <span class="menu-arrow"></span>
+                                            </a>
+                                            <ul class="side-nav-forth-level mm-collapse" aria-expanded="false" style="height: 0px;">
+                                                <li>
+                                                    <a href="{{url('/registro_sucursal')}}">Registrar</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="side-nav-item">
+                                            <a href="javascript: void(0);" aria-expanded="false">Fabrica
+                                                <span class="menu-arrow"></span>
+                                            </a>
+                                            <ul class="side-nav-forth-level mm-collapse" aria-expanded="false" style="height: 0px;">
+                                                <li>
+                                                    <a href="javascript: void(0);">Registrar</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="side-nav-item">
+                                            <a href="javascript: void(0);" aria-expanded="false">Almacén
+                                                <span class="menu-arrow"></span>
+                                            </a>
+                                            <ul class="side-nav-forth-level mm-collapse" aria-expanded="false" style="height: 0px;">
+                                                <li>
+                                                    <a href="javascript: void(0);">Registrar</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li> -->
+
                             </ul>
                         </li>
 
@@ -411,9 +452,9 @@
                                 <span class="menu-arrow"></span>
                             </a>
                             <ul class="side-nav-second-level" aria-expanded="false">
-                                <!-- <li>
+                                <li>
                                     <a href="{{url('/registro_proveedor')}}">Crear</a>
-                                </li> -->
+                                </li>
                                 <li class="side-nav-item">
                                     <a href="javascript: void(0);" aria-expanded="false">Contacto Proveedor
                                         <span class="menu-arrow"></span>
@@ -424,58 +465,6 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="side-nav-item mm-active">
-                                    <a href="javascript: void(0);" aria-expanded="true">Empresa
-                                        <span class="menu-arrow"></span>
-                                    </a>
-                                    <ul class="side-nav-third-level mm-collapse mm-show" aria-expanded="false" style="">
-                                        <li>
-                                            <a href="{{url('/registro_empresa')}}" aria-expanded="false">Registrar</a>
-                                        </li>
-                                        <li class="side-nav-item">
-                                            <a href="javascript: void(0);" aria-expanded="false">Sucursal
-                                                <span class="menu-arrow"></span>
-                                            </a>
-                                            <ul class="side-nav-forth-level mm-collapse" aria-expanded="false" style="height: 0px;">
-                                                <li>
-                                                    <a href="{{url('/registro_sucursal')}}">Registrar</a>
-                                                </li>
-<!--                                                 <li>
-                                                    <a href="javascript: void(0);">Listar</a>
-                                                </li> -->
-                                            </ul>
-                                        </li>
-                                        <li class="side-nav-item">
-                                            <a href="javascript: void(0);" aria-expanded="false">Fabrica
-                                                <span class="menu-arrow"></span>
-                                            </a>
-                                            <ul class="side-nav-forth-level mm-collapse" aria-expanded="false" style="height: 0px;">
-                                                <li>
-                                                    <a href="javascript: void(0);">Registrar</a>
-                                                </li>
-                                                <!-- <li>
-                                                    <a href="javascript: void(0);">Listar</a>
-                                                </li> -->
-                                            </ul>
-                                        </li>
-                                        <li class="side-nav-item">
-                                            <a href="javascript: void(0);" aria-expanded="false">Almacén
-                                                <span class="menu-arrow"></span>
-                                            </a>
-                                            <ul class="side-nav-forth-level mm-collapse" aria-expanded="false" style="height: 0px;">
-                                                <li>
-                                                    <a href="javascript: void(0);">Registrar</a>
-                                                </li>
-<!--                                                 <li>
-                                                    <a href="javascript: void(0);">Listar</a>
-                                                </li> -->
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-
-
-
                             </ul>
                         </li>
 

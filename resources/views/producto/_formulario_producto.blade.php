@@ -15,11 +15,11 @@
                      <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="cod_empresa" class="col-form-label">Proveedor</label>
-                            @if(!empty($empresas))
+                            @if(!empty($proveedores))
                             <select id="cod_empresa" name="cod_empresa" class="form-control" data-toggle="select3" data-select3-id="1" tabindex="-1" aria-hidden="true">
-                                <option data-select2-id="3">Seleccione la empresa</option>
-                                @foreach($empresas as $empresa)
-                                <option value="{{$empresa->cod_empresa}}">{{$empresa->nombre_empresa}}</option>
+                                <option data-select2-id="3">Seleccione proveedor</option>
+                                @foreach($proveedores as $proveedor)
+                                <option value="{{$proveedor->id}}">{{$proveedor->nombre}}</option>
                                 @endforeach
                             </select>
                             @else
@@ -170,10 +170,12 @@
     
     $(document).ready(function(){
         $("#tipo").change(function(){
+            contenedorNombre.innerHTML="";
+            contenedorDato.innerHTML="";
+            contenedorUnidadMedida.innerHTML="";
             var tipoProducto = $(this).val();
-            // console.log(tipoProducto)
             $.get('producto_caracteristicas/'+tipoProducto, function(data){
-                console.log(data);
+                // console.log(data);
                 for(var caracteristica in data) {
                     if(data[caracteristica].nombre) {
                         contenedorNombre.innerHTML +="<div class='estilosFilaCaracteristicas'><label class='col-form-label estilosNombreCaracte'>"+data[caracteristica].nombre+"</label></div>";

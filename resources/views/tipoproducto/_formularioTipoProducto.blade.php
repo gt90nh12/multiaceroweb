@@ -79,12 +79,12 @@
                                                             <option value="mts">Metro</option>
                                                             <option value="dm">Decimetro</option>
                                                             <option value="cm">Centimetro</option>
-                                                            <option value="mm">Milinetro</option>
+                                                            <option value="mm">Milimetro</option>
                                                         </optgroup>
                                                         <optgroup label="Medida de volumen">
                                                             <option value="m3">Metro cubico</option>
                                                             <option value="l">Litro</option>
-                                                            <option value="ml">Milimetro</option>
+                                                            <option value="ml">Mililitro</option>
                                                         </optgroup>
                                                     </select>
                                                 </div>
@@ -108,7 +108,7 @@
                                                         <optgroup label="Medida de volumen">
                                                             <option value="m3">Metro cubico</option>
                                                             <option value="l">Litro</option>
-                                                            <option value="ml">Milimetro</option>
+                                                            <option value="ml">Mililitro</option>
                                                         </optgroup>
                                                     </select>
                                                 </div>

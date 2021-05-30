@@ -27,7 +27,10 @@ class TipoProductoController extends Controller
      */
     public function create()
     {
-        $tipoproducto = tipoProducto::all();
+        // $tipoproducto = tipoProducto::all();
+        $tipoproducto =    tipoProducto::select('tipo_producto')
+        ->DISTINCT('tipo_producto')
+        ->get();
         return view('tipoproducto/registrar')->with(compact('tipoproducto'));
     }
 

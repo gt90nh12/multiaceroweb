@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box">
-            <h4 class="page-title">Sucursal<span class="separador_menu">|</span>Registrar</h4>
+            <h4 class="page-title">Sucursal<span class="separador_menu"> | </span>Registrar</h4>
         </div>
     </div>
 </div>
@@ -10,21 +10,17 @@
         <div class="card">
             <div class="card-body">
                 <h4>Ingrese información de la sucursal</h4>
-                <div class="form-group">
-                    <label for="empresa">Empresa</label>
-                    <select id="empresa" name="empresa" class="form-control" data-toggle="select3" data-select3-id="1" tabindex="-1" aria-hidden="true">
-                        <option data-select2-id="3">Seleccione empresa</option>
-                        @if(!empty($empresas))
-                        @foreach($empresas as $empresa)
-                        <option value="{{$empresa->cod_empresa}}">{{$empresa->nombre_empresa}}</option>
-                        @endforeach
-                        @endif
-                    </select>
-                </div>
                 <div class="form-row">
                     <div class="form-group col-md-8">
-                        <label for="nombresucursal">Nombre de sucursal</label>
-                        <input type="number" class="form-control" id="nombresucursal" name="nombresucursal" placeholder="Ingrese nombre de sucursal.">
+                        <label for="empresa">Empresa</label>
+                        <select id="empresa" name="empresa" class="form-control" data-toggle="select3" data-select3-id="1" tabindex="-1" aria-hidden="true">
+                            <option data-select2-id="3">Seleccione empresa</option>
+                            @if(!empty($empresas))
+                            @foreach($empresas as $empresa)
+                            <option value="{{$empresa->id}}">{{$empresa->nombre_empresa}}</option>
+                            @endforeach
+                            @endif
+                        </select>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="sucursal">Numero de sucursal</label>
@@ -39,14 +35,16 @@
                         <div id="ver_archivo" class="ver_imagen"></div>
                     </div>
                 </div>
-                <!-- <div class="form-group">
-                    <label for="nit">NIT</label>
-                    <input type="text" class="form-control" id="nit" name="nit" placeholder="Ingrese numero de identificación tributaria."></textarea>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="codigo_punto_venta">Código de punto de venta</label>
+                        <input type="text" class="form-control" id="codigo_punto_venta" name="codigo_punto_venta" placeholder="Ingrese numero de identificación tributaria.">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="numero_autorizacion">Número de autorización</label>
+                        <input type="text" class="form-control" id="numero_autorizacion" name="numero_autorizacion" placeholder="Ingrese la actividad pricipal de la sucursal.">
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="actividad">Actividad principal</label>
-                    <input type="text" class="form-control" id="actividad" name="actividad" placeholder="Ingrese la actividad pricipal de la sucursal."></textarea>
-                </div> -->
                 <div class="form-group">
                     <label for="direccion">Dirección</label>
                     <textarea class="form-control" id="direccion" name="direccion" rows="2" placeholder="Ingrese dirección de la sucursal."></textarea>

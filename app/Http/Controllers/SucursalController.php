@@ -44,7 +44,6 @@ class SucursalController extends Controller
         $rules = [
             'empresa'=>'required',
             'sucursal'=>'required',
-            // 'nombresucursall'=>'required',
             'archivo_seleccionado'=>'required',
             'direccion'=>'required',
             'pais'=>'required',
@@ -57,8 +56,7 @@ class SucursalController extends Controller
         $messages = [
             'empresa.required' => 'Debe seleccionar la empresa.',
             'sucursal.required' => 'Debe ingresar el numero de sucursal.',
-            // 'nombresucursall.required' => 'Debe ingresar el nombre de la sucursal.',
-            'archivo_seleccionado.required' => 'Debe ingresar el logo de la sucursal.',
+            'archivo_seleccionado.required' => 'Debe ingresar la imagen de la sucursal.',
             'direccion.required' => 'Debe ingresar la direccion donde se localiza la sucursal.',
             'pais.required' => 'Debe ingresar el pais donde esta registrado la sucursal.',
             'estado_departamento.required' => 'Debe ingresar el departamento donde esta registrado la sucursal.',
@@ -92,12 +90,13 @@ class SucursalController extends Controller
                 $cod_sucursal="emp".$numeroRegistroTablaSucursal;
                 /*---------------------------------------------------------------------*/
                 $sucursal = new Sucursale;
-                    $sucursal->cod_sucursal=$cod_sucursal;
+                    // $sucursal->cod_sucursal=$cod_sucursal;
                     $sucursal->usuario=$usuario;
                     $sucursal->cod_empresa=e($request->input('empresa'));
                     $sucursal->numero_sucursal=e($request->input('sucursal'));
-                    $sucursal->nombre_sucursal=e($request->input('nombresucursal'));
                     $sucursal->archivo_seleccionado=$Nombreimagen;
+                    $sucursal->codigo_punto_venta=e($request->input('codigo_punto_venta'));
+                    $sucursal->numero_autorizacion=e($request->input('numero_autorizacion'));
                     $sucursal->direccion=e($request->input('direccion'));
                     $sucursal->pais=e($request->input('pais'));
                     $sucursal->estado_departamento=e($request->input('estado_departamento'));

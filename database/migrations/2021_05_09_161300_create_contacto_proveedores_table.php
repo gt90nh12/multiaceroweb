@@ -25,9 +25,9 @@ class CreateContactoProveedoresTable extends Migration
             $table->date('fecha_inicio');
             $table->time('hora_inicio');
             $table->text('descripcion_inicio_actividades');
-            $table->date('fecha_finalizacion');
-            $table->time('hora_finalizacion');
-            $table->text('descripcion_finalizacion_actividades');
+            $table->date('fecha_finalizacion')->nullable();
+            $table->time('hora_finalizacion')->nullable();
+            $table->text('descripcion_finalizacion_actividades')->nullable();
             $table->timestamps();
             $table->boolean('estado');
         });

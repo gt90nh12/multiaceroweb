@@ -15,12 +15,13 @@ class CreateCaracteristicasTable extends Migration
     {
         Schema::create('caracteristicas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('cod_empresa',7);
+            $table->integer('id_producto');
             $table->text('nombre');
             $table->text('dato');
             $table->text('unidad_medida');
             $table->timestamps();
             $table->boolean('estado');
+
         });
     }
 

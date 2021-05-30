@@ -25,7 +25,7 @@
                                         <option data-select2-id="3">Seleccione proveedor</option>
                                         @if(!empty($proveedores))
                                             @foreach($proveedores as $proveedor)
-                                                <option value="{{$proveedor->cod_proveedor}}">{{$proveedor->nombre}}</option>
+                                                <option value="{{$proveedor->id}}">{{$proveedor->nombre}}</option>
                                             @endforeach
                                         @endif
                                     </select>

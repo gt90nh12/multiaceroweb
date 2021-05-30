@@ -15,12 +15,13 @@ class CreateSucursalesTable extends Migration
     {
         Schema::create('sucursales', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('cod_sucursal',7);
+            // $table->string('cod_sucursal',7);
             $table->integer('usuario');
             $table->string('cod_empresa',7);
             $table->integer('numero_sucursal');
-            $table->text('nombre_sucursal');
             $table->text('archivo_seleccionado');
+            $table->text('codigo_punto_venta');
+            $table->text('numero_autorizacion');
             $table->text('direccion');
             $table->text('pais');
             $table->text('estado_departamento');

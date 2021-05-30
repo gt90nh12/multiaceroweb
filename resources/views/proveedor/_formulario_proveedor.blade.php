@@ -16,17 +16,6 @@
                 <div class="tab-content">
                     <div class="tab-pane show active" id="form-row-preview">
                         <div class="form-group">
-                            <label for="proveedor">Empresa</label>
-                            <select id="proveedor" name="proveedor" class="form-control" data-toggle="select3" data-select3-id="1" tabindex="-1" aria-hidden="true">
-                                <option data-select2-id="3">Seleccione empresa</option>
-                                @if(!empty($empresas))
-                                @foreach($empresas as $empresa)
-                                <option value="{{$empresa->id}}">{{$empresa->nombreempresa}}</option>
-                                @endforeach
-                                @endif
-                            </select>
-                        </div>
-                        <div class="form-group">
                             <label for="nombre" class="col-form-label">Nombre</label>
                             <input type="text" id="nombre" class="form-control" name="nombre" placeholder="Ingrese nombre de almacen">
                         </div>
@@ -69,6 +58,8 @@
                                         <option value="Cusco">Cusco</option>
                                         <option value="Cajamarca">Cajamarca</option>
                                         <option value="Arequipa">Arequipa</option>
+                                        <option value="Arequipa">La Paz</option>
+                                        <option value="Santa Cruz">Santa Cruz</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">
