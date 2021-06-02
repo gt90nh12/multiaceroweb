@@ -25,17 +25,17 @@
         <div class="navbar-custom topnav-navbar topnav-navbar-dark">
             <div class="container-fluid">
 
-                <!-- LOGO -->
-                <a href="index.html" class="topnav-logo">
-                    <span class="topnav-logo-lg">
-                        <img src="{{asset('assets/images/logo-light.png')}}" alt="" height="16">
-                    </span>
-                    <span class="topnav-logo-sm">
-                        <img src="{{asset('assets/images/logo_sm.png')}}" alt="" height="16">
-                    </span>
-                </a>
-
-                <ul class="list-unstyled topbar-right-menu float-right mb-0">
+              <!-- LOGO -->
+              <a href="index.html" class="topnav-logo">
+                  <span class="topnav-logo-lg">
+                      <img src="{{asset('assets/images/logo-light.png')}}" alt="" height="16">
+                  </span>
+                  <span class="topnav-logo-sm">
+                      <img src="{{asset('assets/images/logo_sm.png')}}" alt="" height="16">
+                  </span>
+              </a>
+              
+            <ul class="list-unstyled topbar-right-menu float-right mb-0">
 
                 <li class="dropdown notification-list d-lg-none">
                     <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
@@ -77,7 +77,7 @@
                                     </span>Notification
                                 </h5>
                             </div>
-    
+
                             <div style="max-height: 230px;" data-simplebar>
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
@@ -88,7 +88,7 @@
                                         <small class="text-muted">1 min ago</small>
                                     </p>
                                 </a>
-    
+
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                                     <div class="notify-icon bg-info">
@@ -98,139 +98,139 @@
                                         <small class="text-muted">5 hours ago</small>
                                     </p>
                                 </a>
-    
+
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                                     <div class="notify-icon">
                                         <img src="{{asset('assets/images/users/avatar-2.jpg')}}" class="img-fluid rounded-circle" alt="" /> </div>
-                                    <p class="notify-details">Cristina Pride</p>
-                                    <p class="text-muted mb-0 user-msg">
-                                        <small>Hi, How are you? What about our next meeting</small>
-                                    </p>
-                                </a>
+                                        <p class="notify-details">Cristina Pride</p>
+                                        <p class="text-muted mb-0 user-msg">
+                                            <small>Hi, How are you? What about our next meeting</small>
+                                        </p>
+                                    </a>
 
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <div class="notify-icon bg-primary">
-                                        <i class="mdi mdi-comment-account-outline"></i>
-                                    </div>
-                                    <p class="notify-details">Caleb Flakelar commented on Admin
-                                        <small class="text-muted">4 days ago</small>
-                                    </p>
-                                </a>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="notify-icon bg-primary">
+                                            <i class="mdi mdi-comment-account-outline"></i>
+                                        </div>
+                                        <p class="notify-details">Caleb Flakelar commented on Admin
+                                            <small class="text-muted">4 days ago</small>
+                                        </p>
+                                    </a>
 
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <div class="notify-icon">
-                                        <img src="{{asset('assets/images/users/avatar-4.jpg')}}" class="img-fluid rounded-circle" alt="" /> </div>
-                                    <p class="notify-details">Karen Robinson</p>
-                                    <p class="text-muted mb-0 user-msg">
-                                        <small>Wow ! this admin looks good and awesome design</small>
-                                    </p>
-                                </a>
-    
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <div class="notify-icon bg-info">
-                                        <i class="mdi mdi-heart"></i>
-                                    </div>
-                                    <p class="notify-details">Carlos Crouch liked
-                                        <b>Admin</b>
-                                        <small class="text-muted">13 days ago</small>
-                                    </p>
-                                </a>
-
-                            </div>
-                        </li>
-
-                    <li class="dropdown notification-list d-none d-sm-inline-block">
-                        <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <i class="dripicons-view-apps noti-icon"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated dropdown-lg p-0">
-    
-                            <div class="p-2">
-                                <div class="row no-gutters">
-                                    <div class="col">
-                                        <a class="dropdown-icon-item" href="#">
-                                            <img src="{{asset('assets/images/brands/slack.png')}}" alt="slack">
-                                            <span>Slack</span>
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <div class="notify-icon">
+                                            <img src="{{asset('assets/images/users/avatar-4.jpg')}}" class="img-fluid rounded-circle" alt="" /> </div>
+                                            <p class="notify-details">Karen Robinson</p>
+                                            <p class="text-muted mb-0 user-msg">
+                                                <small>Wow ! this admin looks good and awesome design</small>
+                                            </p>
                                         </a>
-                                    </div>
-                                    <div class="col">
-                                        <a class="dropdown-icon-item" href="#">
-                                            <img src="{{asset('assets/images/brands/github.png')}}" alt="Github">
-                                            <span>GitHub</span>
+
+                                        <!-- item-->
+                                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                            <div class="notify-icon bg-info">
+                                                <i class="mdi mdi-heart"></i>
+                                            </div>
+                                            <p class="notify-details">Carlos Crouch liked
+                                                <b>Admin</b>
+                                                <small class="text-muted">13 days ago</small>
+                                            </p>
                                         </a>
+
                                     </div>
-                                    <div class="col">
-                                        <a class="dropdown-icon-item" href="#">
-                                            <img src="{{asset('assets/images/brands/dribbble.png')}}" alt="dribbble">
-                                            <span>Dribbble</span>
+                                </li>
+
+                                <li class="dropdown notification-list d-none d-sm-inline-block">
+                                    <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                        <i class="dripicons-view-apps noti-icon"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated dropdown-lg p-0">
+
+                                        <div class="p-2">
+                                            <div class="row no-gutters">
+                                                <div class="col">
+                                                    <a class="dropdown-icon-item" href="#">
+                                                        <img src="{{asset('assets/images/brands/slack.png')}}" alt="slack">
+                                                        <span>Slack</span>
+                                                    </a>
+                                                </div>
+                                                <div class="col">
+                                                    <a class="dropdown-icon-item" href="#">
+                                                        <img src="{{asset('assets/images/brands/github.png')}}" alt="Github">
+                                                        <span>GitHub</span>
+                                                    </a>
+                                                </div>
+                                                <div class="col">
+                                                    <a class="dropdown-icon-item" href="#">
+                                                        <img src="{{asset('assets/images/brands/dribbble.png')}}" alt="dribbble">
+                                                        <span>Dribbble</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <div class="row no-gutters">
+                                                <div class="col">
+                                                    <a class="dropdown-icon-item" href="#">
+                                                        <img src="{{asset('assets/images/brands/bitbucket.png')}}" alt="bitbucket">
+                                                        <span>Bitbucket</span>
+                                                    </a>
+                                                </div>
+                                                <div class="col">
+                                                    <a class="dropdown-icon-item" href="#">
+                                                        <img src="{{asset('assets/images/brands/dropbox.png')}}" alt="dropbox">
+                                                        <span>Dropbox</span>
+                                                    </a>
+                                                </div>
+                                                <div class="col">
+                                                    <a class="dropdown-icon-item" href="#">
+                                                        <img src="{{asset('assets/images/brands/g-suite.png')}}" alt="G Suite">
+                                                        <span>G Suite</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </li>
+
+                                    <li class="notification-list">
+                                        <a class="nav-link right-bar-toggle" href="javascript: void(0);">
+                                            <i class="dripicons-gear noti-icon"></i>
                                         </a>
-                                    </div>
-                                </div>
-    
-                                <div class="row no-gutters">
-                                    <div class="col">
-                                        <a class="dropdown-icon-item" href="#">
-                                            <img src="{{asset('assets/images/brands/bitbucket.png')}}" alt="bitbucket">
-                                            <span>Bitbucket</span>
+                                    </li>
+
+                                    <li class="dropdown notification-list">
+                                        <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" id="topbar-userdrop" href="#" role="button" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        <span class="account-user-avatar"> 
+                                            <img src="{{asset('assets/images/users/avatar-0.jpg')}}" alt="user-image" class="rounded-circle">
+                                        </span>
+                                        <span>
+                                            <span class="account-user-name">Erik Weisz</span>
+                                            <span class="account-position">Administrador de sistema</span>
+                                        </span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown" aria-labelledby="topbar-userdrop">
+                                        <!-- item-->
+                                        <div class=" dropdown-header noti-title">
+                                            <h6 class="text-overflow m-0">Bienvenido !</h6>
+                                        </div>
+
+                                        <!-- item-->
+                                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                            <i class="mdi mdi-account-circle mr-1"></i>
+                                            <span>Mi cuenta</span>
                                         </a>
-                                    </div>
-                                    <div class="col">
-                                        <a class="dropdown-icon-item" href="#">
-                                            <img src="{{asset('assets/images/brands/dropbox.png')}}" alt="dropbox">
-                                            <span>Dropbox</span>
+
+                                        <!-- item-->
+                                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                            <i class="mdi mdi-account-edit mr-1"></i>
+                                            <span>Configuración</span>
                                         </a>
-                                    </div>
-                                    <div class="col">
-                                        <a class="dropdown-icon-item" href="#">
-                                            <img src="{{asset('assets/images/brands/g-suite.png')}}" alt="G Suite">
-                                            <span>G Suite</span>
-                                        </a>
-                                    </div>
-                                </div>
 
-                            </div>
-                        </li>
-
-                        <li class="notification-list">
-                            <a class="nav-link right-bar-toggle" href="javascript: void(0);">
-                                <i class="dripicons-gear noti-icon"></i>
-                            </a>
-                        </li>
-
-                        <li class="dropdown notification-list">
-                            <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" id="topbar-userdrop" href="#" role="button" aria-haspopup="true"
-                            aria-expanded="false">
-                            <span class="account-user-avatar"> 
-                                <img src="{{asset('assets/images/users/avatar-0.jpg')}}" alt="user-image" class="rounded-circle">
-                            </span>
-                            <span>
-                                <span class="account-user-name">Kevin Mitnick</span>
-                                <span class="account-position">Administrador de sistema</span>
-                            </span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown" aria-labelledby="topbar-userdrop">
-                            <!-- item-->
-                            <div class=" dropdown-header noti-title">
-                                <h6 class="text-overflow m-0">Bienvenido !</h6>
-                            </div>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="mdi mdi-account-circle mr-1"></i>
-                                <span>Mi cuenta</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="mdi mdi-account-edit mr-1"></i>
-                                <span>Configuración</span>
-                            </a>
-
-                            <!-- item-->
+                                        <!-- item-->
     <!--                         <a href="javascript:void(0);" class="dropdown-item notify-item">
                                 <i class="mdi mdi-lifebuoy mr-1"></i>
                                 <span>Support</span>
@@ -275,7 +275,7 @@
                     <div class="leftbar-user">
                         <a href="javascript: void(0);">
                             <img src="{{asset('assets/images/users/avatar-0.jpg')}}" alt="user-image" height="42" class="rounded-circle shadow-sm">
-                            <span class="leftbar-user-name">Kevin Mitnick</span>
+                            <span class="leftbar-user-name">Erik Weisz</span>
                         </a>
                     </div>
 
@@ -292,17 +292,58 @@
                             </a>
                             <ul class="side-nav-second-level" aria-expanded="false">
                                 <li>
-                                    <a href="dashboard-analytics.html">Análisis</a>
+                                    <a href="{{url('/registro_empresa')}}">Información</a>
                                 </li>
                                 <li>
-                                    <a href="#">CLientes</a>
+                                    <a href="{{url('/registro_sucursal')}}">Sucursal</a>
                                 </li>
                                 <li>
-                                    <a href="index.html">Productos</a>
+                                    <a href="#">Almacen</a>
                                 </li>
                                 <li>
-                                    <a href="dashboard-projects.html">Personal</a>
+                                    <a href="#">Personal</a>
                                 </li>
+                                  <!-- <li class="side-nav-item mm-active">
+                                    <a href="javascript: void(0);" aria-expanded="true">Empresa
+                                        <span class="menu-arrow"></span>
+                                    </a>
+                                    <ul class="side-nav-third-level mm-collapse mm-show" aria-expanded="false" style="">
+                                        <li>
+                                            <a href="{{url('/registro_empresa')}}" aria-expanded="false">Registrar</a>
+                                        </li>
+                                        <li class="side-nav-item">
+                                            <a href="javascript: void(0);" aria-expanded="false">Sucursal
+                                                <span class="menu-arrow"></span>
+                                            </a>
+                                            <ul class="side-nav-forth-level mm-collapse" aria-expanded="false" style="height: 0px;">
+                                                <li>
+                                                    <a href="{{url('/registro_sucursal')}}">Registrar</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="side-nav-item">
+                                            <a href="javascript: void(0);" aria-expanded="false">Fabrica
+                                                <span class="menu-arrow"></span>
+                                            </a>
+                                            <ul class="side-nav-forth-level mm-collapse" aria-expanded="false" style="height: 0px;">
+                                                <li>
+                                                    <a href="javascript: void(0);">Registrar</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="side-nav-item">
+                                            <a href="javascript: void(0);" aria-expanded="false">Almacén
+                                                <span class="menu-arrow"></span>
+                                            </a>
+                                            <ul class="side-nav-forth-level mm-collapse" aria-expanded="false" style="height: 0px;">
+                                                <li>
+                                                    <a href="javascript: void(0);">Registrar</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li> -->
+
                             </ul>
                         </li>
 
@@ -359,29 +400,29 @@
                                     <a href="#">Ventas de Hoy</a>
                                 </li>
                                 <li>
-                                  <a href="#">Nueva Factura</a>
-                                </li>
-                            </ul>
-                        </li>
+                                  <a href="#">Revisar Facturas</a>
+                              </li>
+                          </ul>
+                      </li>
 
-                        <li class="side-nav-item">
-                            <a href="javascript: void(0);" class="side-nav-link">
-                                <i class="icon-almacen"></i>
-                                <span> Almacen </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <ul class="side-nav-second-level" aria-expanded="false">
-                                <li>
-                                    <a href="{{url('/registro_almacen')}}">Registrar</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a href="javascript: void(0);" aria-expanded="false">Existencia productos
-                                        <span class="menu-arrow"></span>
-                                    </a>
-                                    <ul class="side-nav-third-level" aria-expanded="false">
-                                        <li>
-                                            <a href="{{url('/registro_almacenproducto')}}">Registrar</a>
-                                        </li>
+                      <li class="side-nav-item">
+                        <a href="javascript: void(0);" class="side-nav-link">
+                            <i class="icon-almacen"></i>
+                            <span> Almacen </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <ul class="side-nav-second-level" aria-expanded="false">
+                            <li>
+                                <a href="{{url('/registro_almacen')}}">Registrar</a>
+                            </li>
+                            <li class="side-nav-item">
+                                <a href="javascript: void(0);" aria-expanded="false">Existencia productos
+                                    <span class="menu-arrow"></span>
+                                </a>
+                                <ul class="side-nav-third-level" aria-expanded="false">
+                                    <li>
+                                        <a href="{{url('/registro_almacenproducto')}}">Registrar</a>
+                                    </li>
                                         <!-- <li>
                                             <a href="#">Listar</a>
                                         </li> -->
@@ -414,30 +455,15 @@
                             </a>
                             <ul class="side-nav-second-level" aria-expanded="false">
                                 <li>
-                                    <a href="#">Crear</a>
-                                </li><!-- 
-                                <li>
-                                    <a href="pages-profile-2.html">Profile 2</a>
+                                    <a href="{{url('/registro_proveedor')}}">Crear</a>
                                 </li>
-                                <li>
-                                    <a href="pages-invoice.html">Invoice</a>
-                                </li>
-                                <li>
-                                    <a href="pages-faq.html">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="pages-pricing.html">Pricing</a>
-                                </li>
-                                <li>
-                                    <a href="pages-maintenance.html">Maintenance</a>
-                                </li> -->
                                 <li class="side-nav-item">
-                                    <a href="javascript: void(0);" aria-expanded="false">Empresa
+                                    <a href="javascript: void(0);" aria-expanded="false">Contacto Proveedor
                                         <span class="menu-arrow"></span>
                                     </a>
                                     <ul class="side-nav-third-level" aria-expanded="false">
                                         <li>
-                                            <a href="{{url('/registro_empresa')}}">Registrar</a>                                    
+                                            <a href="{{url('/registro_contacto_proveedor')}}">Registrar</a>                                 
                                         </li>
                                     </ul>
                                 </li>
@@ -450,12 +476,28 @@
                                 <span> Productos </span>
                                 <span class="menu-arrow"></span>
                             </a>
-                            <ul class="side-nav-second-level" aria-expanded="false">
+                            <ul class="side-nav-second-level" aria-expanded="false">            
                                 <li>
                                     <a href="{{url('/registro_producto')}}">Registrar</a>                                    
                                 </li>
                                 <li>
                                     <a href="{{url('/listar_producto')}}">Lista</a>
+                                </li>
+                                <li class="side-nav-item">
+                                    <a href="javascript: void(0);" aria-expanded="false">Tipo
+                                        <span class="menu-arrow"></span>
+                                    </a>
+                                    <ul class="side-nav-third-level" aria-expanded="false">
+                                        <li>
+                                            <a href="{{url('/registro_tipo_producto')}}">Registrar</a>
+                                        </li>
+                                        <!-- <li>
+                                            <a href="#">Listar</a>
+                                        </li> -->
+                                        <!-- <li>
+                                            <a href="pages-500.html">Error 500</a>
+                                        </li> -->
+                                    </ul>
                                 </li>
 <!--                                 <li>
                                     <a href="apps-ecommerce-products-details.html">Detalla de producto</a>
@@ -607,40 +649,40 @@
 
                 <div class="content-page">
                     <div class="content">
-                        
+
                         <!-- start page title -->
                         {{-- <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box">        
                                     <h3 class="page-title">@yield('titulo_pagina')</h3>
                                     <p class="text-themecolor mb-0 mt-0">@yield('descripcion_pagina')<p>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>  --}}
-                        <!-- end page title -->    
+                            </div>  --}}
+                            <!-- end page title -->    
 
-                        <div class="row">
-                            <div class="col-12">
-                               @section('content')
-                               @show
+                            <div class="row">
+                                <div class="col-12">
+                                 @section('content')
+                                 @show
 
-                           </div>
-                       </div>
-                       <!-- end row -->
-
+                             </div>
+                         </div>
+                         <!-- end row -->
 
 
 
 
-                   </div> <!-- End Content -->
 
-                   <!-- Footer Start -->
-                   <footer class="footer">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-6">
-                                2018 - 2020 © Multiacero
-                            </div>
+                     </div> <!-- End Content -->
+
+                     <!-- Footer Start -->
+                     <footer class="footer">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    2019 - 2021 © Multiacero
+                                </div>
                             <!-- <div class="col-md-6">
                                 <div class="text-md-right footer-links d-none d-md-block">
                                     <a href="javascript: void(0);">About</a>
@@ -681,17 +723,17 @@
                 <h5 class="mt-3">Esquema de colores</h5>
                 <hr class="mt-1" />
 
-                    <div class="custom-control custom-switch mb-1">
-                        <input type="radio" class="custom-control-input" name="color-scheme-mode" value="light"
-                            id="light-mode-check" checked />
-                        <label class="custom-control-label" for="light-mode-check">Modo Día</label>
-                    </div>
+                <div class="custom-control custom-switch mb-1">
+                    <input type="radio" class="custom-control-input" name="color-scheme-mode" value="light"
+                    id="light-mode-check" checked />
+                    <label class="custom-control-label" for="light-mode-check">Modo Día</label>
+                </div>
 
-                    <div class="custom-control custom-switch mb-1">
-                        <input type="radio" class="custom-control-input" name="color-scheme-mode" value="dark"
-                            id="dark-mode-check" />
-                        <label class="custom-control-label" for="dark-mode-check">Modo Nocturno</label>
-                    </div>
+                <div class="custom-control custom-switch mb-1">
+                    <input type="radio" class="custom-control-input" name="color-scheme-mode" value="dark"
+                    id="dark-mode-check" />
+                    <label class="custom-control-label" for="dark-mode-check">Modo Nocturno</label>
+                </div>
 
                 <!-- Left Sidebar-->
                 <h5 class="mt-4">Barra lateral izquierda</h5>
@@ -709,20 +751,20 @@
                     <label class="custom-control-label" for="condensed-check">Condensada</label>
                 </div>
 
-                    <button class="btn btn-primary btn-block mt-4" id="resetBtn">Restablecen predeterminado</button>
+                <button class="btn btn-primary btn-block mt-4" id="resetBtn">Restablecen predeterminado</button>
 
-                </div> <!-- end padding-->
+            </div> <!-- end padding-->
 
-            </div>
         </div>
+    </div>
 
-        <div class="rightbar-overlay"></div>
-        <!-- /Right-bar -->
+    <div class="rightbar-overlay"></div>
+    <!-- /Right-bar -->
 
 
-        <!-- bundle -->
-        <script src="{{asset('assets/js/vendor.min.js')}}"></script>
-        <script src="{{asset('assets/js/app.min.js')}}"></script>
-        
-    </body>
-    </html>
+    <!-- bundle -->
+    <script src="{{asset('assets/js/vendor.min.js')}}"></script>
+    <script src="{{asset('assets/js/app.min.js')}}"></script>
+
+</body>
+</html>

@@ -15,29 +15,21 @@ class CreateProductosTable extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('cod_producto',7);
             $table->integer('usuario');
+            $table->string('cod_empresa',7);
             $table->text('nombre');
             $table->text('descripcion');
             $table->text('imagen');
-            $table->text('lugar_origen_producto');
+            $table->text('procedencia_producto');
             $table->text('marca_producto');
             $table->text('color_producto');
             $table->text('material_producto');
-            $table->double('longitud');
-            $table->double('espesor');
-            $table->text('dimension_producto');
-            $table->text('dimension_producto_medida');
-            $table->text('peso_producto');
-            $table->text('peso_producto_medida');
-            $table->text('unidad_compra');
-            $table->text('factor_unidad_compra');
-            $table->text('unidad_venta');
-            $table->text('factor_unidad_venta');
-            $table->text('unidad_almacen');
-            $table->text('factor_unidad_almacen');
+            $table->text('cod_caracteristicas');
+            $table->text('unidad_comercial');
+            $table->text('embalaje');
+            $table->text('manejo_producto');
             $table->double('precio_venta');
-            $table->boolean('manejo_lote');
-            $table->json('complementario');
             $table->timestamps();
             $table->boolean('estado');
         });

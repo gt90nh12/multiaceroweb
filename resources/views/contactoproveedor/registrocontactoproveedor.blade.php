@@ -1,7 +1,7 @@
 <!-- ************** Formulario admin *************** -->
 @extends('layouts\admin')
-@section('titulo_pagina', 'Almacen')
-@section('descripcion_pagina', 'Formulario Registrar Almacen')
+@section('titulo_pagina', 'Contacto Proveedor')
+@section('descripcion_pagina', 'Formulario contacto proveedor')
 <!-- *********************************************** -->
 @section('content')
 <!-- ============================================================== -->
@@ -27,12 +27,13 @@
     </div>
 @endif
 
-<form  action="{{route('almacenar_almacen')}}" enctype="multipart/form-data" method="post" novalidate>
-{{ csrf_field() }}
-	@include('almacen._formulario_almacen')
-    <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i>Guardar</button>        
+<form  action="{{route('almacenar_contacto_proveedor')}}" enctype="multipart/form-data" method="post" novalidate>
+    {{ csrf_field() }}
+    @include('contactoproveedor._formulario_contacto_proveedor')
+    <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i>Guardar</button>
 </form>
 <!-- ============================================================== -->
 <!-- End PAge Content -->
 <!-- ============================================================== -->
+<script src="assets/js/pages/demo.form-wizard.js"></script>
 @stop

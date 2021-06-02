@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator, Hash, Auth;
+use App\Producto;
+use App\Proveedor;
+use App\ContactoProveedore;
+
 
 class CompraController extends Controller
 {
@@ -24,7 +28,9 @@ class CompraController extends Controller
      */
     public function create()
     {
-        return view("compra.registro_compra");
+        $contactoProveedores = ContactoProveedore::all();
+        $productos = Producto::all();
+        return view('compra.registro_compra')->with(compact('productos','contactoProveedores'));
     }
 
     /**

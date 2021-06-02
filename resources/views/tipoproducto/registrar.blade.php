@@ -1,7 +1,5 @@
 <!-- ************** Formulario admin *************** -->
 @extends('layouts\admin')
-@section('titulo_pagina', 'Almacen')
-@section('descripcion_pagina', 'Formulario Registrar Almacen')
 <!-- *********************************************** -->
 @section('content')
 <!-- ============================================================== -->
@@ -27,9 +25,9 @@
     </div>
 @endif
 
-<form  action="{{route('almacenar_almacen')}}" enctype="multipart/form-data" method="post" novalidate>
+<form  action="{{route('almacenar_tipo_producto')}}" enctype="multipart/form-data" method="post" novalidate>
 {{ csrf_field() }}
-	@include('almacen._formulario_almacen')
+	@include('tipoproducto._formularioTipoProducto')
     <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i>Guardar</button>        
 </form>
 <!-- ============================================================== -->
