@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator, Hash, Auth;
 use Carbon\carbon;
 use App\Almacene;
+use App\Sucursale;
 use App\Empresa;
 use DB;
 
@@ -29,7 +30,8 @@ class AlmacenController extends Controller
     public function create()
     {
         $empresas = Empresa::all();
-        return view('almacen/registrar')->with(compact('empresas'));
+        $sucursales = Sucursale::all();
+        return view('almacen/registrar')->with(compact('empresas','sucursales'));
     }
 
     /**

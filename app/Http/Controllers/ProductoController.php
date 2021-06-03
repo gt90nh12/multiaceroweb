@@ -20,9 +20,8 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        // $productos = Producto::all();
-        // $empresas = Producto::all();
-        // return view('producto.listar')->with(compact('productos','empresas'));
+        $productos = Producto::all();
+        return view('producto.listar')->with(compact('productos'));
     }
     /**
      * Show the form for creating a new resource.

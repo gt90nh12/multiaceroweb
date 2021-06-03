@@ -47,8 +47,8 @@ Route::post('/almacenar_almacen', 'AlmacenController@store')->name('almacenar_al
 
 /* ------------------------- REGISTRO DE ALMACEN/PRODUCTO ------------------------- */
 Route::get('/registro_almacenproducto', 'AlmacenproductoController@create')->name('registro_almacenproducto');
-// Route::post('/almacenar_almacen', 'AlmacenproductoController@store')->name('almacenar_almacen');
-
+Route::post('/almacenar_almacenproducto', 'AlmacenproductoController@store')->name('almacenar_almacenproducto');
+Route::get('/listar_almacenproducto', 'AlmacenproductoController@index')->name('listar_almacenproducto');
 /*********************************** MODULO COMPRAS ***********************************/
 
 /* ------------------------- REGISTRO DE EMPRESA ------------------------- */
