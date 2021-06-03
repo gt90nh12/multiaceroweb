@@ -10,7 +10,7 @@ const renderInvoice=()=>{
         <td>${el.id}</td>
         <td>
           <b>${el.nombre}</b> <br/>
-          ${el.producto}, ${el.origen}, ${el.color}
+          ${el.producto}, ${el.color}
         </td>
         <td>${el.precio.toFixed(2)} Bs.</td>
         <td>${el.multiplicador}</td>
@@ -187,7 +187,7 @@ imprimir=()=>{
   mywindow = window.open('', 'Nueva_factura', 'height=600px,width=800px');
   mywindow.document.write('<html>');
   mywindow.document.write('<head>');
-  mywindow.document.write('<title>FACTURA_NUMERO</title>');
+  mywindow.document.write('<title>Factura</title>');
   mywindow.document.write(`<link href="${assetGeneral}assets/css/app-modern.min.css" rel="stylesheet" type="text/css" id="light-style" />`);
   mywindow.document.write('</head>');
   mywindow.document.write('<body>');

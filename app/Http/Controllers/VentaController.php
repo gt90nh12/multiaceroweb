@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Caracteristica;
 use App\Cliente;
 use App\Producto;
 use App\Venta;
@@ -22,8 +23,11 @@ class VentaController extends Controller
       $todosLosProductos = Producto::all();
       $clientes_total=new Cliente();
       $clientes_total = Cliente::all();
+      $caracteristicas = new Caracteristica();
+      $caracteristicas = Caracteristica::all();
+      // return $caracteristicas;
 
-      return view('venta.create',compact('todosLosProductos','clientes_total'));
+      return view('venta.create',compact('todosLosProductos','clientes_total','caracteristicas'));
     }
 
     public function store(Request $request)

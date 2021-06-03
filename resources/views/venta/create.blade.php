@@ -3,6 +3,7 @@
 @section('descripcion_pagina', 'Formulario Ventas')
 @section('content')
 {{-- {{$todosLosProductos}} --}}
+{{-- {{$caracteristicas}} --}}
 <!-- third party css -->
 {{-- <link href="{{asset('assets/css/vendor/dataTables.bootstrap4.css')}}" rel="stylesheet" type="text/css" /> --}}
 <link href="{{asset('assets/css/vendor/responsive.bootstrap4.css')}}" rel="stylesheet" type="text/css" />
@@ -150,26 +151,27 @@
                                           <th>Procedencia</th>
                                           <th>Color</th>
                                           <th>Costo</th>
-                                          <th>Descripcion</th>
+                                          <th>Material</th>
+                                          {{-- <th>Caracteristicas</th> --}}
                                           <th>AGREGAR</th>
                                         </tr>
                                       </thead>
-
                                       <tbody>
                                         @foreach($todosLosProductos as $item)
                                           <tr>
                                             <td style="width: 1px">{{$item->id}}</td>
                                             <td>{{$item->nombre}}</td>
                                             <td>{{$item->marca_producto}}</td>
-                                            <td>{{$item->lugar_origen_producto}}</td>
+                                            <td>{{$item->procedencia_producto}}</td>
                                             <td>{{$item->color_producto}}</td>
-                                            <td>{{$item->precio_venta}}</td>
-                                            <td>{{$item->descripcion}}</td>
+                                            <td >{{$item->precio_venta}} Bs.</td>
+                                            <td>{{$item->material_producto}}</td>
+                                            {{-- <td>{{$caracteristicas[0]}}</td> --}}
                                             <td> <input onclick="checkProductos(event)" 
                                               data-id={{$item->id}}
-                                              data-nombre={{$item->nombre}}
-                                              data-producto={{$item->marca_producto}}
-                                              data-origen={{$item->lugar_origen_producto}}
+                                              data-nombre="{{$item->nombre}}"
+                                              data-producto="{{$item->marca_producto}}"
+                                              data-origen={{$item->procedencia_producto}}
                                               data-color={{$item->color_producto}}
                                               data-precio={{$item->precio_venta}}
                                               data-descripcion="{{$item->descripcion}}"
