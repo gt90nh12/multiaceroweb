@@ -57,7 +57,6 @@
                     $selected_ci = '';
                     $selected_nit = 'selected';
                     break;
-                    
                     default:
                     $selected_ci = '';
                     $selected_nit = '';

@@ -148,27 +148,36 @@
                                           <th style="width: 1px">Codigo</th>
                                           <th>Nombre</th>
                                           <th>Marca</th>
-                                          <th>Procedencia</th>
-                                          <th>Color</th>
                                           <th>Costo</th>
                                           <th>Material</th>
-                                          {{-- <th>Caracteristicas</th> --}}
+                                          <th>Procedencia</th>
+                                          <th>Color</th>
+                                          <th>Caracteristicas</th>
                                           <th>AGREGAR</th>
                                         </tr>
                                       </thead>
                                       <tbody>
                                         @foreach($todosLosProductos as $item)
+                                            <?php
+                                            $car="";
+                                              foreach ($caracteristicas as $key=>$val){
+                                                if($item->id==$val->id_producto)
+                                                  $car=str_replace('null','',$car.$val->nombre.' '.$val->dato.' '.$val->unidad_medida.' | ');
+                                              }
+                                              $car=substr($car,0,-3);
+                                            ?>
                                           <tr>
-                                            <td style="width: 1px">{{$item->id}}</td>
+                                            <td style="width: 1px">{{$item->cod_producto}}</td>
                                             <td>{{$item->nombre}}</td>
                                             <td>{{$item->marca_producto}}</td>
-                                            <td>{{$item->procedencia_producto}}</td>
-                                            <td>{{$item->color_producto}}</td>
                                             <td >{{$item->precio_venta}} Bs.</td>
                                             <td>{{$item->material_producto}}</td>
-                                            {{-- <td>{{$caracteristicas[0]}}</td> --}}
+                                            <td>{{$item->procedencia_producto}}</td>
+                                            <td>{{$item->color_producto}}</td>
+                                            <td>{{$car}}</td>
                                             <td> <input onclick="checkProductos(event)" 
                                               data-id={{$item->id}}
+                                              data-codigo={{$item->cod_producto}}
                                               data-nombre="{{$item->nombre}}"
                                               data-producto="{{$item->marca_producto}}"
                                               data-origen={{$item->procedencia_producto}}
@@ -176,6 +185,8 @@
                                               data-precio={{$item->precio_venta}}
                                               data-descripcion="{{$item->descripcion}}"
                                               data-item="{{$item}}"
+                                              data-car="{{$car}}"
+                                              data-img="{{$item->imagen}}"
                                               type="checkbox"></td>
                                             </tr>
                                         @endforeach
@@ -404,6 +415,9 @@
   <input type="hidden" id="rutaMiniClienteStore" value="{{route('miniCliente.store')}}">
   <input type="hidden" id="assetGeneral" value="{{asset('')}}">
   <input type="hidden" id="unoRoute" value="{{route('ventas.uno')}}">
+  <input type="hidden" id="sucursal" value="{{$sucursal}}">
+  <input type="hidden" id="ventasStore" value="{{route('ventas.store')}}">
+
   <!-- third party js -->
   <script src="{{asset('assets/js/vendor/jquery.dataTables.min.js')}}"></script>
   <script src="{{asset('assets/js/vendor/dataTables.bootstrap4.js')}}"></script>

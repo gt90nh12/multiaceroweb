@@ -133,7 +133,6 @@ todoOk=()=>{
   }
 }
 const $rutaMiniClienteStore=document.getElementById('rutaMiniClienteStore').value;
-const $csrf_token=document.getElementById('csrf_token').value;
 clienteStore=()=>{
   let datosCliente=JSON.stringify({"nombre_razon_social": valorFinalRazonSocial,"tipo_documento": valorFinalTipoDocumento,"num_documento":valorFinalnumeroDocumento});
   let opciones={

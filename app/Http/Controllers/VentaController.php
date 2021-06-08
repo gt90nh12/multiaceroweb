@@ -7,6 +7,7 @@ use App\Cliente;
 use App\Producto;
 use App\Venta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class VentaController extends Controller
 {
@@ -20,19 +21,41 @@ class VentaController extends Controller
     public function create()
     {
       $todosLosProductos = new Producto();
-      $todosLosProductos = Producto::all();
-      $clientes_total=new Cliente();
-      $clientes_total = Cliente::all();
+      $clientes_total = new Cliente();
       $caracteristicas = new Caracteristica();
+      $sucursal=DB::table('sucursales')->select(
+      'sucursales.id',
+      'sucursales.numero_sucursal',
+      'sucursales.numero_autorizacion',
+      'sucursales.pais',
+      'sucursales.estado_departamento',
+      'sucursales.ciudad',
+      'sucursales.direccion',
+      'sucursales.telefono',
+      'sucursales.correo',
+      'empresas.nombre_empresa',
+      'empresas.actividad',
+      'empresas.nit',
+      'empresas.archivo_seleccionado',
+      )
+      ->Join('empresas', 
+      'empresas.id', 
+      '=', 
+      'sucursales.cod_empresa')
+      ->get();
+      // return $sucursal;
+      $todosLosProductos = Producto::all();
+      $clientes_total = Cliente::all();
       $caracteristicas = Caracteristica::all();
-      // return $caracteristicas;
-
-      return view('venta.create',compact('todosLosProductos','clientes_total','caracteristicas'));
+      return view('venta.create',compact('todosLosProductos','clientes_total','caracteristicas','sucursal'));
     }
 
     public function store(Request $request)
     {
-        //
+      // foreach ($request as $key => $value) {
+      //   echo $key;
+      // }
+      return $request;
     }
 
     public function show($id)

@@ -80,10 +80,10 @@ Route::delete('clientes/destroy/{id}', 'ClienteController@destroy')->name('clien
 Route::get('ventas', 'VentaController@index')->name('ventas.index');
 Route::get('ventas/create', 'VentaController@create')->name('ventas.create');
 Route::post('ventas/store', 'VentaController@store')->name('ventas.store');
-Route::get('ventas/show/{id}', 'VentaController@show')->name('ventas.show');
-Route::get('ventas/{id}/edit', 'VentaController@edit')->name('ventas.edit');
-Route::put('ventas/update/{id}', 'VentaController@update')->name('ventas.update');
-Route::delete('ventas/destroy/{id}', 'VentaController@destroy')->name('ventas.destroy');
+// Route::get('ventas/show/{id}', 'VentaController@show')->name('ventas.show');
+// Route::get('ventas/{id}/edit', 'VentaController@edit')->name('ventas.edit');
+// Route::put('ventas/update/{id}', 'VentaController@update')->name('ventas.update');
+// Route::delete('ventas/destroy/{id}', 'VentaController@destroy')->name('ventas.destroy');
 //--------------------------- miniClientes------------------------------------------------------
 Route::get('miniclientes', 'miniClienteController@index')->name('miniCliente.index');
 Route::post('miniclientes/store', 'miniClienteController@store')->name('miniCliente.store');

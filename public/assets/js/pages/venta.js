@@ -2,10 +2,14 @@ const assetGeneral=document.getElementById('assetGeneral').value;
 const $trProductosDOM=document.getElementById('tbodyProductos');
 const $resumenVentaDOM=document.getElementById('resumenVenta');
 const $des=document.getElementById('thanks');
+const ventasStore=document.getElementById('ventasStore').value;
+const $csrf_token=document.getElementById('csrf_token').value;
+cajero={id:1};
 venta=[];
 checkProductos=e=>{
   if(e.target.checked){
     id=Number(e.target.dataset.id);
+    codigo=e.target.dataset.codigo;
     nombre=e.target.dataset.nombre;
     producto=e.target.dataset.producto;
     origen=e.target.dataset.origen;
@@ -14,7 +18,9 @@ checkProductos=e=>{
     descripcion=e.target.dataset.descripcion;
     multiplicador=1;
     total=precio;
-    data=[{id, nombre, producto, origen, color, precio, multiplicador, total, descripcion}];
+    car=e.target.dataset.car;
+    img=e.target.dataset.img;
+    data=[{id, codigo, nombre, producto, origen, color, precio, multiplicador, total, descripcion,car,img}];
     almacenProductos(data);
   }
 };
@@ -41,8 +47,8 @@ function renderizadoProductosCheck(venta){
     let nuevocontenido=`
       <tr id="tr-productos">
         <td id="eventoEjemplo" >
-          <img src="${assetGeneral}assets/images/products/product-1.jfif" alt="${element.nombre}"
-          title="${element.nombre} - Descripcion: ${element.descripcion}" class="rounded mr-3" height="64" />
+          <img src="${assetGeneral}assets/images/products/${element.img}" alt="${element.nombre}"
+          title="Caracteriticas: ${element.car}" class="rounded mr-3" height="64" />
           <p class="m-0 d-inline-block align-middle font-16">
               <a href="javascript: void(0);"
                   class="text-body"> ${element.nombre} </a>

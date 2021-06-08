@@ -1,16 +1,18 @@
 const $rowInvoice=document.getElementById('invoice');
 const unoRoute=document.getElementById('unoRoute').value;
+const sucursal=document.getElementById('sucursal').value;
 t=new Date();
 const renderInvoice=()=>{
   if(venta.length!==0&&Object.entries(cliente).length!==0){
     let templateTr="", empty1="";
+    let inputProducto="", empty2="";c=0;
     venta.forEach(el=>{
       templateTr=`
       <tr>
-        <td>${el.id}</td>
+        <td>#${el.codigo}</td>
         <td>
           <b>${el.nombre}</b> <br/>
-          ${el.producto}, ${el.color}
+          ${el.car}
         </td>
         <td>${el.precio.toFixed(2)} Bs.</td>
         <td>${el.multiplicador}</td>
@@ -18,7 +20,14 @@ const renderInvoice=()=>{
       </tr>`;
       templateTr=empty1+templateTr;
       empty1=templateTr;
+      c++;
+      inputProducto=`
+        <input type="hidden" name="${c}" value="${el.id},${el.precio},${el.multiplicador},${el.total}"/>
+      `;
+      inputProducto=empty2+inputProducto;
+      empty2=inputProducto;
     });
+    suc=JSON.parse(sucursal)[0];
     let templateInvoice=`
     <div class="col-12">
       <div class="card">
@@ -28,23 +37,24 @@ const renderInvoice=()=>{
               <div class="col-sm-6">
                 <div class="float-left mt-3">
                   <img src="${assetGeneral}assets/images/logo-light.png" alt="" height="22px">
-                  <h4>MULTIACERO</h4>
-                  <h5>CASA MATRIZ</h5>
+                  <h4>${suc.nombre_empresa}</h4>
+                  <h5>Sucursal ${suc.numero_sucursal}</h5>
                   <address>
-                    La Paz - Bolivia<br>
-                    Zona 16 de Julio<br>
-                    Calle Juan Pablo II, #123<br>
-                    <abbr title="Telefono"></abbr> (512) 78860849
+                    ${suc.pais} - ${suc.estado_departamento}<br>
+                    ${suc.ciudad}<br>
+                    ${suc.direccion}<br>
+                    Correo: ${suc.correo}<br>
+                    Telefono: ${suc.telefono}
                   </address>
                 </div>
               </div><!-- end col -->
               <div class="col-sm-4 offset-sm-2">
                 <div class="mt-3 float-sm-right">
-                  <p class="font-12"><strong>NIT:</strong><span class="float-right">456489012</span></p>
-                  <p class="font-12"><strong>N° FACTURA:</strong><span class="float-right">100</span></p>
-                  <p class="font-12"><strong>N° AUTORIZACION:</strong><span class="float-right">434401000041743</span></p>
+                  <p class="font-12"><strong>NIT:</strong><span class="float-right">${suc.nit}</span></p>
+                  <p class="font-12"><strong>N° FACTURA:</strong><span class="float-right">001</span></p>
+                  <p class="font-12"><strong>N° AUTORIZACION:</strong><span class="float-right">${suc.numero_autorizacion}</span></p>
                   <p class="font-18"><strong>ORIGINAL</strong></p>
-                  <p class="font-12"><strong></strong><span class="float-right">Venta al por mayor de materiales de ferreteria, equipo y materiales de fontaneria y calefacción.</span></p>
+                  <p class="font-12"><strong></strong><span class="float-right">${suc.actividad}.</span></p>
                 </div>
               </div><!-- end col -->
             </div>
@@ -131,8 +141,8 @@ const renderInvoice=()=>{
           </div>
           <div class="d-print-none mt-4">
             <div class="text-right">
-              <a href="javascript: void(0);" onclick="imprimir();" class="btn btn-primary"><i class="mdi mdi-printer"></i> Imprimir</a>
-              <a href="javascript: void(0);" class="btn btn-info">Realizar Venta</a>
+              <form id='form1' action="${ventasStore}" method="POST">
+              </form>
             </div>
           </div>   
           <!-- end buttons -->
@@ -140,8 +150,21 @@ const renderInvoice=()=>{
       </div> <!-- end card -->
     </div> <!-- end col-->`;
     $rowInvoice.innerHTML=templateInvoice;
-		qrcode=new QRCode(document.getElementById("divQr"), {
-      text: `456489012|100|434401000041743|${t.toLocaleDateString()}|${venta.totalFinal.toFixed(2)}|${venta.totalFinal.toFixed(2)}|17-89-80-C7-3C|${cliente.num_documento}|0|0|0|${venta.descuentoTotal}`,
+    templateForm=`
+    <input type="hidden" name="_token" value="${$csrf_token}">
+    <input type="hidden" name="max" value="${c}"/>
+    ${inputProducto}
+    <input type="hidden" name="descuentoTotal" value="${venta.descuentoTotal}"/>
+    <input type="hidden" name="totalGeneral" value="${venta.totalGeneral}"/>
+    <input type="hidden" name="totalFinal" value="${venta.totalFinal}"/>
+    <input type="hidden" id="cod" name="cod" value=""/>
+    <input type="hidden" name="id_cliente" value="${cliente.id}"/>
+    <input type="hidden" name="id_sucursal" value="${JSON.parse(sucursal)[0].id}"/>
+    <input type="hidden" name="id_cajero" value="${cajero.id}"/>
+    <button class="btn btn-primary type="submit" onclick="imprimir();">REALIZAR VENTA</button>
+    `;
+    document.getElementById('form1').innerHTML=templateForm;
+		qrcode=new QRCode(document.getElementById("divQr"),{
       width: 140,
       height: 140,
       correctLevel : 0,
@@ -176,6 +199,8 @@ unoCode=(url, options={})=>{
   .then(res=>res.ok?res.text():Promise.reject(res))
   .then(json=>{
     document.getElementById('unoCode').innerText=json;
+    document.getElementById('cod').value=json;
+    qrcode.makeCode(`${suc.nit}|001|${suc.numero_autorizacion}|${t.toLocaleDateString()}|${venta.totalFinal.toFixed(2)}|${venta.totalFinal.toFixed(2)}|${json}|${cliente.num_documento}|0|0|0|${venta.descuentoTotal}`);
   })
   .catch(err=>{
     mensaje=err.statusText||"Ocurrió un error";
@@ -183,7 +208,7 @@ unoCode=(url, options={})=>{
   });
 };
 imprimir=()=>{
-  console.log("hola cabrito");
+  console.log("start");
   mywindow = window.open('', 'Nueva_factura', 'height=600px,width=800px');
   mywindow.document.write('<html>');
   mywindow.document.write('<head>');
@@ -199,5 +224,10 @@ imprimir=()=>{
     mywindow.focus();
     mywindow.print();
     mywindow.close();
-  },300); 
+  },300);
+  // console.log(venta);
+  // venta=[...venta,{'descuento':venta.descuentoTotal,'totalGeneral':venta.totalGeneral,'totalFinal':venta.totalFinal},cliente,suc];
+  // console.log(venta);
 }
+
+
