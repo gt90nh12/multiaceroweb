@@ -20,10 +20,10 @@ const renderInvoice=()=>{
       </tr>`;
       templateTr=empty1+templateTr;
       empty1=templateTr;
-      c++;
       inputProducto=`
-        <input type="hidden" name="${c}" value="${el.id},${el.precio},${el.multiplicador},${el.total}"/>
+      <input type="hidden" name="${c}" value="${el.id},${el.precio},${el.multiplicador},${el.total}"/>
       `;
+      c++;
       inputProducto=empty2+inputProducto;
       empty2=inputProducto;
     });
@@ -152,8 +152,7 @@ const renderInvoice=()=>{
     $rowInvoice.innerHTML=templateInvoice;
     templateForm=`
     <input type="hidden" name="_token" value="${$csrf_token}">
-    <input type="hidden" name="max" value="${c}"/>
-    ${inputProducto}
+    <input type="hidden" name="max" value="${c}"/>${inputProducto}
     <input type="hidden" name="descuentoTotal" value="${venta.descuentoTotal}"/>
     <input type="hidden" name="totalGeneral" value="${venta.totalGeneral}"/>
     <input type="hidden" name="totalFinal" value="${venta.totalFinal}"/>
@@ -170,13 +169,7 @@ const renderInvoice=()=>{
       correctLevel : 0,
       useSVG:true
     });
-    let datosCliente=JSON.stringify({
-      "a": "7904006306693",
-      "b":"876814",
-      "c":"1665979",
-      "d":"20080519",
-      "e":venta.totalFinal.toFixed(2),
-      "f":"zZ7Z]xssKqkEf_6K9uH(EcV+%x+u[Cca9T%+_$kiLjT8(zr3T9b5Fx2xG-D+_EBS"
+    let data=JSON.stringify({"a": "7904006306693","b":"876814","c":"1665979","d":"20080519","e":venta.totalFinal.toFixed(2),"f":"zZ7Z]xssKqkEf_6K9uH(EcV+%x+u[Cca9T%+_$kiLjT8(zr3T9b5Fx2xG-D+_EBS"
     });
     let opciones={
       headers: {
@@ -187,7 +180,7 @@ const renderInvoice=()=>{
         },
       method: 'POST',
       credentials: "same-origin",
-      body: datosCliente
+      body: data
     };
     unoCode(unoRoute, opciones);
   }else{
@@ -225,9 +218,4 @@ imprimir=()=>{
     mywindow.print();
     mywindow.close();
   },300);
-  // console.log(venta);
-  // venta=[...venta,{'descuento':venta.descuentoTotal,'totalGeneral':venta.totalGeneral,'totalFinal':venta.totalFinal},cliente,suc];
-  // console.log(venta);
 }
-
-

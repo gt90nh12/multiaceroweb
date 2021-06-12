@@ -17,14 +17,14 @@ class CreateVentasTable extends Migration
             $table->id();
             $table->string('monto_total');
             $table->string('monto_total_sujeto_iva');
+            $table->double('descuento_total');
             $table->tinyInteger('codigo_moneda');
             $table->tinyInteger('tipo_cambio');
             $table->string('monto_total_moneda');
-            $table->unsignedBigInteger('id_clientes')->unique();
-            $table->unsignedBigInteger('id_agencias')->unique();
-            $table->unsignedBigInteger('id_cajeros')->unique();
+            $table->unsignedBigInteger('id_clientes');
+            $table->unsignedBigInteger('id_sucursales');
+            $table->unsignedBigInteger('id_cajeros');
             $table->foreign('id_clientes')->references('id')->on('clientes');
-            $table->foreign('id_agencias')->references('id')->on('agencias');
             $table->foreign('id_cajeros')->references('id')->on('cajeros');
             $table->timestamps();
         });

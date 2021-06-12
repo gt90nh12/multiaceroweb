@@ -4,7 +4,6 @@
 
 
 @section('content')
-{{$todasLasVentas}}
 
   {{-- <link href="{{asset('assets/css/vendor/dataTables.bootstrap4.css')}}" rel="stylesheet" type="text/css" /> --}}
   <link href="{{asset('assets/css/vendor/responsive.bootstrap4.css')}}" rel="stylesheet" type="text/css" />
@@ -23,7 +22,7 @@
             <li class="breadcrumb-item active">Todas las Ventas</li>
           </ol>
         </div>
-        <h4 class="page-title">Todas las Ventas</h4>
+        <h4 class="page-title">TODAS LAS VENTAS</h4>
       </div>
     </div>
   </div>
@@ -43,51 +42,38 @@
                 
                 <thead>
                   <tr>
-                    {{-- <th class="all">Producto</th>
-                    <th>Categoria</th>
-                    <th>fecha add</th>
-                    <th>Precio</th>
-                    <th>Cantidad</th>
-                    <th>Estado</th>
-                    <th style="width: 85px;">Action</th> --}}
-
-
-
-                      <th style="width: 1px">Codigo</th>
-                      <th>Producto</th>
-                      <th>Categoria</th>
-                      <th>Fecha Agreagado</th>
-                      <th>Precio</th>
-                      <th>Cantidad</th>
-                      <th>estado</th>
+                      <th style="width: 1px">FECHA DE LA VENTA</th>
+                      <th>CLIENTE</th>
+                      <th>CI / NIT</th>
+                      <th>N° DOCUMENTO</th>
+                      <th>TOTAL</th>
+                      <th>DESCUENTO</th>
+                      <th>TOTAL FINAL</th>
                       <th style="width: 85px;">Action</th>
-                      <th>Email</th>
-
                     </tr>
                   </thead>
 
                   <tbody>
                     @foreach($todasLasVentas as $item)
                       <tr>
-                        <td style="width: 1px">{{'$item->id'}}</td>
-                        <td>{{'$item->nombre'}}</td>
-                        <td>{{'$item->apellidos'}}</td>
-                        <td>{{'$item->tipo_documento'}}</td>
-                        <td>{{'$item->num_documento'}}</td>
-                        <td>{{'$item->telefono_movil'}}</td>
-                        <td>{{'$item->telefono_fijo'}}</td>
-                        <td>{{'$item->email'}}</td>
+                        <td>{{$item->created_at}}</td>
+                        <td>{{$item->nombre_razon_social}}</td>
+                        <td>{{$item->tipo_documento}}</td>
+                        <td>{{$item->num_documento}}</td>
+                        <td>{{$item->monto_total+$item->descuento_total}} Bs.</td>
+                        <td>{{$item->descuento_total}} Bs.</td>
+                        <td>{{$item->monto_total}} Bs.</td>
                         <td class="table-action">
-                          <a href="#" class="action-icon"> <i class="mdi mdi-eye"></i></a>
+                          <a href="{{route('ventas.show', $item->id)}}" class="action-icon"><i class="mdi mdi-eye"></i></a>
                           <a href="#" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
                           {{-- <a href="#" class="action-icon"> <i class="mdi mdi-delete"></i></a> --}}
-                          <form action="#" method="POST">
+                          {{-- <form action="#" method="POST">
                             @method('delete')
                             @csrf
                             <button type="submit" class="btn btn-light" >
                               <i class="action-icon mdi mdi-delete"></i>
                             </button>
-                          </form>
+                          </form> --}}
                         </td>
                       </tr>
                     @endforeach

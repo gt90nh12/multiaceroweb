@@ -18,8 +18,7 @@ class CreateFacturasTable extends Migration
             $table->bigInteger('numero_factura');
             $table->date('fecha_emicion');
             $table->tinyInteger('codigo_metodo_pago');
-            $table->string('cuf',60);
-            $table->tinyInteger('codigo_documento_sector');
+            $table->string('codigo_control');
             $table->unsignedBigInteger('id_ventas')->unique();
             $table->foreign('id_ventas')->references('id')->on('ventas')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
