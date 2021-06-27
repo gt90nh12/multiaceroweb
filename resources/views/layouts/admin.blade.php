@@ -20,7 +20,6 @@
         <script src="{{asset('assets/js/jquery/jquery.min.js')}}"></script>
     </head>
     <body class="loading" data-layout="detached" data-layout-config='{"leftSidebarCondensed":false,"darkMode":true, "showRightSidebarOnStart": true}'>
-
         <!-- Topbar Start -->
         <div class="navbar-custom topnav-navbar topnav-navbar-dark">
             <div class="container-fluid">
@@ -208,7 +207,7 @@
                                             <img src="{{asset('assets/images/users/avatar-0.jpg')}}" alt="user-image" class="rounded-circle">
                                         </span>
                                         <span>
-                                            <span class="account-user-name">Erik Weisz</span>
+                                            <span class="account-user-name">{{Auth::user()->user}}</span>
                                             <span class="account-position">Administrador de sistema</span>
                                         </span>
                                     </a>
@@ -231,22 +230,14 @@
                                         </a>
 
                                         <!-- item-->
-    <!--                         <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="mdi mdi-lifebuoy mr-1"></i>
-                                <span>Support</span>
-                            </a>
-                        -->
-                        <!-- item-->
-<!--                             <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="mdi mdi-lock-outline mr-1"></i>
-                                <span>Lock Screen</span>
-                            </a> -->
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="mdi mdi-logout mr-1"></i>
-                                <span>cerrar sesión</span>
-                            </a>
+                                        <form action="{{route('auths.logout')}}" method="POST">
+                                          @csrf
+                                          <a href="javascript:void(0);" onclick="this.closest('form').submit()" class="dropdown-item notify-item">
+                                            <i class="mdi mdi-logout mr-1"></i>
+                                            <span>Cerrar sesión</span>
+                                          </a>
+                                        </form>
+                                        
 
                         </div>
                     </li>
@@ -275,7 +266,7 @@
                     <div class="leftbar-user">
                         <a href="javascript: void(0);">
                             <img src="{{asset('assets/images/users/avatar-0.jpg')}}" alt="user-image" height="42" class="rounded-circle shadow-sm">
-                            <span class="leftbar-user-name">Erik Weisz</span>
+                            <span class="leftbar-user-name">{{Auth::user()->user}}</span>
                         </a>
                     </div>
 

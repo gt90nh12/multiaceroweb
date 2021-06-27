@@ -65,7 +65,7 @@
   .number-input input[type=number] {
     font-family: sans-serif;
     color: #37404a;
-    max-width: 2.5rem;
+    max-width: 4rem;
     padding: .5rem;
     border: solid black;
     border-width: 0 2px;
@@ -281,17 +281,14 @@
                   </div>
                   <!-- End Payment Information Content-->
               </div> <!-- end tab content-->
-
               <hr>
               <div class="row">                  
-
                 <div class="col-12">
                   <div class="card">
                     <div class="card-body">
                       <div id="divCliente" style="font-size:16px">
                         <h4 style="color:#866f33 ">Seleccione un cliente por favor.</h4><br>
                       </div>
-                      
                       <div class="row">
                         <div class="col-lg-8">
                           <div class="table-responsive">
@@ -305,18 +302,14 @@
                                   <th style="width: 50px;"></th>
                                 </tr>
                               </thead>
-                              <tbody id ="tbodyProductos">
-
-                              </tbody>
+                              <tbody id ="tbodyProductos"></tbody>
                             </table>
                           </div> <!-- end table-responsive-->
-
                             <!-- Add note input-->
                           <div class="mt-3">
                             <label for="example-textarea">Descripcion de la venta:</label>
                             <textarea class="form-control" id="example-textarea" rows="3" placeholder="Escriba aqui..."></textarea>
                           </div>
-
                           <!-- action buttons-->
                           <div class="row mt-4">
                             <div class="col-sm-6">
@@ -358,8 +351,6 @@
                   </div> <!-- end card-->
                 </div> <!-- end col -->
               </div>
-
-              
               <!-- CrearCliente modal-->
               <div id="crearCliente-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
                   <div class="modal-dialog">
@@ -404,21 +395,19 @@
                       </div><!-- /.modal-content -->
                   </div><!-- /.modal-dialog -->
               </div><!-- /.modal -->
-
           </div> <!-- end card-body-->
       </div> <!-- end card-->
   </div> <!-- end col -->
 </div>
 <!-- end row-->
   <input type="hidden" id="csrf_token" value="{{csrf_token()}}">
+  <input type="hidden" id="fa" value="{{$fa?$fa->numero_factura+1:1}}">
   <input type="hidden" id="rutaMiniClienteIndex" value="{{route('miniCliente.index')}}">
   <input type="hidden" id="rutaMiniClienteStore" value="{{route('miniCliente.store')}}">
   <input type="hidden" id="assetGeneral" value="{{asset('')}}">
   <input type="hidden" id="unoRoute" value="{{route('ventas.uno')}}">
   <input type="hidden" id="sucursal" value="{{$sucursal}}">
   <input type="hidden" id="ventasStore" value="{{route('ventas.store')}}">
-
-  <!-- third party js -->
   <script src="{{asset('assets/js/vendor/jquery.dataTables.min.js')}}"></script>
   <script src="{{asset('assets/js/vendor/dataTables.bootstrap4.js')}}"></script>
   <script src="{{asset('assets/js/vendor/dataTables.responsive.min.js')}}"></script>
@@ -431,13 +420,10 @@
   {{-- <script src="assets/js/vendor/dataTables.keyTable.min.js"></script> --}}
   {{-- <script src="assets/js/vendor/dataTables.select.min.js"></script> --}}
   <!-- third party js ends -->
-
-  {{-- ================================================================================================= --}}
   <script src="{{asset('assets/js/pages/demo.datatable-init.js')}}"></script>
   <script src="{{asset('assets/js/pages/venta.js')}}"></script>
   <script src="{{asset('assets/js/pages/miniClientes.js')}}"></script>
   <script src="{{asset('assets/js/pages/montoInvoice.js')}}"></script>
   <script src="{{asset('assets/js/pages/invoice.js')}}"></script>
   <script src="{{asset('assets/js/pages/demo.apex.js')}}"></script>
-
 @stop

@@ -13,9 +13,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'AuthController@index')->name('auths.index')->middleware('guest');
+Route::post('auths/login', 'AuthController@login')->name('auths.login');
+
+Route::get('/admin', 'PersonaController@admin')->name('admin')->middleware('auth');
+
+Route::post('auths/logout', 'AuthController@logout')->name('auths.logout');
+
+
+Route::get('auths/create', 'AuthController@create')->name('auths.create');
+Route::post('auths/store', 'AuthController@store')->name('auths.store');
+// Route::get('auths/show/{id}', 'AuthController@show')->name('auths.show');
+// Route::get('auths/{id}/edit', 'AuthController@edit')->name('auths.edit');
+// Route::put('auths/update/{id}', 'AuthController@update')->name('auths.update');
+// Route::delete('auths/destroy/{id}', 'AuthController@destroy')->name('auths.destroy');
+
 
 //plantila administrador
 
@@ -25,7 +37,6 @@ Route::get('/inicio', 'PersonaController@inicio')->name('inicio'); // cancelar r
 // Route::get('/listar_persona', 'PersonaController@index')->name('listar_persona');
 // Route::get('/almacenar_persona', 'PersonaController@create')->name('almacenar_persona');
 Route::get('/registrar_persona', 'PersonaController@store')->name('registrar_persona');
-Route::get('/admin', 'PersonaController@admin')->name('admin');
 Route::get('/almacen_lista', 'PersonaController@almacen_lista')->name('almacen_lista');
 
 // Route::get('/editar_persona{id}', 'PersonaController@edit')->name('editar_persona');

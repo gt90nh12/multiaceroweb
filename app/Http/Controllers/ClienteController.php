@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cliente;
+use App\Venta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -10,10 +11,9 @@ class ClienteController extends Controller
 {
   public function index()
   {
-    $clientes_total = new Cliente();
-    $clientes_total = Cliente::all();
-    // return $clientes_total;
-    return view('cliente.index', compact('clientes_total'));
+    $clientes_total=Cliente::all();
+    $ve=Venta::all();
+    return view('cliente.index', compact('clientes_total','ve'));
   }
 
   public function create()
@@ -24,9 +24,9 @@ class ClienteController extends Controller
   public function store(Request $request)
   {
     $request->validate([
-      'nombre_razon_social' => 'required|max:30',
-      'tipo_documento' => 'required',
-      'num_documento' => ['required', 'min:5', 'unique:clientes,num_documento'],
+      'nombre_razon_social'=>'required|max:30',
+      'tipo_documento'=>'required',
+      'num_documento'=>['required', 'min:5', 'unique:clientes,num_documento'],
     ]);
     $agregarCliente = new Cliente();
     $agregarCliente->nombre_razon_social = $request->nombre_razon_social;
@@ -38,15 +38,8 @@ class ClienteController extends Controller
 
   public function show($id)
   {
-    $verCliente = new Cliente();
-    // $verCliente = DB::table('ventas')
-    //   ->select('*')
-    //   ->join('clientes', 'ventas.id_clientes', '=', 'clientes.id')
-    //   ->where('clientes.id', '=', $id)
-    //   ->get();
-    // return $verCliente;
-    $verCliente=Cliente::find($id);
-    return view('cliente.show', compact('verCliente'));
+    $vCli=DB::table('clientes')->select()->join('ventas', 'ventas.id_clientes','=','clientes.id')->where('clientes.id', '=', $id)->get();
+    return view('cliente.show', compact('vCli',));
   }
 
   public function edit($id)

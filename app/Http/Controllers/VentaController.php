@@ -13,12 +13,14 @@ use App\Venta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use function PHPUnit\Framework\returnSelf;
+
 class VentaController extends Controller
 {
   public function index()
   { 
     $todasLasVentas=new Venta();
-    $todasLasVentas =DB::table('clientes')->select('*')->join('ventas','ventas.id_clientes','=','clientes.id')->get();
+    $todasLasVentas=DB::table('clientes')->select()->join('ventas','ventas.id_clientes','=','clientes.id')->get();
     return view('venta.index', compact('todasLasVentas'));
   }
 
@@ -27,6 +29,7 @@ class VentaController extends Controller
     $todosLosProductos=new Producto();
     $clientes_total=new Cliente();
     $caracteristicas=new Caracteristica();
+    $fa=Factura::all()->last();
     $sucursal=DB::table('sucursales')->select(
     'sucursales.id',
     'sucursales.numero_sucursal',
@@ -50,7 +53,7 @@ class VentaController extends Controller
     $todosLosProductos=Producto::all();
     $clientes_total=Cliente::all();
     $caracteristicas=Caracteristica::all();
-    return view('venta.create',compact('todosLosProductos','clientes_total','caracteristicas','sucursal'));
+    return view('venta.create',compact('todosLosProductos','clientes_total','caracteristicas','sucursal','fa'));
   }
 
   public function store(Request $request){
@@ -61,6 +64,7 @@ class VentaController extends Controller
     $ve->monto_total=$request->totalFinal;
     $ve->monto_total_sujeto_iva=$request->totalFinal-(($request->totalFinal)/100)*13;
     $ve->descuento_total=$request->descuentoTotal;
+    $ve->cantidad_productos=$request->max;
     $ve->codigo_moneda=0;
     $ve->tipo_cambio=0;
     $ve->monto_total_moneda=$request->totalFinal;
@@ -68,33 +72,35 @@ class VentaController extends Controller
     $ve->id_sucursales=$request->id_sucursal;
     $ve->id_cajeros=$request->id_cajero;
     $ve->save();
-    $fa->numero_factura=1;
-    $fa->fecha_emicion=$date;
-    $fa->codigo_metodo_pago=1;
-    $fa->codigo_control=$request->cod;
-    $fa->id_ventas=Venta::select('id')->get()->last()->id;
-    $fa->save();
     $tr->fecha_transaccion=$date;
     $tr->observaciones='';
-    $tr->id_compra=0;
-    $tr->id_venta=Venta::select('id')->get()->last()->id;
+    $tr->tipo_transaccion='ventas';
+    $tr->id_compras=0;
+    $tr->id_ventas=Venta::all()->last()->id;
+    $tr->id_almacen=1;
     $tr->save();
     for($i=0; $i<$request->max; $i++){
       $de=new detalle_movimiento_inventario();
       $st=new almacen_producto();
       $j=explode(',',$request->$i);
-      $de->numero_transaccion='';
+      $de->numero_transaccion=''; 
       $de->costo=$j[1];
       $de->cantidad=$j[2];
       $de->descuento=$request->descuentoTotal/$request->max;
       $de->id_producto=$j[0];
       $st=almacen_producto::find($j[0]);
-      $de->id_transacciones_movimiento_inventarios=transacciones_movimiento_inventarios::select('id')->get()->last()->id;
+      $de->id_transacciones_movimiento_inventarios=transacciones_movimiento_inventarios::all()->last()->id;
       $st->cantidad_producto=$st->cantidad_producto-$j[2];
       $st->save();
       $de->save();
     }
-    $todasLasVentas=DB::table('clientes')->select('*')->join('ventas','ventas.id_clientes','=','clientes.id')->get();
+    $fa->numero_factura=$request->nfa;
+    $fa->fecha_emicion=$date;
+    $fa->codigo_metodo_pago=1;
+    $fa->codigo_control=$request->cod;
+    $fa->id_ventas=Venta::all()->last()->id;
+    $fa->save();
+    $todasLasVentas=DB::table('clientes')->select()->join('ventas','ventas.id_clientes','=','clientes.id')->get();
     return redirect()->route('ventas.index','todasLasVentas');
   }
 
@@ -102,9 +108,9 @@ class VentaController extends Controller
   {
     $pro=new Producto();
     $ve=Venta::find($id);
-    $tr=transacciones_movimiento_inventarios::where('id_venta',$id)->first();
-    $pr=DB::table('detalle_movimiento_inventarios')->where('id_transacciones_movimiento_inventarios',$tr->id)->get();
-    foreach ($pr as $k=>$val){
+    $tr=transacciones_movimiento_inventarios::where('tipo_transaccion','=','ventas')->where('id_ventas','=',$id)->first();
+    $pr=DB::table('detalle_movimiento_inventarios')->where('id_transacciones_movimiento_inventarios',$tr->id_ventas)->get();
+    foreach($pr as $k=>$val){
       $val->pro=Producto::find($val->id_producto);
     }
     $cl=Cliente::find($ve->id_clientes);

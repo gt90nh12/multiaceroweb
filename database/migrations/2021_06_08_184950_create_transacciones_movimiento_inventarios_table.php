@@ -8,12 +8,14 @@ class CreateTransaccionesMovimientoInventariosTable extends Migration
 {
   public function up()
   {
-    Schema::create('transacciones_movimiento_inventarios', function (Blueprint $table) {
+    Schema::create('transacciones_movimiento_inventarios', function (Blueprint $table){
       $table->id();
       $table->date('fecha_transaccion');
-      $table->string('observaciones');
-      $table->bigInteger('id_compra');
-      $table->bigInteger('id_venta');
+      $table->text('observaciones');
+      $table->text('tipo_transaccion');
+      $table->bigInteger('id_compras');
+      $table->bigInteger('id_ventas');
+      $table->bigInteger('id_almacen');
       $table->timestamps();
     });
   }

@@ -18,6 +18,7 @@ class CreateVentasTable extends Migration
             $table->string('monto_total');
             $table->string('monto_total_sujeto_iva');
             $table->double('descuento_total');
+            $table->integer('cantidad_productos');
             $table->tinyInteger('codigo_moneda');
             $table->tinyInteger('tipo_cambio');
             $table->string('monto_total_moneda');

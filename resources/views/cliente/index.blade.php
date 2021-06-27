@@ -1,11 +1,7 @@
 @extends('layouts\admin')
 @section('titulo_pagina', 'Clientes')
 @section('descripcion_pagina', 'Formulario Ventas')
-
-
 @section('content')
-
-  {{-- <link href="{{asset('assets/css/vendor/dataTables.bootstrap4.css')}}" rel="stylesheet" type="text/css" /> --}}
   <link href="{{asset('assets/css/vendor/responsive.bootstrap4.css')}}" rel="stylesheet" type="text/css" />
   <link href="{{asset('assets/css/vendor/buttons.bootstrap4.css')}}" rel="stylesheet" type="text/css" />
   <link href="{{asset('assets/css/vendor/select.bootstrap4.css')}}" rel="stylesheet" type="text/css" />
@@ -15,22 +11,11 @@
   <div class="row">
     <div class="col-12">
       <div class="page-title-box">
-        <div class="page-title-right">
-          <ol class="breadcrumb m-0">
-            <li class="breadcrumb-item"><a href="javascript: void(0);">Multiacero</a></li>
-            <li class="breadcrumb-item"><a href="javascript: void(0);">Clientes</a></li>
-            <li class="breadcrumb-item active">Lista de Clientess</li>
-          </ol>
-        </div>
         <h4 class="page-title">Clientes</h4>
       </div>
     </div>
   </div>
   <!-- end page title -->
-
-
-  
-  
 
   <div class="row">  
     <div class="col-sm-4">
@@ -43,46 +28,53 @@
           <div class="tab-content">
             <div class="tab-pane show active">
               <table id="basic-datatable" class="table activate-select dt-responsive nowrap">
-                
                 <thead>
-                  <tr>
-                      <th style="width: 1px">Codigo</th>
-                      <th>Razon Social</th>
-                      <th>Tipo Doc</th>
-                      <th>Numero Doc</th>
-                      <th>Producto Favorito</th>
-                      <th>Numero de Compras</th>
-                      <th>otro</th>
-                      <th>Email</th>
-                      <th>Acción</th>
+                <tr>
+                  <th style="width: 1px">CODIGO</th>
+                  <th>RAZON SOCIAL</th>
+                  <th>CI / NIT</th>
+                  <th>N° DOCUMENTO</th>
+                  <th>N° COMPRAS</th>
+                  <th>MONTO TOTAL</th>
+                  <th>FECHA AGREGADO</th>
+                  <th>Acción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach($clientes_total as $item)
+                    <?php
+                      $ax=0;
+                      $cont_ve=0;
+                      $to_ve=0;
+                      foreach ($ve as $key=>$val) {
+                        if($val->id_clientes==$item->id){
+                          $cont_ve++;
+                          $to_ve=$ax+$val->monto_total;
+                          $ax=$to_ve;
+                        }
+                      }
+                    ?>
+                    <tr>
+                      <td style="width: 1px">{{$item->id}}</td>
+                      <td>{{$item->nombre_razon_social}}</td>
+                      <td>{{$item->tipo_documento}}</td>
+                      <td>{{$item->num_documento}}</td>
+                      <td>{{$cont_ve}}</td>
+                      <td>{{$to_ve}}</td>
+                      <td>{{$item->created_at}}</td>
+                      <td class="table-action">
+                        <a href="{{route('clientes.show', $item->id)}}" class="action-icon"> <i class="mdi mdi-eye"></i></a>
+                        <a href="{{route('clientes.edit', $item->id)}}" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
+                      </td>
                     </tr>
-                  </thead>
-
-                  <tbody>
-                    @foreach($clientes_total as $item)
-                      <tr>
-                        <td style="width: 1px">{{$item->id}}</td>
-                        <td>{{$item->nombre_razon_social}}</td>
-                        <td>{{$item->tipo_documento}}</td>
-                        <td>{{$item->num_documento}}</td>
-                        <td>{{$item->apellidos}}</td>
-                        <td>{{$item->telefono_movil}}</td>
-                        <td>{{$item->telefono_fijo}}</td>
-                        <td>{{$item->email}}</td>
-                        <td class="table-action">
-                          <a href="{{route('clientes.show', $item->id)}}" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-                          <a href="{{route('clientes.edit', $item->id)}}" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
-                        </td>
-                      </tr>
-                    @endforeach
-                  </tbody>
-
-                </table>                                          
-              </div> <!-- end preview-->
-            </div> <!-- end tab-content-->
-          </div> <!-- end card body-->
-        </div> <!-- end card -->
-    </div><!-- end col-->
+                  @endforeach
+                </tbody>
+              </table>                                          
+            </div> <!-- end preview-->
+          </div> <!-- end tab-content-->
+        </div> <!-- end card body-->
+      </div> <!-- end card -->
+  </div><!-- end col-->
 </div>
 
 

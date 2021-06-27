@@ -11,7 +11,7 @@
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="javascript: void(0);">Multiacero</a></li>
                     <li class="breadcrumb-item"><a href="javascript: void(0);">Ventas</a></li>
-                    <li class="breadcrumb-item active">Ver Venta</li>
+                    <li class="breadcrumb-item active">Detalle Venta</li>
                 </ol>
             </div>
             <h4 class="page-title">DETALLE DE LA VENTA</h4>
@@ -32,8 +32,8 @@
                             <span class="float-left m-2 mr-4"><img src="{{asset('assets/images/users/avatar-0.jpg')}}" style="height: 100px;" alt="" class="rounded-circle img-thumbnail"></span>
                             <div class="media-body">
 
-                                <h4 class="mt-1 mb-1 text-white">{{$cl->nombre_razon_social}}</h4>
-                                <p class="font-13 text-white-50">Nombre del Cliente</p>
+                                <h4 class="mt-1 mb-1 text-white">#{{$ve->id}}</h4>
+                                <p class="font-13 text-white-50">Numero de Venta</p>
 
                                 <ul class="mb-0 list-inline text-light">
                                     <li class="list-inline-item mr-3">
@@ -75,14 +75,14 @@
               <p class="text-muted"><strong>Fecha de la Venta :</strong><span class="ml-2">{{$tr->fecha_transaccion}}</span></p>
               <p class="text-muted"><strong>Sub Total :</strong><span class="ml-2">Bs. {{$ve->monto_total+$ve->descuento_total}}</span></p>
               <p class="text-muted"><strong>Descuento :</strong><span class="ml-2">Bs. {{$ve->descuento_total}}</span></p>
-              <p class="text-muted"><strong>TOTAL:</strong><span class="ml-2">Bs. {{$ve->monto_total}}</span></p>
+              <p class="text-muted"><strong>TOTAL:</strong><span class="ml-2" style="color: #f9c851">Bs. {{$ve->monto_total}}</span></p>
             </div>
           </div><hr>
           <div class="card-body">
             <h4 class="header-title mt-0 mb-3">Información del Cliente </h4>
             <hr/>
             <div class="text-left">
-              <p class="text-muted"><strong>Razón Social :</strong><span class="ml-2">{{$cl->nombre_razon_social}}</span></p>
+              <p class="text-muted"><strong>Razón Social :</strong><span class="ml-2" style="color: #f9c851">{{$cl->nombre_razon_social}}</span></p>
               <p class="text-muted"><strong>Tipo de Documento :</strong><span class="ml-2">{{$cl->tipo_documento}}</span></p>
               <p class="text-muted"><strong>N° de Documento :</strong><span class="ml-2">{{$cl->num_documento}}</span></p>
               <p class="text-muted"><strong>Agregado el :</strong><span class="ml-2">{{$cl->created_at}}</span></p>
@@ -127,57 +127,45 @@
         </div> <!--end card-->
       </div><!-- end col -->
     </div>
-    <!-- end row -->
-    
-            
-            <div class="card">
-              <div class="card-body">
-              <h4 class="header-title mb-3">Productos Vendidos</h4>
-
-              <div class="table-responsive">
-                  <table class="table table-hover table-centered mb-0">
-                      <thead>
-                          <tr>
-                              <th>Producto</th>
-                              <th>Marca</th>
-                              <th>Precio(Bs)</th>
-                              <th>Cantidad</th>
-                              <th>Total(Bs)</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                        @foreach ($pr as $item)
-                          <tr>
-                            <td>{{$item->pro->nombre}}</td>
-                            <td>{{$item->pro->marca_producto}}</td>
-                            <td>{{$item->costo}}</td>
-                            <td><span class="badge badge-warning">{{$item->cantidad}} Pcs</span></td>
-                            <td>{{$item->costo*$item->cantidad}}</td>
-                          </tr>
-                        @endforeach
-                      </tbody>
-                  </table>
-              </div> <!-- end table responsive-->
-          </div> <!-- end col-->
-      </div> <!-- end row-->
-    </div>
-    <!-- end col -->
+    <!-- end row -->    
+    <div class="card">
+      <div class="card-body">
+        <h4 class="header-title mb-3">Productos Vendidos</h4>
+        <div class="table-responsive">
+          <table class="table table-hover table-centered mb-0">
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Marca</th>
+                <th>Precio(Bs)</th>
+                <th>Cantidad</th>
+                <th>Total(Bs)</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($pr as $item)
+                <tr>
+                  <td>{{$item->pro->nombre}}</td>
+                  <td>{{$item->pro->marca_producto}}</td>
+                  <td>{{$item->costo}}</td>
+                  <td><span class="badge badge-warning">{{$item->cantidad}} Pzs</span></td>
+                  <td>{{$item->costo*$item->cantidad}}</td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div> <!-- end table responsive-->
+      </div> <!-- end col-->
+    </div> <!-- end row-->
+  </div>
 </div>
-
-<!-- end row -->
-      <!-- Chart-->
-      <div class="card tilebox-one">
-        <div class="card-body">
-            <h4 class="header-title mb-3">Frecuencia de ventas al Cliente: {{$cl->nombre_razon_social}}</h4>
-            {{-- <div style="height: 260px;" class="chartjs-chart"> --}}
-            <div id="datalabels-column" class="apex-charts" data-colors="#10c469"></div>
-                {{-- <canvas id="high-performing-product"></canvas> --}}  
-            </div>        
-        </div>
-    </div>
-    <!-- End Chart-->
-
-    <script src="{{asset('assets/js/vendor/apexcharts.min.js')}}"></script>
-    <script src="{{asset('assets/js/pages/demo.apex-column.js')}}"></script>
-
+<div class="card tilebox-one">
+  <div class="card-body">
+      <h4 class="header-title mb-3">Frecuencia de ventas al Cliente: {{$cl->nombre_razon_social}}</h4>
+      {{-- <div style="height: 260px;" class="chartjs-chart"> --}}
+      <div id="datalabels-column" class="apex-charts" data-colors="#10c469"></div>    
+  </div>
+</div>
+<script src="{{asset('assets/js/vendor/apexcharts.min.js')}}"></script>
+<script src="{{asset('assets/js/pages/demo.apex-column.js')}}"></script>
 @stop

@@ -1,6 +1,7 @@
 const $rowInvoice=document.getElementById('invoice');
 const unoRoute=document.getElementById('unoRoute').value;
 const sucursal=document.getElementById('sucursal').value;
+const fa=document.getElementById('fa').value;
 t=new Date();
 const renderInvoice=()=>{
   if(venta.length!==0&&Object.entries(cliente).length!==0){
@@ -51,7 +52,7 @@ const renderInvoice=()=>{
               <div class="col-sm-4 offset-sm-2">
                 <div class="mt-3 float-sm-right">
                   <p class="font-12"><strong>NIT:</strong><span class="float-right">${suc.nit}</span></p>
-                  <p class="font-12"><strong>N° FACTURA:</strong><span class="float-right">001</span></p>
+                  <p class="font-12"><strong>N° FACTURA:</strong><span class="float-right">${fa}</span></p>
                   <p class="font-12"><strong>N° AUTORIZACION:</strong><span class="float-right">${suc.numero_autorizacion}</span></p>
                   <p class="font-18"><strong>ORIGINAL</strong></p>
                   <p class="font-12"><strong></strong><span class="float-right">${suc.actividad}.</span></p>
@@ -160,16 +161,17 @@ const renderInvoice=()=>{
     <input type="hidden" name="id_cliente" value="${cliente.id}"/>
     <input type="hidden" name="id_sucursal" value="${JSON.parse(sucursal)[0].id}"/>
     <input type="hidden" name="id_cajero" value="${cajero.id}"/>
+    <input type="hidden" name="nfa" value="${fa}"/>
     <button class="btn btn-primary type="submit" onclick="imprimir();">REALIZAR VENTA</button>
     `;
     document.getElementById('form1').innerHTML=templateForm;
 		qrcode=new QRCode(document.getElementById("divQr"),{
       width: 140,
       height: 140,
-      correctLevel : 0,
+      correctLevel: 0,
       useSVG:true
     });
-    let data=JSON.stringify({"a": "7904006306693","b":"876814","c":"1665979","d":"20080519","e":venta.totalFinal.toFixed(2),"f":"zZ7Z]xssKqkEf_6K9uH(EcV+%x+u[Cca9T%+_$kiLjT8(zr3T9b5Fx2xG-D+_EBS"
+    let data=JSON.stringify({"a": "7904006306693","b":fa,"c":"1665979","d":"20080519","e":venta.totalFinal.toFixed(2),"f":"zZ7Z]xssKqkEf_6K9uH(EcV+%x+u[Cca9T%+_$kiLjT8(zr3T9b5Fx2xG-D+_EBS"
     });
     let opciones={
       headers: {
@@ -193,7 +195,7 @@ unoCode=(url, options={})=>{
   .then(json=>{
     document.getElementById('unoCode').innerText=json;
     document.getElementById('cod').value=json;
-    qrcode.makeCode(`${suc.nit}|001|${suc.numero_autorizacion}|${t.toLocaleDateString()}|${venta.totalFinal.toFixed(2)}|${venta.totalFinal.toFixed(2)}|${json}|${cliente.num_documento}|0|0|0|${venta.descuentoTotal}`);
+    qrcode.makeCode(`${suc.nit}|${fa}|${suc.numero_autorizacion}|${t.toLocaleDateString()}|${venta.totalFinal.toFixed(2)}|${venta.totalFinal.toFixed(2)}|${json}|${cliente.num_documento}|0|0|0|${venta.descuentoTotal}`);
   })
   .catch(err=>{
     mensaje=err.statusText||"Ocurrió un error";
