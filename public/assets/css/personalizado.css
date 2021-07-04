@@ -19,6 +19,9 @@
 
 
 /***** disenio para mostrar la imagen *****/
+#archivo_seleccionadoS{
+    display: none;
+}
 .datos_imagen{
     background: green;
 
@@ -47,6 +50,17 @@ background-position: 1;*/
     text-align: center;
     height: 120px;
     width: 120px;
+}
+#ver_archivoS{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#ver_archivoS img{
+    background: red;
+    text-align: center;
+    height: 100px;
+    width: 100px;
 }
 .oculto_texto{
     display: block;
@@ -140,3 +154,24 @@ background-position: 1;*/
     margin-top: 1px;
     height: 60px;
 }
+
+/* -------- Estilos de agregar  de compra de productos -------- */
+.contenedor_productos_comprados{
+    height: 417px;
+    width: 100%;
+    overflow:auto;
+    box-sizing: border-box;
+    padding:0 1rem;
+}
+.producto-comprado-opciones{
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+}
+.producto-comprado-nombre{
+
+}
+.eliminar_productoC{
+    display: none;
+}
+/*--------------------------------------------------------------*/

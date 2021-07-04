@@ -16,14 +16,14 @@ class CreateAlmacenProductosTable extends Migration
         Schema::create('almacen_productos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('usuario');
-            $table->integer('almacen_id');
-            $table->integer('producto_id');
-            $table->integer('cantidadproducto');
-            $table->integer('stockminimo');
-            $table->integer('stockmaximo');
-            $table->integer('comprasporrecibir')->nullable();;
-            $table->integer('pendientesporventa')->nullable();;
-            $table->integer('costopromedio');
+            $table->integer('cantidad_producto');
+            $table->integer('stock_minimo');
+            $table->integer('stock_maximo');
+            $table->integer('compras_por_recibir')->nullable();;
+            $table->integer('pendientes_en_venta')->nullable();;
+            $table->integer('costo_promedio');
+            $table->integer('id_productos');
+            $table->integer('id_almacenes');
             $table->timestamps();
             $table->boolean('estado');
         });

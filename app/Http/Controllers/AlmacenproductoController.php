@@ -4,10 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator, Hash, Auth;
-use App\AlmacenProducto;
-use App\Almacene;
-use App\Producto;
 use Carbon\carbon;
+use App\AlmacenProducto;
+use App\transacciones_movimiento_inventarios;
+use App\DetalleMovimientoInventarios;
+use App\Producto;
+use App\Proveedor;
+use App\ContactoProveedore;
+use App\Almacene;
+use App\Compra;
+use DB;
 
 class AlmacenproductoController extends Controller
 {
@@ -18,7 +24,11 @@ class AlmacenproductoController extends Controller
      */
     public function index()
     {
-        $almacenproductos = AlmacenProducto::all();
+        $almacenproductos = DB::table('almacen_productos')
+        ->join('almacenes', 'almacenes.id', '=', 'almacen_productos.id_almacenes')
+        ->join('productos', 'productos.id', '=', 'almacen_productos.id_productos')
+        ->select('almacen_productos.*', 'productos.nombre as producto', 'almacenes.nombre as almacen')
+        ->get();
         return view('almacenproducto.listar_almacenproducto', compact('almacenproductos'));
     }
 
@@ -61,22 +71,54 @@ class AlmacenproductoController extends Controller
         if($validator->fails()):
             return back()->withErrors($validator)->with('message','Se ha producido un error de validacion')->with('typealert', 'danger');
         else:
+            /*------ Numero de la tabla transaccion movimiento de inventarios------*/
+                $numeroAP = AlmacenProducto::count();$numeroAP=$numeroAP+1;
+            /*---------------------------------------------------------------------*/
             $usuario=1;
             $almacenProducto = new AlmacenProducto;
             $almacenProducto->usuario=$usuario;
-            $almacenProducto->almacen_id=e($request->input('almacen'));
-            $almacenProducto->producto_id=e($request->input('producto'));;
-            $almacenProducto->cantidadproducto=e($request->input('cantidadproducto'));;
-            $almacenProducto->stockminimo=e($request->input('stockminimo'));
-            $almacenProducto->stockmaximo=e($request->input('stockmaximo'));
-            $almacenProducto->comprasporrecibir=e($request->input('comprasporrecibir'));
-            $almacenProducto->pendientesporventa=e($request->input('pendientesporventa'));
-            $almacenProducto->costopromedio=e($request->input('costopromedio'));
+            $almacenProducto->cantidad_producto=e($request->input('cantidadproducto'));
+            $almacenProducto->stock_minimo=e($request->input('stockminimo'));
+            $almacenProducto->stock_maximo=e($request->input('stockmaximo'));
+            $almacenProducto->compras_por_recibir=e($request->input('comprasporrecibir'));
+            $almacenProducto->pendientes_en_venta=e($request->input('pendientesporventa'));
+            $almacenProducto->costo_promedio=e($request->input('costopromedio'));
+            $almacenProducto->id_productos=e($request->input('producto'));
+            $almacenProducto->id_almacenes=e($request->input('almacen'));
             $almacenProducto->created_at=Carbon::now();
             $almacenProducto->updated_at=Carbon::now();
             $almacenProducto->estado=false;
             if($almacenProducto->save()):
-               return back()->withErrors($validator)->with('message','Almacen registrado')->with('typealert', 'success');
+                /*------ Numero de la tabla transaccion movimiento de inventarios------*/
+                $numeroTMI = transacciones_movimiento_inventarios::count();$numeroTMI=$numeroTMI+1;
+                /*---------------------------------------------------------------------*/
+                $transaccionMI = new transacciones_movimiento_inventarios;
+                $transaccionMI->id_usuario=$usuario;
+                $transaccionMI->fecha_transaccion=e($request->input('fecha'));
+                $transaccionMI->observaciones=e($request->input('observaciones'));
+                $transaccionMI->tipo_transaccion="Inventario incial";
+                $transaccionMI->id_compras=0;
+                $transaccionMI->id_ventas=0;
+                $transaccionMI->id_movimientos=0;
+                $transaccionMI->id_devoluciones=0;
+                $transaccionMI->id_almacen_producto=$numeroAP;                
+                $transaccionMI->id_almacen=e($request->input('almacen'));
+                $transaccionMI->created_at=Carbon::now();
+                $transaccionMI->updated_at=Carbon::now();
+                if($transaccionMI->save()):
+                    $detalleMI = new DetalleMovimientoInventarios;
+                    $detalleMI->costo=e($request->input('costopromedio'));
+                    $detalleMI->cantidad=e($request->input('cantidadproducto'));
+                    $detalleMI->descuento=0;
+                    $detalleMI->identificador_producto="";
+                    $detalleMI->id_producto=e($request->input('producto'));
+                    $detalleMI->id_transacciones_movimiento_inventarios=$numeroTMI;
+                    $detalleMI->created_at=Carbon::now();
+                    $detalleMI->updated_at=Carbon::now();
+                    if($detalleMI->save()):
+                        return back()->withErrors($validator)->with('message','Registro de existencia de producto, almacenado correctamente.')->with('typealert', 'success');
+                    endif;    
+                endif;
            endif;
        endif;
    }

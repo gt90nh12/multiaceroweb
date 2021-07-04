@@ -70,7 +70,6 @@ class ContactoProveedorController extends Controller
             $contacto_proveedor = new contactoproveedore;
             $contacto_proveedor->usuario=$usuario;
             $contacto_proveedor->persona=e($request->input('persona'));
-            $contacto_proveedor->proveedor=e($request->input('proveedor'));;
             $contacto_proveedor->profesion=e($request->input('profesion'));;
             $contacto_proveedor->cargo=e($request->input('cargo'));
             $contacto_proveedor->telefono_coorporativo=e($request->input('telefono_coorporativo'));
@@ -84,6 +83,7 @@ class ContactoProveedorController extends Controller
             $contacto_proveedor->created_at=Carbon::now();
             $contacto_proveedor->updated_at=Carbon::now();
             $contacto_proveedor->estado=false;
+            $contacto_proveedor->id_proveedor=e($request->input('proveedor'));;
             if($contacto_proveedor->save()):
              return back()->withErrors($validator)->with('message','Personal registrado')->with('typealert', 'success');
          endif;

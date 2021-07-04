@@ -26,7 +26,7 @@
                     <th>Procedencia producto</th>
                     <th>Marca producto</th>
                     <th>Precio Venta</th>
-                    <!-- <th>Cantidad</th> -->
+                    <th>Estado</th>
                     <th style="width: 85px;">Action</th>
                 </tr>
             </thead>
@@ -39,8 +39,9 @@
                 <td>{{$item->procedencia_producto}}</td>
                 <td>{{$item->marca_producto}}</td>
                 <td>{{$item->precio_venta}}</td>
-                <!-- <td>{{$item->cantidadproducto}}</td> -->
+                <td><span class="badge badge-success-lighten">Activo</span></td>
                 <td class="table-action">
+                    <input type="radio" name="verproducto" id="myModal">
                   <a href="#" class="action-icon"> <i class="mdi mdi-eye"></i></a>
                   <a href="#" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
               </td>
@@ -54,6 +55,9 @@
 </div>
 </div>
 </div>
+
+
+
 <script src="{{asset('assets/js/vendor/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('assets/js/vendor/dataTables.bootstrap4.js')}}"></script>
 <script src="{{asset('assets/js/vendor/dataTables.responsive.min.js')}}"></script>
@@ -62,4 +66,13 @@
 <script src="{{asset('assets/js/vendor/buttons.bootstrap4.min.js')}}"></script>
 <script src="{{asset('assets/js/vendor/buttons.html5.min.js')}}"></script>
 <script src="{{asset('assets/js/pages/demo.datatable-init.js')}}"></script>
+<script type="text/javascript">
+    var myModal = document.getElementById('myModal')
+    var myInput = document.getElementById('myInput')
+
+    myModal.addEventListener('shown.bs.modal', function () {
+        console.log("Hora de mostrar el producto");
+      myInput.focus()
+    })
+</script>
 @stop

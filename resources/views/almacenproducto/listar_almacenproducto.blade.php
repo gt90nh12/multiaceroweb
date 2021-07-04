@@ -51,12 +51,12 @@
                 <tbody>
                   @foreach($almacenproductos as $item)
                   <tr>
-                    <td>{{$item->almacen_id}}</td>
-                    <td>{{$item->producto_id}}</td>
-                    <td>{{$item->cantidadproducto}}</td>
-                    <td>{{$item->stockminimo}}</td>
-                    <td>{{$item->stockmaximo}}</td>
-                    <td>{{$item->cantidadproducto}}</td>
+                    <td>{{$item->almacen}}</td>
+                    <td>{{$item->producto}}</td>
+                    <td>{{$item->cantidad_producto}}</td>
+                    <td>{{$item->stock_minimo}}</td>
+                    <td>{{$item->stock_maximo}}</td>
+                    <td>{{$item->cantidad_producto}}</td>
                     <td class="table-action">
                       <a href="#" class="action-icon"> <i class="mdi mdi-eye"></i></a>
                       <a href="#" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>

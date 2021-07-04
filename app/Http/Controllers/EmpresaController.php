@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator, Hash, Auth;
 use Carbon\carbon;
 use App\Empresa;
+use App\Sucursale;
 use DB;
 
 class EmpresaController extends Controller
@@ -40,7 +41,7 @@ class EmpresaController extends Controller
     {
         $usuario=1;
         $rules = [
-            'nombreempresa'=>'required',
+            'nombre_empresa'=>'required',
             'actividad'=>'required',
             'nit'=>'required',
             'archivo_seleccionado'=>'required',
@@ -56,7 +57,7 @@ class EmpresaController extends Controller
             'correo'=>'required',
         ];
         $messages = [
-            'nombreempresa.required' => 'Debe ingresar el nombre de la empresa.',
+            'nombre_empresa.required' => 'Debe ingresar el nombre de la empresa.',
             'actividad.required' => 'Debe ingresar la actividad principal que desarrolla la empresa.',
             'nit.required' => 'Debe ingresar el número de identificación tributaria de la empresa.',
             'archivo_seleccionado.required' => 'Debe ingresar la imagen el logo de la empresa.',
@@ -76,7 +77,7 @@ class EmpresaController extends Controller
         if($validator->fails()):
             return back()->withErrors($validator)->with('message','Se ha producido un error de validacion')->with('typealert', 'danger');
             else:
-                /*------------------------- $empresaar imagen  -------------------------*/
+                /*------------------------- Empresa imagen  -------------------------*/
                 $formato = array('.png', '.jpeg','.PNG','.JPEG','.JPG');
                 $imagen = ($_FILES['archivo_seleccionado']['name']);
                 $extencion = substr($imagen, strrpos($imagen, '.'));
@@ -92,36 +93,70 @@ class EmpresaController extends Controller
                     $Nombreimagen = ($_FILES['archivo_seleccionado']['name']);
                 }
                 /*---------------------------------------------------------------------*/
+                /*------------------------- Sucursal imagen  -------------------------*/
+                $formatoS = array('.png', '.jpeg','.PNG','.JPEG','.JPG');
+                $imagenS = ($_FILES['archivo_seleccionadoS']['name']);
+                $extencionS = substr($imagenS, strrpos($imagenS, '.'));
+                if(!in_array($extencionS, $formatoS)) {
+                    $data['documento_general']='El tipo de archivo no esta permitido.';
+                    echo("El tipo de archivo no esta permitido");
+                }else {
+                    $ruta="../storage/imagenes/".$_FILES['archivo_seleccionadoS']['name'];
+                    $nombreArchivoS = $_FILES['archivo_seleccionadoS']['name'];
+                    move_uploaded_file($_FILES['archivo_seleccionadoS']['tmp_name'], $ruta);
+                }
+                if (e($request->input("archivo_seleccionadoS")) === ""){
+                    $NombreimagenS = ($_FILES['archivo_seleccionadoS']['name']);
+                }
+                /*---------------------------------------------------------------------*/
                 
-                /*------------------------- $empresaar imagen  -------------------------*/
+                /*------------------------- Codigo de mepresa  -------------------------*/
                 $numeroRegistroTablaEmpresa = empresa::count();
                 $cod_empresa="emp".$numeroRegistroTablaEmpresa;
                 // echo($cod_empresa);
                 /*---------------------------------------------------------------------*/
-
-                $empresa = new empresa;
+                    $empresa = new empresa;
                     $empresa->usuario=$usuario;
-                    // $empresa->cod_empresa=$cod_empresa;
-                    $empresa->nombre_empresa=e($request->input('nombreempresa'));
-                    $empresa->actividad=e($request->input('actividad'));
-                    $empresa->nit=e($request->input('nit'));
+                    $empresa->nombre_empresa=e($request->input('nombre_empresa'));
                     $empresa->archivo_seleccionado=$Nombreimagen;
-                    $empresa->mision=e($request->input('mision'));
-                    $empresa->vision=e($request->input('vision'));
-                    $empresa->valores=e($request->input('valores'));
-                    $empresa->conocenos=e($request->input('conocenos'));
-                    $empresa->historia=e($request->input('historia'));
+                    $empresa->nit=e($request->input('nit'));
+                    $empresa->actividad=e($request->input('actividad'));
                     $empresa->direccion=e($request->input('direccion'));
                     $empresa->pais=e($request->input('pais'));
                     $empresa->estado_departamento=e($request->input('estado_departamento'));
                     $empresa->ciudad=e($request->input('municipio'));
                     $empresa->telefono=e($request->input('telefono'));
                     $empresa->correo=e($request->input('correo'));
+                    $empresa->mision=e($request->input('mision'));
+                    $empresa->vision=e($request->input('vision'));
+                    $empresa->valores=e($request->input('valores'));
+                    $empresa->conocenos=e($request->input('conocenos'));
+                    $empresa->descripcion=e($request->input('descripcion'));
                     $empresa->created_at=Carbon::now();
                     $empresa->updated_at=Carbon::now();
                     $empresa->estado=false;
                 if($empresa->save()):
-                   return back()->withErrors($validator)->with('message','Empresa registrado')->with('typealert', 'success');
+                    $sucursal = new Sucursale;
+                    $sucursal->usuario=$usuario;
+                    $sucursal->id_empresa=$cod_empresa;
+                    $sucursal->nombre_sucursal="CASA MATRIZ";
+                    $sucursal->archivo_seleccionado=$nombreArchivoS;
+                    $sucursal->descripcion=e($request->input('descripcion'));
+                    $sucursal->actividad=e($request->input('actividad'));
+                    $sucursal->codigo_punto_venta=0;
+                    $sucursal->numero_autorizacion=e($request->input('numero_autorizacion'));
+                    $sucursal->direccion=e($request->input('direccion'));
+                    $sucursal->pais=e($request->input('pais'));
+                    $sucursal->estado_departamento=e($request->input('estado_departamento'));
+                    $sucursal->municipio=e($request->input('municipio'));
+                    $sucursal->telefono=e($request->input('telefono'));
+                    $sucursal->correo=e($request->input('correo'));
+                    $sucursal->created_at=Carbon::now();
+                    $sucursal->updated_at=Carbon::now();
+                    $sucursal->estado=false;
+                    if($sucursal->save()):
+                       return back()->withErrors($validator)->with('message','La información de la Empresa y Casa matriz a sido registrada.')->with('typealert', 'success');
+                    endif;
                 endif;
             endif;
     }

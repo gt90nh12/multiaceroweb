@@ -17,6 +17,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Router Auth or auth
+Route::get('/login', 'ConnectController@getLogin')->name('login');
+Route::post('/login_user', 'ConnectController@postLogin')->name('login_user');
+Route::get('/registro_usuario', 'ConnectController@getRegistro_usuario')->name('registro_usuario');
+Route::post('/almacenar_usuario', 'ConnectController@postAlmacenar_usuario')->name('almacenar_usuario');
+Route::get('/listar_usuario', 'ConnectController@getListar_Usuario')->name('listar_usuario');
+Route::get('/registro_usuario_admin', 'ConnectController@getRegistro_Usuario_Adm')->name('registro_usuario_admin');
+Route::get('/actualizar_registro_usuario{id}', 'ConnectController@actualizarDatosUsuario')->name('actualizar_registro_usuario');
+Route::post('/modificar_datos_usuario', 'ConnectController@modificarDatosUsuarios')->name('modificar_datos_usuario');
+Route::get('/estado_datos_usuario{id}', 'ConnectController@estadoDatosUsuarios')->name('estado_datos_usuario');
+Route::post('/registro_administrador', 'ConnectController@registroAdministrador')->name('registro_administrador');
+
 //plantila administrador
 
 //Router persona
@@ -58,6 +70,9 @@ Route::post('/almacenar_empresa', 'EmpresaController@store')->name('almacenar_em
 /* ------------------------- COMPRA DE PRODUCTOS ------------------------- */
 Route::get('/registro_compra', 'CompraController@create')->name('registro_compra');
 Route::post('/almacenar_compra', 'CompraController@store')->name('almacenar_compra');
+Route::get('/listar_compra', 'CompraController@index')->name('listar_compra');
+Route::Get('datos_proveedor/{id}', 'CompraController@proveedor'); // ruta de ajax para obtener la imagen del producto
+
 
 /* ------------------------- VENTAS ----------------------------------------------------- */
 // Route::get('/ventas_hoy', 'ventasController@index')->name('ventas.index');

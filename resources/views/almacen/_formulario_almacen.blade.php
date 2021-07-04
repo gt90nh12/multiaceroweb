@@ -2,54 +2,48 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box">
-            <h4 class="page-title">Almacen<span class="separador_menu"> | </span>Registrar</h4>
+            <h4 class="page-title">Almacén<span class="separador_menu"> | </span>Registrar</h4>
         </div>
     </div>
 </div><div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4>Ingrese la información del almacen</h4>
+                <h4>Ingrese la información del almacén</h4>
 
                 <div class="tab-content">
                     <div class="tab-pane show active" id="form-row-preview">
 
                         <div class="form-group">
-                            <label for="nombre" class="col-form-label">Nombre de almacen</label>
-                            <input type="text" id="nombre" class="form-control" name="nombre" placeholder="Ingrese nombre de almacen">
+                            <label for="nombre" class="col-form-label">Nombre de almacén</label>
+                            <input type="text" id="nombre" class="form-control" name="nombre" placeholder="Ingrese nombre de almacén.">
                         </div>
                         <div class="form-group">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="empresa_id">Empresa</label>
+                                    <label for="empresa_id">Seleccione sucursal</label>
                                     <select id="empresa_id" name="empresa_id" class="form-control" data-toggle="select3" data-select3-id="1" tabindex="-1" aria-hidden="true">
-                                        <option data-select2-id="3">Seleccione empresa</option>
-                                        @if(!empty($empresas))
-                                        @foreach($empresas as $empresa)
-                                        <option value="{{$empresa->id}}">{{$empresa->nombre_empresa}}</option>
-                                        @endforeach
-                                        @endif
+                                        <option data-select2-id="3">Seleccione sucursal</option>
                                         @if(!empty($sucursales))
                                         @foreach($sucursales as $sucursal)
-                                        <option value="{{$sucursal->id}}">{{$sucursal->numero_sucursal}}</option>
+                                        <option value="{{$sucursal->id}}">{{$sucursal->nombre_sucursal}}<spam> (Sucursal - {{$sucursal->codigo_punto_venta}}) </spam></option>
                                         @endforeach
                                         @endif
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="tipo_almacen">Tipo almacen</label>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
+                                    <label for="tipo_almacen">Tipo almacén</label>
+                                    <div class="mt-2">
+                                        <div class="custom-control custom-radio custom-control-inline">
                                             <input type="radio" id="deposito" name="tipo_almacen" class="custom-control-input" value="deposito">
                                             <label class="custom-control-label" for="deposito">Depósito</label>
                                         </div>
-                                        <div class="form-group col-md-6">
-                                          <input type="radio" id="almacen" name="tipo_almacen" class="custom-control-input" value="almacen">
-                                            <label class="custom-control-label" for="almacen">Almacén</label>  
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="almacen" name="tipo_almacen" class="custom-control-input" value="almacen">
+                                            <label class="custom-control-label" for="almacen">Almacén</label>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -57,7 +51,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="descripcion">Descripción</label>
-                                <textarea class="form-control" id="descripcion" name="descripcion" rows="5" placeholder="Ingrese descripción del producto"></textarea>
+                                <textarea class="form-control" id="descripcion" name="descripcion" rows="5" placeholder="Ingrese descripción del almacén."></textarea>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="archivo_seleccionado">Imagen</label>
@@ -71,12 +65,12 @@
                     <div class="form-group">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="direccion">Direccion</label>
-                                <textarea class="form-control" id="direccion" name="direccion" rows="2" placeholder="Ingrese dirección del almacen."></textarea>
+                                <label for="direccion">Dirección</label>
+                                <textarea class="form-control" id="direccion" name="direccion" rows="2" placeholder="Ingrese dirección del almacén."></textarea>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="telefono" class="col-form-label">Telefono</label> 
-                                <input type="text" id="telefono" class="form-control" name="telefono" placeholder="Ingrese número de telefono">
+                                <label for="telefono" class="col-form-label">Teléfono</label> 
+                                <input type="text" id="telefono" class="form-control" name="telefono" placeholder="Ingrese número de teléfono.">
                             </div>
                         </div>
                     </div>

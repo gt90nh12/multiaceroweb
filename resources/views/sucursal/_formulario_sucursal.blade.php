@@ -11,34 +11,36 @@
             <div class="card-body">
                 <h4>Ingrese información de la sucursal</h4>
                 <div class="form-row">
-                    <div class="form-group col-md-8">
-                        <label for="empresa">Empresa</label>
-                        <select id="empresa" name="empresa" class="form-control" data-toggle="select3" data-select3-id="1" tabindex="-1" aria-hidden="true">
-                            <option data-select2-id="3">Seleccione empresa</option>
-                            @if(!empty($empresas))
+                    <label for="id_empresa" class="col-form-label">Casa matriz: 
+                        @if(!empty($empresas)) 
                             @foreach($empresas as $empresa)
-                            <option value="{{$empresa->id}}">{{$empresa->nombre_empresa}}</option>
-                            @endforeach
-                            @endif
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="sucursal">Numero de sucursal</label>
-                        <input type="number" class="form-control" id="sucursal" name="sucursal" placeholder="Ingrese numero de sucursal.">
-                    </div>
+                                {{$empresa->nombre_empresa}}
+                            <input type="hidden" name="id_empresa" value="{{$empresa->id}}">
+                            @endforeach 
+                        @endif
+                    </label>
                 </div>
-
                 <div class="form-group">
-                    <label for="example-textarea" onclick="mostraIMGFOR()" >Imagen de sucursal</label>
-                    <input id="archivo_seleccionado" name="archivo_seleccionado" type="file" onchange="seleccionar_archivo_imagen()" />    
-                    <div class="contenedor_imagen" id="cuadro_selector_elemento">
-                        <div id="ver_archivo" class="ver_imagen"></div>
+                    <label for="nombre_sucursal" class="col-form-label">Nombre sucursal</label> 
+                    <input type="text" id="nombre_sucursal" class="form-control" name="nombre_sucursal" placeholder="Ingrese número telefonico de la sucursal.">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="actividad">Actividad principal</label>
+                        <textarea type="text" class="form-control" rows="5" id="actividad" name="actividad" placeholder="Ingrese la actividad pricipal."></textarea>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="example-textarea" onclick="mostraIMGFOR()" >Imagen de sucursal</label>
+                        <input id="archivo_seleccionado" name="archivo_seleccionado" type="file" onchange="seleccionar_archivo_imagen()" />    
+                        <div class="contenedor_imagen" id="cuadro_selector_elemento">
+                            <div id="ver_archivo" class="ver_imagen"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="codigo_punto_venta">Código de punto de venta</label>
-                        <input type="text" class="form-control" id="codigo_punto_venta" name="codigo_punto_venta" placeholder="Ingrese numero de identificación tributaria.">
+                        <input type="number" class="form-control" id="codigo_punto_venta" name="codigo_punto_venta" placeholder="Ingrese código de punto de venta.">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="numero_autorizacion">Número de autorización</label>
@@ -53,23 +55,23 @@
                     <!-- <label class="col-form-label">Existencia de producto</label> -->
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <span> Pais: </span><input type="text" class="form-control" name="pais">
+                            <span> País: </span><input type="text" class="form-control" name="pais">
                         </div>
                         <div class="form-group col-md-4">
-                            <span> Estado: </span><input type="text" class="form-control" name="estado_departamento">
+                            <span> Departamento: </span><input type="text" class="form-control" name="estado_departamento">
                         </div>
                         <div class="form-group col-md-4">
-                            <span> Ciudad: </span><input type="text" class="form-control" name="ciudad">
+                            <span> Municipio: </span><input type="text" class="form-control" name="ciudad">
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="telefono" class="col-form-label">Telefono</label> 
-                    <input type="number" id="telefono" class="form-control" name="telefono" placeholder="Ingrese número telefonico de la sucursal">
+                    <label for="telefono" class="col-form-label">Teléfono</label> 
+                    <input type="number" id="telefono" class="form-control" name="telefono" placeholder="Ingrese número teléfonico de la sucursal.">
                 </div>
                 <div class="form-group">
                     <label for="correo">Correo electrónico</label>
-                    <input type="text" class="form-control" id="correo" name="correo" placeholder="Ingrese correo electronico de la sucursal."></textarea>
+                    <input type="text" class="form-control" id="correo" name="correo" placeholder="Ingrese correo electrónico de la sucursal."></textarea>
                 </div>
                 <div class="form-group">
                     <label for="descripcion">Descripción</label>
@@ -80,14 +82,14 @@
     </div> 
 </div>
 <script type="text/javascript">
-   /*--------------------- SCRIPT PARA ADICIONAR IMAGEN --------------------*/
-   let cuadroimagen = document.querySelector('#cuadro_selector_elemento');
-   cuadroimagen.addEventListener('click', ()=>{
+ /*--------------------- SCRIPT PARA ADICIONAR IMAGEN --------------------*/
+ let cuadroimagen = document.querySelector('#cuadro_selector_elemento');
+ cuadroimagen.addEventListener('click', ()=>{
     var archivoIMAGEN = document.getElementById("archivo_seleccionado")
     archivoIMAGEN.click();
 })
 
-   function seleccionar_archivo_imagen() {
+ function seleccionar_archivo_imagen() {
     var filesSelected = document.getElementById("archivo_seleccionado").files;
     var formato_imagen
     formato_imagen=filesSelected[0]

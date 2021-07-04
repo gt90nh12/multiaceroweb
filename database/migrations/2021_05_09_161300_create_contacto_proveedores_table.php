@@ -17,7 +17,6 @@ class CreateContactoProveedoresTable extends Migration
             $table->bigIncrements('id');
             $table->integer('usuario');
             $table->text('persona');
-            $table->text('proveedor');
             $table->text('profesion');
             $table->text('cargo');
             $table->integer('telefono_coorporativo');
@@ -30,6 +29,7 @@ class CreateContactoProveedoresTable extends Migration
             $table->text('descripcion_finalizacion_actividades')->nullable();
             $table->timestamps();
             $table->boolean('estado');
+            $table->text('id_proveedor');
         });
     }
 
