@@ -20,11 +20,11 @@ class CreatePersonasTable extends Migration
             $table->string('apellido_materno',25);
             $table->bigInteger('numero_documento_ci');
             $table->string('direccion',60);
-            $table->bigInteger('telefono_movil')->nullable();
+            $table->bigInteger('telefono_movil');
             $table->integer('telefono_fijo')->nullable();
             $table->string('email',30)->nullable();
-            $table->date('fecha_nacimiento')->nullable();
-            $table->string('genero',25)->nullable();
+            $table->date('fecha_nacimiento');
+            $table->string('genero',9)->nullable();
             $table->timestamps();
         });
     }

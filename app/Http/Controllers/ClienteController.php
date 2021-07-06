@@ -58,7 +58,6 @@ class ClienteController extends Controller
     ]);
     $actualizarCliente = new Cliente();
     $actualizarCliente = Cliente::find($id);
-
     $actualizarCliente->nombre_razon_social = $request->nombre_razon_social;
     $actualizarCliente->tipo_documento = $request->tipo_documento;
     $actualizarCliente->num_documento = $request->num_documento;

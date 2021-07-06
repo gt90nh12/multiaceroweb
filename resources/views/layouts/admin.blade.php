@@ -35,7 +35,6 @@
               </a>
               
             <ul class="list-unstyled topbar-right-menu float-right mb-0">
-
                 <li class="dropdown notification-list d-lg-none">
                     <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                         <i class="dripicons-search noti-icon"></i>
@@ -46,25 +45,13 @@
                         </form>
                     </div>
                 </li>
-
+                <?php $d=DB::table('empleados')->where('id',Auth::user()->id)->first();?>
                 <li class="dropdown notification-list">
                     <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" id="topbar-notifydrop" role="button" aria-haspopup="true" aria-expanded="false">
                         <i class="dripicons-bell noti-icon"></i>
                         <span class="noti-icon-badge"></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated dropdown-lg" aria-labelledby="topbar-notifydrop">
-
-                        <!-- item-->
-                        <div class="dropdown-item noti-title">
-                            <h5 class="m-0">
-                                <span class="float-right">
-                                    <a href="javascript: void(0);" class="text-dark">
-                                        <small>Clear All</small>
-                                    </a>
-                                </span>Notification
-                            </h5>
-                        </div>
-
                         <div style="max-height: 230px;" data-simplebar>
                             <!-- item-->
                             <div class="dropdown-item noti-title">
@@ -204,11 +191,11 @@
                                         <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" id="topbar-userdrop" href="#" role="button" aria-haspopup="true"
                                         aria-expanded="false">
                                         <span class="account-user-avatar"> 
-                                            <img src="{{asset('assets/images/users/avatar-0.jpg')}}" alt="user-image" class="rounded-circle">
+                                            <img src="{{str_replace('public','storage/personal',asset($d->foto))}}" alt="user-image" class="rounded-circle">
                                         </span>
                                         <span>
                                             <span class="account-user-name">{{Auth::user()->user}}</span>
-                                            <span class="account-position">Administrador de sistema</span>
+                                            <span class="account-position">{{$d->cargo}}</span>
                                         </span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated topbar-dropdown-menu profile-dropdown" aria-labelledby="topbar-userdrop">
@@ -265,7 +252,7 @@
 
                     <div class="leftbar-user">
                         <a href="javascript: void(0);">
-                            <img src="{{asset('assets/images/users/avatar-0.jpg')}}" alt="user-image" height="42" class="rounded-circle shadow-sm">
+                            <img src="{{str_replace('public','storage/personal',asset($d->foto))}}" alt="user-image" height="42" class="rounded-circle shadow-sm">
                             <span class="leftbar-user-name">{{Auth::user()->user}}</span>
                         </a>
                     </div>
@@ -672,7 +659,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-6">
-                                    2019 - 2021 © Multiacero
+                                    2021 © Multiacero
                                 </div>
                             <!-- <div class="col-md-6">
                                 <div class="text-md-right footer-links d-none d-md-block">
