@@ -2,17 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', 'AuthController@index')->name('auths.index')->middleware('guest');
 Route::get('auths/list', 'AuthController@list')->name('auths.list')->middleware('auth');
 Route::post('auths/login', 'AuthController@login')->name('auths.login');
@@ -27,8 +16,6 @@ Route::post('auths/store', 'AuthController@store')->name('auths.store');
 Route::get('auths/show/{id}', 'AuthController@show')->name('auths.show');
 Route::get('auths/{id}/edit', 'AuthController@edit')->name('auths.edit');
 Route::put('auths/update/{id}', 'AuthController@update')->name('auths.update');
-// Route::delete('auths/destroy/{id}', 'AuthController@destroy')->name('auths.destroy');
-
 
 //plantila administrador
 
@@ -71,13 +58,6 @@ Route::post('/almacenar_empresa', 'EmpresaController@store')->name('almacenar_em
 Route::get('/registro_compra', 'CompraController@create')->name('registro_compra');
 Route::post('/almacenar_compra', 'CompraController@store')->name('almacenar_compra');
 
-/* ------------------------- VENTAS ----------------------------------------------------- */
-// Route::get('/ventas_hoy', 'ventasController@index')->name('ventas.index');
-// Route::get('/nueva_factura', 'ventasController@create')->name('nueva_factura.create');
-// Route::get('/revisar_facturas', 'ventasController@show')->name('revisar_facturas.show');
-// Route::get('/ver_factura/{id}', 'ventasController@ver')->name('ver_factura');
-// Route::get('/buscar_producto','ventasController@buscar_producto')->name('buscar_producto');
-
 //---------------------------------- CLIENTES -------------------------------------------------
 
 Route::get('clientes', 'ClienteController@index')->name('clientes.index');
@@ -93,9 +73,7 @@ Route::get('ventas', 'VentaController@index')->name('ventas.index');
 Route::get('ventas/create', 'VentaController@create')->name('ventas.create');
 Route::post('ventas/store', 'VentaController@store')->name('ventas.store');
 Route::get('ventas/show/{id}', 'VentaController@show')->name('ventas.show');
-// Route::get('ventas/{id}/edit', 'VentaController@edit')->name('ventas.edit');
-// Route::put('ventas/update/{id}', 'VentaController@update')->name('ventas.update');
-// Route::delete('ventas/destroy/{id}', 'VentaController@destroy')->name('ventas.destroy');
+
 //--------------------------- miniClientes------------------------------------------------------
 Route::get('miniclientes', 'miniClienteController@index')->name('miniCliente.index');
 Route::post('miniclientes/store', 'miniClienteController@store')->name('miniCliente.store');

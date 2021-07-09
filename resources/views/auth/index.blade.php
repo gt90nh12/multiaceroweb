@@ -55,27 +55,22 @@
                                     <div class="form-group mb-0 text-center">
                                         <button class="btn btn-primary" type="submit"> Entrar </button>
                                     </div>
-
                                 </form>
-                            </div> <!-- end card-body -->
+                            </div>
                         </div>
-                        <!-- end card -->
 
-                    </div> <!-- end col -->
+                    </div>
                 </div>
-                <!-- end row -->
+
             </div>
-            <!-- end container -->
+
         </div>
-        <!-- end page -->
 
         <footer class="footer footer-alt">
             2021 © Multiacero
         </footer>
-
         <!-- bundle -->
         <script src="assets/js/vendor.min.js"></script>
         <script src="assets/js/app.min.js"></script>
-        
     </body>
 </html>
