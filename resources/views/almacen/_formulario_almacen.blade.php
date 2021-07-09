@@ -2,124 +2,106 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box">
-        <h4 class="page-title">Almacen<span class="separador_menu"> | </span>Registrar</h4>
+            <h4 class="page-title">Almacén<span class="separador_menu"> | </span>Registrar</h4>
+        </div>
     </div>
-</div>
 </div><div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <!-- <h4 class="header-title">Ingrese la informacion de producto</h4> -->
-                <h4>Ingrese la información del almacen</h4>
+                <h4>Ingrese la información del almacén</h4>
 
                 <div class="tab-content">
                     <div class="tab-pane show active" id="form-row-preview">
 
                         <div class="form-group">
-                            <label for="nombre" class="col-form-label">Nombre de almacen</label>
-                            <input type="text" id="nombre" class="form-control" name="nombre" placeholder="Ingrese nombre de almacen">
+                            <label for="nombre" class="col-form-label">Nombre de almacén</label>
+                            <input type="text" id="nombre" class="form-control" name="nombre" placeholder="Ingrese nombre de almacén.">
                         </div>
                         <div class="form-group">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="empresa_id">Empresa</label>
+                                    <label for="empresa_id">Seleccione sucursal</label>
                                     <select id="empresa_id" name="empresa_id" class="form-control" data-toggle="select3" data-select3-id="1" tabindex="-1" aria-hidden="true">
-                                        <option data-select2-id="3">Seleccione empresa</option>
-                                        @if(!empty($empresas))
-                                            @foreach($empresas as $empresa)
-                                                <option value="{{$empresa->id}}">{{$empresa->nombreempresa}}</option>
-                                            @endforeach
+                                        <option data-select2-id="3">Seleccione sucursal</option>
+                                        @if(!empty($sucursales))
+                                        @foreach($sucursales as $sucursal)
+                                        <option value="{{$sucursal->id}}">{{$sucursal->nombre_sucursal}}<spam> (Sucursal - {{$sucursal->codigo_punto_venta}}) </spam></option>
+                                        @endforeach
                                         @endif
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="tipo_almacen">Tipo almacen</label>
-                                    <select id="tipo_almacen" name="tipo_almacen" class="form-control" data-toggle="select3" data-select3-id="1" tabindex="-1" aria-hidden="true">
-                                        <option data-select2-id="3">Seleccione tipo almacen</option>
-                                        <option value="Almacen">Almacen</option>
-                                        <option value="Sucursal">Sucursal</option>
-                                        <option value="Sucursal">Fabrica almacen</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="descripcion">Descripción del almacen</label>
-                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="5" placeholder="Ingrese descripción del producto"></textarea>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="archivo_seleccionado">Imagen de Almacen</label>
-                                    <input id="archivo_seleccionado" name="archivo_seleccionado" type="file" onchange="seleccionar_archivo_imagen()" />    
-                                    <div class="contenedor_imagen" id="cuadro_selector_elemento">
-                                        <div id="ver_archivo" class="ver_imagen"></div>
+                                    <label for="tipo_almacen">Tipo almacén</label>
+                                    <div class="mt-2">
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="deposito" name="tipo_almacen" class="custom-control-input" value="deposito">
+                                            <label class="custom-control-label" for="deposito">Depósito</label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="almacen" name="tipo_almacen" class="custom-control-input" value="almacen">
+                                            <label class="custom-control-label" for="almacen">Almacén</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="direccion">Direccion</label>
-                                    <textarea class="form-control" id="direccion" name="direccion" rows="2" placeholder="Ingrese dirección del almacen."></textarea>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="telefono" class="col-form-label">Telefono</label> 
-                                    <input type="text" id="telefono" class="form-control" name="telefono" placeholder="Ingrese número de telefono">
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="descripcion">Descripción</label>
+                                <textarea class="form-control" id="descripcion" name="descripcion" rows="5" placeholder="Ingrese descripción del almacén."></textarea>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="archivo_seleccionado">Imagen</label>
+                                <input id="archivo_seleccionado" name="archivo_seleccionado" type="file" onchange="seleccionar_archivo_imagen()" />    
+                                <div class="contenedor_imagen" id="cuadro_selector_elemento">
+                                    <div id="ver_archivo" class="ver_imagen"></div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-form-label">Horario de atención por la mañana.</label>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <span> De: </span><input type="time" class="form-control" name="horario_abierto_m">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <span> Hasta: </span><input type="time" class="form-control" name="horario_cerrado_m">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-form-label">Horario de atención por la tarde.</label>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <span> De: </span><input type="time" class="form-control" name="horario_abierto_t">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <span> Hasta: </span><input type="time" class="form-control" name="horario_cerrado_t">
-                                </div>
-                            </div>
-                        </div>
-               <!--  <div class="form-group">
-                    <label class="col-form-label">Horario de descanso </label><span class="btn btn-success" click="adicionar_horario_descanso()">+</span>
-                    <div class="form-row" id="contenedor_horario_descanso">
-                        <div class="form-group col-md-3">
-                            <span> De: </span><input type="time" class="form-control" name="horario_abierto">
-                        </div>
-                        <div class="form-group col-md-3">
-                            <span> Hasta: </span><input type="time" class="form-control" name="horario_cerrado">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <span> Motivo: </span><input type="time" class="form-control" name="horario_cerrado">
                         </div>
                     </div>
-                </div> --
-
-                <!-- <button type="submit" class="btn btn-primary">Registrar</button> -->
-
-
-            </div> <!-- end preview-->
-
-
-        </div> <!-- end tab-content-->
-
-    </div> <!-- end card-body -->
-</div> <!-- end card-->
-</div> <!-- end col -->
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="direccion">Dirección</label>
+                                <textarea class="form-control" id="direccion" name="direccion" rows="2" placeholder="Ingrese dirección del almacén."></textarea>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="telefono" class="col-form-label">Teléfono</label> 
+                                <input type="text" id="telefono" class="form-control" name="telefono" placeholder="Ingrese número de teléfono.">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Horario de atención por la mañana.</label>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <span> De: </span><input type="time" class="form-control" name="horario_abierto_m">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <span> Hasta: </span><input type="time" class="form-control" name="horario_cerrado_m">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Horario de atención por la tarde.</label>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <span> De: </span><input type="time" class="form-control" name="horario_abierto_t">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <span> Hasta: </span><input type="time" class="form-control" name="horario_cerrado_t">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<!-- end row -->
+</div>
 <script>
     /*------------------------- SCRIPT PARA ADICIONAR CODIGOS DE LOTE DE PRODUCTOS -----------------------*/
     var checkbox = document.querySelector("input[name=manejo_lote]");

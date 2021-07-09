@@ -25,7 +25,7 @@
     </div>
 @endif
 
-<form  action="{{route('almacenar_sucursal')}}"  enctype="multipart/form-data" method="post" novalidate>
+<form  action="{{route('almacenar_sucursal')}}"  enctype="multipart/form-data" method="post">
 {{ csrf_field() }}
 	@include('sucursal._formulario_sucursal')
     <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i>Guardar</button>        

@@ -276,7 +276,7 @@
                                     <a href="{{url('/registro_sucursal')}}">Sucursal</a>
                                 </li>
                                 <li>
-                                    <a href="#">Almacen</a>
+                                    <a href="{{url('/registro_almacen')}}">Almacen</a>
                                 </li>
                                 <li>
                                     <a href="#">Personal</a>
@@ -357,9 +357,9 @@
                                 <li>
                                     <a href="{{url('/registro_compra')}}">Realizar compra</a>
                                 </li>
-<!--                                 <li>
-                                    <a href="apps-email-read.html">Read Email</a>
-                                </li> -->
+                                <li>
+                                    <a href="{{url('/listar_compra')}}">Listar</a>
+                                </li>
                             </ul>
                         </li>
 
@@ -386,13 +386,10 @@
                       <li class="side-nav-item">
                         <a href="javascript: void(0);" class="side-nav-link">
                             <i class="icon-almacen"></i>
-                            <span> Almacen </span>
+                            <span> Inventario </span>
                             <span class="menu-arrow"></span>
                         </a>
                         <ul class="side-nav-second-level" aria-expanded="false">
-                            <li>
-                                <a href="{{url('/registro_almacen')}}">Registrar</a>
-                            </li>
                             <li class="side-nav-item">
                                 <a href="javascript: void(0);" aria-expanded="false">Existencia productos
                                     <span class="menu-arrow"></span>
@@ -400,6 +397,9 @@
                                 <ul class="side-nav-third-level" aria-expanded="false">
                                     <li>
                                         <a href="{{url('/registro_almacenproducto')}}">Registrar</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('/listar_almacenproducto')}}">Listar</a>
                                     </li>
                                         <!-- <li>
                                             <a href="#">Listar</a>
