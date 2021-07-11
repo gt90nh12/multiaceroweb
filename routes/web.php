@@ -5,12 +5,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'AuthController@index')->name('auths.index')->middleware('guest');
 Route::get('auths/list', 'AuthController@list')->name('auths.list')->middleware('auth');
 Route::post('auths/login', 'AuthController@login')->name('auths.login');
-
 Route::get('/admin', 'PersonaController@admin')->name('admin')->middleware('auth');
-
 Route::post('auths/logout', 'AuthController@logout')->name('auths.logout');
-
-
 Route::get('auths/create', 'AuthController@create')->name('auths.create');
 Route::post('auths/store', 'AuthController@store')->name('auths.store');
 Route::get('auths/show/{id}', 'AuthController@show')->name('auths.show');
