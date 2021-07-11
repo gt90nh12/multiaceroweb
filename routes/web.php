@@ -50,12 +50,13 @@ Route::get('/almacen_lista', 'PersonaController@almacen_lista')->name('almacen_l
 Route::get('/registro_producto', 'ProductoController@create')->name('registro_producto');
 Route::post('/almacenar_producto', 'ProductoController@store')->name('almacenar_producto');
 Route::get('/listar_producto', 'ProductoController@index')->name('listar_producto');
-Route::Get('producto_caracteristicas/{id}', 'ProductoController@caracteristica_producto'); // ruta de ajax para obtener las caracteristicas del producto
+Route::get('producto_caracteristicas/{id}', 'ProductoController@caracteristica_producto'); // ruta de ajax para obtener las caracteristicas del producto
 
 
 /* ------------------------- REGISTRO DE ALMACEN ------------------------- */
 Route::get('/registro_almacen', 'AlmacenController@create')->name('registro_almacen');
 Route::post('/almacenar_almacen', 'AlmacenController@store')->name('almacenar_almacen');
+// Route::get('/listar_almacen', 'AlmacenController@index')->name('listar_almacen');
 
 /* ------------------------- REGISTRO DE ALMACEN/PRODUCTO ------------------------- */
 Route::get('/registro_almacenproducto', 'AlmacenproductoController@create')->name('registro_almacenproducto');

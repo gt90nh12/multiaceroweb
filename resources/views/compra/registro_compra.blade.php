@@ -90,18 +90,12 @@
                                 </div>
                             </div>
                             <div class="form-group row mb-3">
-                                <label class="col-md-3 col-form-label" for="fecha_orden">Fecha de orden</label>
-                                <div class="col-md-9">
-                                    <input type="date" id="fecha_orden" name="fecha_orden" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="form-group row mb-3">
                                 <label class="col-md-3 col-form-label" for="metodo_entrega">Tipo de entrega</label>
                                 <div class="col-md-9">
-                                    <select class="form-control" data-toggle="select2" data-select2-id="1" tabindex="-1" aria-hidden="true" id="metodo_entrega" name="metodo_entrega">
-                                        <option data-select2-id="3" hidden>Seleccionar tipo de entrega</option>
-                                        <option value="AK" data-select2-id="15">Envio a almacén</option>
-                                        <option value="HI" data-select2-id="16">Recojo en plata de producción</option>
+                                    <select class="form-control" name="metodo_entrega">
+                                        <option hidden>Seleccionar tipo de entrega</option>
+                                        <option value="Envio almacén" data-select2-id="15">Envio a almacén</option>
+                                        <option value="Recojo de plantaI" data-select2-id="16">Recojo en plata de producción</option>
                                     </select>
                                 </div>
                             </div>
@@ -194,9 +188,9 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="seleccion_almacen">Almacén</label>
+                                <label class="col-md-3 col-form-label" for="seleccionAlmacen">Almacén</label>
                                 <div class="col-md-9">
-                                    <select id="seleccion_almacen" class="form-control select2 select2-hidden-accessible" data-toggle="select2" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                    <select id="seleccionAlmacen" class="form-control">
                                         @if(!empty($almacenes))
                                         @foreach($almacenes as $almacen)
                                         <option value="{{$almacen->id}}JSIAM.{{$almacen->nombre}}JSIAM.{{$almacen->imagen}}">{{$almacen->nombre}}</option>
@@ -216,9 +210,9 @@
                     <div class="row"> 
                         <div class="col-12">
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="fecha_esperada_recepion">Fecha de recepción</label>
+                                <label class="col-md-3 col-form-label" for="fecha_recepion_producto">Fecha de recepción</label>
                                 <div class="col-md-9">
-                                    <input type="date" id="fecha_esperada_recepion" name="fecha_esperada_recepion" class="form-control" required>
+                                    <input type="date" id="fecha_recepion_producto" name="fecha_recepion_producto" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -237,13 +231,13 @@
                     <div class="row"> 
                         <div class="col-12">
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="estado">Recepción</label>
+                                <label class="col-md-3 col-form-label" for="recepion_producto">Recepción</label>
                                 <div class="col-md-9">
-                                    <select name="estado" class="form-control" data-toggle="select4" data-select4-id="1" tabindex="-1" aria-hidden="true">
+                                    <select name="recepion_producto" class="form-control" data-toggle="select4" data-select4-id="1" tabindex="-1" aria-hidden="true" id="recepion_producto">
                                         <option class="placeholderselect" data-select4-id="4" disabled selected>Seleccione orden</option>
-                                        <option value="HI" data-select2-id="16">Conforme</option>    
-                                        <option value="HI" data-select2-id="16">Inconpleto</option>
-                                        <option value="HI" data-select2-id="16">Dañado</option>
+                                        <option value="Conforme" data-select2-id="16">Conforme</option>    
+                                        <option value="Incompleto" data-select2-id="16">Inconpleto</option>
+                                        <option value="Dañado" data-select2-id="16">Dañado</option>
 
                                     </select>
                                 </div>
@@ -272,23 +266,10 @@
 <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i>Guardar</button> 
 </form>
 <script type="text/javascript">
-    //------------------------------------------------------- Evento tipo de cambio -----------------------------------------------------
-    (function(){
-        var switchTipoCambio = document.getElementById("switchTipoCambio");
-        var contenedorTipoUnidadMonetaria = document.getElementById("adicionarUnidadMonetaria");
-        switchTipoCambio.addEventListener('change', function(e){
-            if(e.target.checked){
-                contenedorTipoUnidadMonetaria.classList.remove('esconder')
-                contenedorTipoUnidadMonetaria.classList.add('ver')
-            }else{
-                contenedorTipoUnidadMonetaria.classList.remove('ver')
-                contenedorTipoUnidadMonetaria.classList.add('esconder')
-            }
-        });
-    })();
+    
     //------------------------------------------------------- ExtraerDatosAlmacen -------------------------------------------------------
     (function(){
-        var almacenSeleccionado = document.getElementById("seleccion_almacen");
+        var almacenSeleccionado = document.getElementById("seleccionAlmacen");
         console.log(almacenSeleccionado); 
         almacenSeleccionado.addEventListener('change', function(){
             var opcion_seleccionada = this.options[almacenSeleccionado.selectedIndex];
@@ -326,16 +307,36 @@
         var divtest = document.createElement("div");
         divtest.setAttribute("class", "form-group removeclass" + room);
         var rdiv = 'removeclass' + room;
-        divtest.innerHTML = '<div class="row col-12 producto-comprado separador-compra-producto"><div class="row col-12"><div class="form-group col-md-3 contenedor-imagen-compra"><div class="img_compra_producto"><img src="../storage/imagenes/'+ImagenProducto+'" alt="shreyu" id="imagen-producto-compra"></div></div><div class="form-group col-md-9"><input type="hidden" value="'+ IdProducto +'" name="id_producto[]"><div class="form-row quitar-producto"><label for="archivo_seleccionado">Producto: <snpa class="nombre-producto-comprado">'+ NombreProducto +'</span></label><button type="button" class="btn btn-danger" onclick="eliminar_producto_comprado('+ room +')">Quitar producto <i class="mdi mdi-window-close"></i> </button></div><br><div class="form-row"><div class="form-group col-md-4"><label for="cantidad">Cantidad</label><input type="number" id="cantidad" class="form-control" placeholder="Ingrese cantidad" name="cantidad[]"/></div><div class="form-group col-md-4"><label for="fechaFabricacion">Fecha de Fabricación</label><input type="date" id="fechaFabricacion" class="form-control" name="fechaFabricacion[]"/></div><div class="form-group col-md-4"><label for="costo">Precio unitario</label><div class="form-row"><div class="form-group col-md-7"><input type="number" id="costo" class="form-control" placeholder="Ingrese costo unitario" name="costo[]"></div><p id="monedaCompraProducto">Bs.</p></div></div></div></div></div><div class="col-lg-12"><div class="accordion custom-accordion" id="custom-accordion-one"><div class="card mb-0 acordion-contenido"><div class="card-header" id="headingFour"><h5 class="m-0"><a class="custom-accordion-title d-block py-1" data-toggle="collapse" href="#acordion'+ room +'" aria-expanded="false" aria-controls="'+ room +'">Adicionar detalle de producto<i class="dripicons-align-center text-success separa-acordion"></i></a></h5></div><div id="acordion'+ room +'" class="acordion-contenido-dentro collapse" aria-labelledby="headingFour" data-parent="#custom-accordion-one"><div class="form-row"><div class="form-group col-md-4"><label for="lote">Lote</label><input type="number" id="lote" class="form-control" placeholder="Ingrese lote de productos" name="lote[]"></div><div class="form-group col-md-4"><label for="color">Color</label><input type="number" id="color" class="form-control" placeholder="Ingrese lote de productos" name="color[]"></div><div class="form-group col-md-4"><label for="descuento">Descuento</label><div class="form-row"><div class="form-group col-md-9"><input type="number" class="form-control" id="descuento" placeholder="Ingrese descuento" name="descuento[]"/></div><div class="form-group col-md-3"><p id="monedaCompraProducto">Bs.</p></div></div></div></div><div class="form-row"><div class="form-group col-md-4"><label for="fechaCaducidad">Fecha de caducidad</label><input type="date" id="fechaCaducidad" class="form-control" name="fechaCaducidad[]"/></div><div class="form-group col-md-4"><label for="utilizacion">Utilización</label><input type="text" id="utilizacion" class="form-control" placeholder="modo_utilizacion" name="utilizacion[]"/></div><div class="form-group col-md-4"><label for="descuento">Accesorios</label><br><button type="button" class="btn btn-outline-success btn-rounded" onclick="accesoriosProducto('+room+')"><i class="uil-cloud-computing"></i>Agregar</button></div></div><div class="form-row col-12"><label for="identificador">Accesorios de producto</label><a href="#" class="right-bar-toggle float-right eliminar-accesorios-producto"><i class="dripicons-cross noti-icon"></i></a><textarea class="form-control esconder" id="accesorios'+room+'" name="identificador[]" rows="3"></textarea></div></div></div></div></div> </div>';
+        divtest.innerHTML = '<div class="row col-12 producto-comprado separador-compra-producto"><div class="row col-12"><div class="form-group col-md-3 contenedor-imagen-compra"><div class="img_compra_producto"><img src="../storage/imagenes/'+ImagenProducto+'" alt="shreyu" id="imagen-producto-compra"></div></div><div class="form-group col-md-9"><input type="hidden" value="'+ IdProducto +'" name="id_producto[]"><div class="form-row quitar-producto"><label for="archivo_seleccionado">Producto: <snpa class="nombre-producto-comprado">'+ NombreProducto +'</span></label><button type="button" class="btn btn-danger" onclick="eliminar_producto_comprado('+ room +')">Quitar producto <i class="mdi mdi-window-close"></i> </button></div><br><div class="form-row"><div class="form-group col-md-4"><label for="cantidad">Cantidad</label><input type="number" id="cantidad" class="form-control" placeholder="Ingrese cantidad" name="cantidad[]"/></div><div class="form-group col-md-4"><label for="fechaFabricacion">Fecha de Fabricación</label><input type="date" id="fechaFabricacion" class="form-control" name="fechaFabricacion[]"/></div><div class="form-group col-md-4"><label for="costo">Precio unitario</label><span> Bs.</span><div class="form-row"><input type="number" id="costo" class="form-control" placeholder="Ingrese costo unitario" name="costo[]"></div></div></div></div></div><div class="col-lg-12"><div class="accordion custom-accordion" id="custom-accordion-one"><div class="card mb-0 acordion-contenido"><div class="card-header" id="headingFour"><h5 class="m-0"><a class="custom-accordion-title d-block py-1" data-toggle="collapse" href="#acordion'+ room +'" aria-expanded="false" aria-controls="'+ room +'">Adicionar detalle de producto<i class="dripicons-align-center text-success separa-acordion"></i></a></h5></div><div id="acordion'+ room +'" class="acordion-contenido-dentro collapse" aria-labelledby="headingFour" data-parent="#custom-accordion-one"><div class="form-row"><div class="form-group col-md-4"><label for="lote">Lote</label><input type="number" id="lote" class="form-control" placeholder="Ingrese lote de productos" name="lote[]"></div><div class="form-group col-md-4"><label for="color">Color</label><input type=text id="color" class="form-control" placeholder="Ingrese lote de productos" name="color[]"></div><div class="form-group col-md-4"><label for="descuento">Descuento</label><div class="form-row"><div class="form-group col-md-9"><input type="number" class="form-control" id="descuento" placeholder="Ingrese descuento" name="descuento[]"/></div><div class="form-group col-md-3"><p id="monedaCompraProducto">Bs.</p></div></div></div></div><div class="form-row"><div class="form-group col-md-4"><label for="fechaCaducidad">Fecha de caducidad</label><input type="date" id="fechaCaducidad" class="form-control" name="fechaCaducidad[]"/></div><div class="form-group col-md-4"><label for="utilizacion">Utilización</label><input type="text" id="utilizacion" class="form-control" placeholder="modo_utilizacion" name="utilizacion[]"/></div><div class="form-group col-md-4"><label for="descuento">Accesorios</label><br><button type="button" class="btn btn-outline-success btn-rounded" onclick="accesoriosProducto('+room+')"><i class="uil-cloud-computing"></i>Agregar</button></div></div><div id="accesorios'+room+'" class="form-row col-12 ocultarDIV"><label for="identificador">Accesorios de producto</label><span class="eliminar-accesorios-producto" onclick="eliminarAccesorioProducto('+room+')">X</span><textarea class="form-control" name="identificador[]" rows="3"></textarea></div></div></div></div></div> </div>';
 
         objTo.appendChild(divtest);
         // document.getElementById("tablaprueba").insertRow(-1).innerHTML = '<td></td><td></td><td></td><td></td>';
     }
+    //------------------------------------------------------- Adicionar unidad monetaria -----------------------------------------------------
+    (function(){
+        var switchTipoCambio = document.getElementById("switchTipoCambio");
+        var contenedorTipoUnidadMonetaria = document.getElementById("adicionarUnidadMonetaria");
+        switchTipoCambio.addEventListener('change', function(e){
+            if(e.target.checked){
+                contenedorTipoUnidadMonetaria.classList.remove('esconder')
+                contenedorTipoUnidadMonetaria.classList.add('ver')
+            }else{
+                contenedorTipoUnidadMonetaria.classList.remove('ver')
+                contenedorTipoUnidadMonetaria.classList.add('esconder')
+            }
+        });
+    })();
     function accesoriosProducto(id){
         var nombre="accesorios"+id
         console.log(nombre);
-        // document.getElementById(nombre).classList.remove('esconder');
-        document.getElementById(nombre).classList.add('ver');
+        document.getElementById(nombre).classList.remove('ocultarDIV');
+        document.getElementById(nombre).classList.add('mostrarDIV');
+    }
+    function eliminarAccesorioProducto(id){
+     var nombre="accesorios"+id
+        console.log(nombre);
+        document.getElementById(nombre).classList.remove('mostrarDIV');
+        document.getElementById(nombre).classList.add('ocultarDIV');
     }
     function eliminar_producto_comprado(rid) {
         $('.removeclass' + rid).remove();

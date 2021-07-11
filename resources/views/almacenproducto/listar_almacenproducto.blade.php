@@ -11,13 +11,6 @@
 <div class="row">
   <div class="col-12">
     <div class="page-title-box">
-      <!-- <div class="page-title-right">
-        <ol class="breadcrumb m-0">
-          <li class="breadcrumb-item"><a href="javascript: void(0);">Multiacero</a></li>
-          <li class="breadcrumb-item"><a href="javascript: void(0);">Ventas</a></li>
-          <li class="breadcrumb-item active">Todas las Ventas</li>
-        </ol>
-      </div> -->
       <h4 class="page-title">Lista productos en almacén</h4>
     </div>
   </div>
@@ -25,10 +18,10 @@
 <!-- end page title -->
 
 <div class="row">  
-  <!-- <div class="col-sm-4">
-    <a href="{{route('ventas.create')}}" class="btn btn-danger mb-2">
-      <i class="mdi mdi-cash-usd mr-2"></i> Nueva Factura</a>
-    </div> -->
+  <div class="col-sm-4">
+    <a href="{{url('/registro_almacenproducto')}}" class="btn btn-success mb-2">
+      <i class="mdi mdi-plus-circle mr-2"></i>Agregar inventario</a>
+    </div>
     <div class="col-12">
       <div class="card">
         <div class="card-body">

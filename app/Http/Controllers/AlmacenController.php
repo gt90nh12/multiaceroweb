@@ -18,7 +18,11 @@ class AlmacenController extends Controller
      */
     public function index()
     {
-        //
+        $almacenes = DB::table('almacenes')
+        ->join('sucursales', 'sucursales.id', '=', 'almacenes.id_sucursal')
+        ->select('sucursales.nombre_sucursal','almacenes.nombre', 'almacenes.imagen', 'almacenes.direccion')
+        ->get();
+        return view('almacen/registrar')->with(compact('almacenes'));
     }
 
     /**
@@ -29,6 +33,8 @@ class AlmacenController extends Controller
     public function create()
     {
         $sucursales = Sucursale::all();
+        // $sucursaless = DB::table('sucursales')->get();
+        // var_dump($sucursales);
         return view('almacen/registrar')->with(compact('sucursales'));
     }
 
@@ -79,7 +85,7 @@ class AlmacenController extends Controller
                     $data['documento_general']='El tipo de archivo no esta permitido.';
                     echo("El tipo de archivo no esta permitido");
                 }else {
-                    $ruta="../storage/imagenes/".$_FILES['archivo_seleccionado']['name'];
+                    $ruta="assets/imagenes/".$_FILES['archivo_seleccionado']['name'];
                     $nombreArchivo = $_FILES['archivo_seleccionado']['name'];
                     move_uploaded_file($_FILES['archivo_seleccionado']['tmp_name'], $ruta);
                 }

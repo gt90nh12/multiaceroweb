@@ -104,14 +104,14 @@
 </div>
 <script>
     /*------------------------- SCRIPT PARA ADICIONAR CODIGOS DE LOTE DE PRODUCTOS -----------------------*/
-    var checkbox = document.querySelector("input[name=manejo_lote]");
+    /*var checkbox = document.querySelector("input[name=manejo_lote]");
     checkbox.addEventListener( 'change', function() {
         if(this.checked) {
             document.getElementById('contenedor_lote').classList.remove('ocultar_contenedor');
         } else {
             document.getElementById('contenedor_lote').classList.add('ocultar_contenedor');
         }
-    });
+    });*/
     function adicionar_codigoLote() {
         var numero = parseInt(document.getElementById("numeroLote").value);
         var  room = numero+1;
