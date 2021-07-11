@@ -125,61 +125,10 @@
                                                 <small class="text-muted">13 days ago</small>
                                             </p>
                                         </a>
-
                                     </div>
                                 </li>
 
-                                <li class="dropdown notification-list d-none d-sm-inline-block">
-                                    <a class="nav-link dropdown-toggle arrow-none" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                        <i class="dripicons-view-apps noti-icon"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated dropdown-lg p-0">
 
-                                        <div class="p-2">
-                                            <div class="row no-gutters">
-                                                <div class="col">
-                                                    <a class="dropdown-icon-item" href="#">
-                                                        <img src="{{asset('assets/images/brands/slack.png')}}" alt="slack">
-                                                        <span>Slack</span>
-                                                    </a>
-                                                </div>
-                                                <div class="col">
-                                                    <a class="dropdown-icon-item" href="#">
-                                                        <img src="{{asset('assets/images/brands/github.png')}}" alt="Github">
-                                                        <span>GitHub</span>
-                                                    </a>
-                                                </div>
-                                                <div class="col">
-                                                    <a class="dropdown-icon-item" href="#">
-                                                        <img src="{{asset('assets/images/brands/dribbble.png')}}" alt="dribbble">
-                                                        <span>Dribbble</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                            <div class="row no-gutters">
-                                                <div class="col">
-                                                    <a class="dropdown-icon-item" href="#">
-                                                        <img src="{{asset('assets/images/brands/bitbucket.png')}}" alt="bitbucket">
-                                                        <span>Bitbucket</span>
-                                                    </a>
-                                                </div>
-                                                <div class="col">
-                                                    <a class="dropdown-icon-item" href="#">
-                                                        <img src="{{asset('assets/images/brands/dropbox.png')}}" alt="dropbox">
-                                                        <span>Dropbox</span>
-                                                    </a>
-                                                </div>
-                                                <div class="col">
-                                                    <a class="dropdown-icon-item" href="#">
-                                                        <img src="{{asset('assets/images/brands/g-suite.png')}}" alt="G Suite">
-                                                        <span>G Suite</span>
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </li>
 
                                     <li class="notification-list">
                                         <a class="nav-link right-bar-toggle" href="javascript: void(0);">
@@ -259,9 +208,7 @@
 
                     <!--- Sidemenu -->
                     <ul class="metismenu side-nav">
-
-                        <li class="side-nav-title side-nav-item">Navegacion</li>
-
+                        <li class="side-nav-title side-nav-item">Menu principal</li>
                         <li class="side-nav-item">
                             <a href="javascript: void(0);" class="side-nav-link">
                                 <i class="uil-home-alt"></i>
@@ -279,7 +226,7 @@
                                     <a href="{{url('/registro_almacen')}}">Almacen</a>
                                 </li>
                                 <li>
-                                    <a href="#">Personal</a>
+                                    <a href="{{route('auths.list')}}">Personal</a>
                                 </li>
                                   <!-- <li class="side-nav-item mm-active">
                                     <a href="javascript: void(0);" aria-expanded="true">Empresa
@@ -327,24 +274,6 @@
 
                         <li class="side-nav-title side-nav-item">Administrar</li>
 
-                        <li class="side-nav-item">
-                            <a href="javascript: void(0);" class="side-nav-link">
-                                <i class="uil-store"></i>
-                                <span> Comercio </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <ul class="side-nav-second-level" aria-expanded="false">
-                                <li>
-                                    <a href="apps-ecommerce-shopping-cart.html">Ordenes de pedido</a>
-                                </li>
-                                <li>
-                                    <a href="apps-ecommerce-checkout.html">Envio</a>
-                                </li>
-                                <li>
-                                    <a href="apps-ecommerce-sellers.html">Vendedores</a>
-                                </li>
-                            </ul>
-                        </li>
 
                         <li class="side-nav-item">
                             <a href="javascript: void(0);" class="side-nav-link">
@@ -366,7 +295,6 @@
                         <li class="side-nav-item">
                             <a href="javascript: void(0);" class="side-nav-link">
                                 <i class="icon-ventas"></i>
-                                <!-- <i class="uil-envelope almacen"></i> -->
                                 <span> Ventas </span>
                                 <span class="menu-arrow"></span>
                             </a>
@@ -375,11 +303,8 @@
                                     <a href="{{route('ventas.index')}}">Todas las Ventas</a>
                                 </li>
                                 <li>
-                                    <a href="#">Ventas de Hoy</a>
+                                    <a href="{{route('ventas.create')}}">Nueva Factura</a>
                                 </li>
-                                <li>
-                                  <a href="#">Revisar Facturas</a>
-                              </li>
                           </ul>
                       </li>
 
@@ -401,20 +326,9 @@
                                     <li>
                                         <a href="{{url('/listar_almacenproducto')}}">Listar</a>
                                     </li>
-                                        <!-- <li>
-                                            <a href="#">Listar</a>
-                                        </li> -->
-                                        <!-- <li>
-                                            <a href="pages-500.html">Error 500</a>
-                                        </li> -->
-                                    </ul>
+
+                                </ul>
                                 </li>
-                                <!-- <li>
-                                    <a href="apps-projects-gantt.html">Gantt <span class="badge badge-pill badge-dark-lighten font-10 float-right">New</span></a>
-                                </li>
-                                <li>
-                                    <a href="apps-projects-add.html">Create Project <span class="badge badge-pill badge-success-lighten font-10 float-right">New</span></a>
-                                </li> -->
                             </ul>
                         </li>
 
@@ -487,133 +401,13 @@
                         </li>
 
                         <li class="side-nav-item">
-                            <a href="apps-file-manager.html" class="side-nav-link">
-                                <i class="uil-folder-plus"></i>
-                                <span> File Manager </span>
-                            </a>
-                        </li>
-
-                        <li class="side-nav-title side-nav-item">Personalización</li>
-
-                        <li class="side-nav-item">
-                            <a href="javascript: void(0);" class="side-nav-link">
-                                <i class="uil-copy-alt"></i>
-                                <span> Empresa </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <ul class="side-nav-second-level" aria-expanded="false">
-                                <li>
-                                    <a href="pages-profile.html">Profile</a>
-                                </li>
-                                <li>
-                                    <a href="pages-profile-2.html">Profile 2</a>
-                                </li>
-                                <li>
-                                    <a href="pages-invoice.html">Invoice</a>
-                                </li>
-                                <li>
-                                    <a href="pages-faq.html">FAQ</a>
-                                </li>
-                                <li>
-                                    <a href="pages-pricing.html">Pricing</a>
-                                </li>
-                                <li>
-                                    <a href="pages-maintenance.html">Maintenance</a>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a href="javascript: void(0);" aria-expanded="false">Vehiculos
-                                        <span class="menu-arrow"></span>
-                                    </a>
-                                    <ul class="side-nav-third-level" aria-expanded="false">
-                                        <li>
-                                            <a href="pages-login.html">Login</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-login-2.html">Login 2</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-register.html">Register</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-register-2.html">Register 2</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-logout.html">Logout</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-logout-2.html">Logout 2</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-recoverpw.html">Recover Password</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-recoverpw-2.html">Recover Password 2</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-lock-screen.html">Lock Screen</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-lock-screen-2.html">Lock Screen 2</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-confirm-mail.html">Confirm Mail</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-confirm-mail-2.html">Confirm Mail 2</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="side-nav-item">
-                                    <a href="javascript: void(0);" aria-expanded="false">Error
-                                        <span class="menu-arrow"></span>
-                                    </a>
-                                    <ul class="side-nav-third-level" aria-expanded="false">
-                                        <li>
-                                            <a href="pages-404.html">Error 404</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-404-alt.html">Error 404-alt</a>
-                                        </li>
-                                        <li>
-                                            <a href="pages-500.html">Error 500</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="pages-starter.html">Starter Page</a>
-                                </li>
-                                <li>
-                                    <a href="pages-preloader.html">With Preloader</a>
-                                </li>
-                                <li>
-                                    <a href="pages-timeline.html">Timeline</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="side-nav-item">
-                            <a href="landing.html" target="_blank" class="side-nav-link">
+                            <a href="#" target="_blank" class="side-nav-link">
                                 <i class="uil-globe"></i>
                                 <span class="badge badge-light float-right">New</span>
                                 <span> Vehiculos </span>
                             </a>
                         </li>
 
-                        <li class="side-nav-item">
-                            <a href="javascript: void(0);" class="side-nav-link">
-                                <i class="uil-window"></i>
-                                <span> Personas </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <ul class="side-nav-second-level" aria-expanded="false">
-                                <li>
-                                    <a href="layouts-horizontal.html">Horizontal</a>
-                                </li>
-                                <li>
-                                    <a href="layouts-vertical.html">Vertical</a>
-                                </li>
-                            </ul>
-                        </li>
                     </ul>
 
 
