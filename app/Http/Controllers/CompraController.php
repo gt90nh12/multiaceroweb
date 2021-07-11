@@ -59,7 +59,6 @@ class CompraController extends Controller
          'fecha_orden'=>'required',
          'metodo_entrega'=>'required',
          'costo_total_compra'=>'required|between:0,99.99',
-         'unidad_monetaria'=>'required',
          'seleccion_almacen'=>'required',
          'direccion_entrega'=>'required',
          'costo_transporte'=>'required',
@@ -71,7 +70,6 @@ class CompraController extends Controller
          'fecha_orden.required' => 'Debe ingresar la fecha de entrega de producto por parte del proveedor.',
          'metodo_entrega.required' => 'Debe selccionar el metodo de entrega del producto.',
          'costo_total_compra.required' => 'Debe ingresar el costo total del producto.',
-         'unidad_monetaria.required' => 'Seleccione la unidad monetario del costo total de la compra.',
          'seleccion_.required' => 'Seleccione el alamacen que realiza la compra.',
          'direccion_entrega'=>'La dirección de entrega es necesario',
          'costo_transporte'=>'Debe ingresar el consto de transporte.',
@@ -103,13 +101,24 @@ class CompraController extends Controller
             $nombreArchivo = ($_FILES['documentacion']['name']);
         }
         /*-------------------------------------------------------------------------------*/
+        /*------------------------------- Unidad de medida  -----------------------------*/
+        if(e($request->input('switchTipoCambio'))){
+            $unidadMonetariaCostoCompra = e($request->input('unidad_monetaria_costo_compra'));
+            $tipoCambioCostoCompra = e($request->input('tipo_cambio_costo_compra'));
+        }else{
+            $unidadMonetariaCostoCompra = "Bs.";
+            $tipoCambioCostoCompra = 0;
+        }
+        /*-------------------------------------------------------------------------------*/
+
         $compra = new Compra;
         $compra->usuario=$usuario;
         $compra->descripcion_compra=e($request->input('descripcion_compra'));
         $compra->fecha_orden=e($request->input('fecha_orden'));;
-        $compra->metodo_entrega=e($request->input('metodo_entrega'));;
+        $compra->metodo_entrega=e($request->input('metodo_entrega'));
         $compra->costo_total_compra=e($request->input('costo_total_compra'));
-        $compra->unidad_monetaria=e($request->input('unidad_monetaria'));
+        $compra->unidad_monetaria_costo_compra=$unidadMonetariaCostoCompra;
+        $compra->tipo_cambio_costo_compra = $tipoCambioCostoCompra;
         $compra->direccion_entrega=e($request->input('direccion_entrega'));
         $compra->costo_transporte=e($request->input('costo_transporte'));
         $compra->fecha_esperada_recepion=e($request->input('fecha_esperada_recepion'));
@@ -161,6 +170,7 @@ class CompraController extends Controller
                     $i++;
                 }  
             endif;
+            return redirect()->route('listar_compra');
         endif;
     endif;
 }
@@ -215,8 +225,7 @@ class CompraController extends Controller
         ->where('id_productos',$id_productos)
         ->where('id_almacenes',$id_almacenes)
         ->select('id','cantidad_producto')
-        ->get();
-        // print_r($dato_almacen_producto);
+        ->get();{}
         if(empty($dato_almacen_producto[0])){
             echo "Registro nuevo en almacenpoductos";
             /*------ Numero de la tabla transaccion movimiento de inventarios------*/
@@ -249,7 +258,6 @@ class CompraController extends Controller
             $almacenProducto = AlmacenProducto::find($id_almacen_productos);
             $almacenProducto->cantidad_producto = $cantidadActual;
             $almacenProducto->updated_at = Carbon::now();
-            $almacenProducto->save();
             if($almacenProducto->save()){
                 return true;
             }else{

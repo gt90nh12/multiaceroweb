@@ -65,22 +65,19 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <div class="mt-3 text-center">
-                                        <img src="assets/images/logoProveedores/soboce.png" alt="shreyu" class="img-thumbnail avatar-lg">
-                                        <h4>Sociedad Boliviana de Cemento</h4>
-                                        <!-- <button class="btn btn-primary btn-sm mt-1"><i class="uil uil-envelope-add mr-1"></i>Send Email</button> -->
-                                        <button class="btn btn-primary btn-sm mt-1">Ver empresa</button>
-                                        <p class="text-muted mt-2 font-14">Operador logistico: <strong>Lic. Juan Alvaro Marquez</strong></p>
+                                    <div class="text-center">
+                                        <div id="contenedorImagenProveedor"></div>
+                                        <input type="hidden" name="proveedor" id="idContactoProveedor">
                                     </div>
                                 </div>
                                 <div class="form-group row mb-3">
-                                    <label class="col-md-3 col-form-label" for="proveedorSeleccionando">Proveedor</label>
+                                    <label class="col-md-3 col-form-label" for="proveedorCompra">Proveedor</label>
                                     <div class="col-md-9">
-                                       <select id="proveedorSeleccionando" name="proveedor" class="form-control" data-toggle="select3" data-select3-id="1" tabindex="-1" aria-hidden="true">
-                                        <option data-select2-id="3">Seleccione proveedor</option>
+                                     <select id="proveedorCompra" class="form-control" data-toggle="select3" data-select3-id="1" tabindex="-1" aria-hidden="true">
+                                        <option data-select2-id="3" hidden>Seleccione proveedor</option>
                                         @if(!empty($contactoProveedores))
                                         @foreach($contactoProveedores as $proveedor)
-                                        <option value="{{$proveedor->id_proveedores}}">{{$proveedor->persona}}</option>
+                                        <option value="{{$proveedor->id_proveedores}}sjim._{{$proveedor->logo}}sjim._{{$proveedor->proveedor}}">{{$proveedor->persona}}</option>
                                         @endforeach
                                         @endif
                                     </select>
@@ -89,7 +86,7 @@
                             <div class="form-group row mb-3">
                                 <label class="col-md-3 col-form-label" for="descripcion_compra">Descripción de Compra</label>
                                 <div class="col-md-9">
-                                    <textarea class="form-control" id="descripcion_compra" rows="3" name="descripcion_compra"></textarea>
+                                    <textarea class="form-control" id="descripcion_compra" rows="3" name="descripcion_compra" placeholder="Ingrese descripción de compra"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row mb-3">
@@ -102,7 +99,7 @@
                                 <label class="col-md-3 col-form-label" for="metodo_entrega">Tipo de entrega</label>
                                 <div class="col-md-9">
                                     <select class="form-control" data-toggle="select2" data-select2-id="1" tabindex="-1" aria-hidden="true" id="metodo_entrega" name="metodo_entrega">
-                                        <option data-select2-id="3">Seleccionar tipo de entrega</option>
+                                        <option data-select2-id="3" hidden>Seleccionar tipo de entrega</option>
                                         <option value="AK" data-select2-id="15">Envio a almacén</option>
                                         <option value="HI" data-select2-id="16">Recojo en plata de producción</option>
                                     </select>
@@ -111,14 +108,30 @@
                             <div class="row">
                                 <label class="col-md-3 col-form-label" for="costo_total_compra">Costo total de compra</label>
                                 <div class="col-md-6">
-                                    <input type="number" id="costo_total_compra" name="costo_total_compra" class="form-control" required>
+                                    <input type="number" id="costo_total_compra" name="costo_total_compra" class="form-control" placeholder="Ingrese el costo total de compra" required>
+                                    <p>Unidad monetaria en Bolivianos.</p>
                                 </div>
-                                <div class="col-md-3">
-                                    <select class="form-control" data-toggle="select3" data-select3-id="1" tabindex="-1" aria-hidden="true" name="unidad_monetaria">
-                                        <option data-select3-id="4">Seleccione unidad monetaria</option>
-                                        <option value="AK" data-select3-id="15">Bolivianos</option>
-                                        <option value="HI" data-select3-id="16">Dolares</option>
+                                <div class="col-md-3 container-centrado">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="switchTipoCambio">
+                                        <label class="custom-control-label" for="switchTipoCambio">Seleccionar unidad monetaria.</label>
+                                        <p class="etiquetaImvisible">.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="adicionarUnidadMonetaria" class="row esconder">
+                                <label class="col-md-3 col-form-label" for="costo_total_compra">Unidad monetaria</label>
+                                <div class="col-md-4">
+                                    <select class="form-control"  data-toggle="select3" tabindex="-1" aria-hidden="true" name="unidad_monetaria_costo_compra">
+                                        <option data-select3-id="4" hidden>Seleccione unidad monetaria</option>
+                                        <option value="reales">Real</option>
+                                        <option value="soles">Soles</option>
+                                        <option value="dolares">Dolares</option>
                                     </select>
+                                </div>
+                                <label class="col-md-2 col-form-label" for="costo_total_compra">Tipo de cambio</label>
+                                <div class="col-md-3">
+                                    <input type="number" id="tipo_cambio" name="tipo_cambio_costo_compra" class="form-control" placeholder="Ingrese tipo de cambio" required>
                                 </div>
                             </div>
                         </div>
@@ -137,7 +150,7 @@
                                     </span>
                                 </div>
                                 <select id="producto_seleccionado" name="producto" class="form-control" data-toggle="select3" data-select3-id="1" tabindex="-1" aria-hidden="true">
-                                    <option data-select2-id="3">Seleccione producto</option>
+                                    <option data-select2-id="3" hidden>Seleccione producto</option>
                                     @if(!empty($productos))
                                     @foreach($productos as $producto)
                                     <option value="{{$producto->id}}imagen{{$producto->imagen}}">
@@ -152,14 +165,20 @@
                             <label class="col-md-12 col-form-label btn btn-success" for="name3" onclick="agregar_producto_comprado()">Agregar</label>
                         </div>
                     </div>
+                    <br>
                     <div class="row">
-                        <!-- <label class="col-form-label" for="password3">Productos comprados: </label> -->
-                        <div class="contenedor_productos_comprados" id="resgistro_producto_comprado">
-                            <br>
+                        <div class="col-lg-12">
+                            <div class="border p-3 mt-4 mt-lg-0 rounded contenedor_productos_comprados">
+                                <h4 class="header-title mb-3">Detalle de compra</h4>
+                                <div class="table-responsive" id="resgistro_producto_comprado">
+                                    <br>
+                                </div>
+                            </div>
                         </div>
+                        
                         <div class="col-12">
                             <label class="col-md-3 col-form-label" for="observaciones">Descripción de Compra</label>
-                            <textarea class="form-control" id="observaciones" rows="3" name="observaciones"></textarea>
+                            <textarea class="form-control" id="observaciones" rows="3" name="observaciones" placeholder="Ingrese descripción de compra"></textarea>
                         </div>
                     </div>
                 </div>
@@ -167,20 +186,20 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <div class="mt-3 text-center">
-                                    <img src="assets/images/logoProveedores/multiacero.jfif" alt="shreyu" class="img-thumbnail avatar-lg">
-                                    <h4>Multiacero</h4>
-                                    <button class="btn btn-primary btn-sm mt-1">Ver empresa</button>
-                                    <p class="text-muted mt-2 font-14">Representante legal: <strong>Ing. Simeón Kapa Larico</strong></p>
+                                <div class="text-center">
+                                    <div id="contenedorImagenAlmacen">
+                                    </div>
+                                    <!-- <h4 id="nombreEmpresaMultiacero"></h4> -->
+                                    <input type="hidden" name="seleccion_almacen" id="almacenMultiaceroSeleccionado">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="seleccion_almacen">Almacén</label>
                                 <div class="col-md-9">
-                                    <select name="seleccion_almacen" id="seleccion_almacen" class="form-control select2 select2-hidden-accessible" data-toggle="select2" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                    <select id="seleccion_almacen" class="form-control select2 select2-hidden-accessible" data-toggle="select2" data-select2-id="1" tabindex="-1" aria-hidden="true">
                                         @if(!empty($almacenes))
                                         @foreach($almacenes as $almacen)
-                                        <option value="{{$almacen->id}}">{{$almacen->nombre}}</option>
+                                        <option value="{{$almacen->id}}JSIAM.{{$almacen->nombre}}JSIAM.{{$almacen->imagen}}">{{$almacen->nombre}}</option>
                                         @endforeach
                                         @endif
                                     </select>
@@ -189,10 +208,7 @@
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="direccion_entrega">Dirección entrega</label>
                                 <div class="col-md-9">
-                                    <select name="direccion_entrega" id="direccion_entrega" class="form-control select2 select2-hidden-accessible" data-toggle="select2" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                        <option data-select2-id="3">Multiacero</option>
-                                        <option value="AZ" data-select2-id="23">Cesarines</option>
-                                    </select>
+                                    <input type="text" id="direccion_entrega" name="direccion_entrega" class="form-control" placeholder="Ingrese dirección de entrega" required>
                                 </div>
                             </div>
                         </div>
@@ -212,7 +228,7 @@
                             <div class="form-group row">
                                 <label class="col-md-3 col-form-label" for="costo_transporte">Costo de transporte</label>
                                 <div class="col-md-9">
-                                    <input type="number" id="costo_transporte" name="costo_transporte" class="form-control" required>
+                                    <input type="number" id="costo_transporte" name="costo_transporte" class="form-control" placeholder="Ingrese costo de transporte" required>
                                     <p>Unidad monetaria en Bolivianos.</p>
                                 </div>
                             </div>
@@ -221,12 +237,14 @@
                     <div class="row"> 
                         <div class="col-12">
                             <div class="form-group row">
-                                <label class="col-md-3 col-form-label" for="estado">Conformidad</label>
+                                <label class="col-md-3 col-form-label" for="estado">Recepción</label>
                                 <div class="col-md-9">
                                     <select name="estado" class="form-control" data-toggle="select4" data-select4-id="1" tabindex="-1" aria-hidden="true">
-                                        <option data-select4-id="4">Seleccione orden</option>
-                                        <option value="HI" data-select2-id="16">En espera</option>    
-                                        <option value="HI" data-select2-id="16">No entregado</option>
+                                        <option class="placeholderselect" data-select4-id="4" disabled selected>Seleccione orden</option>
+                                        <option value="HI" data-select2-id="16">Conforme</option>    
+                                        <option value="HI" data-select2-id="16">Inconpleto</option>
+                                        <option value="HI" data-select2-id="16">Dañado</option>
+
                                     </select>
                                 </div>
                             </div>
@@ -244,9 +262,8 @@
                     </div>
                 </div>
                 <ul class="list-inline wizard mb-0">
-                    <li class="previous list-inline-item"><a href="#" class="btn btn-info">Atras</a>
-                    </li>
-                    <li class="next list-inline-item float-right"><a href="#" class="btn btn-info">Siguente</a></li>
+                    <!-- <li class="previous list-inline-item"><a href="#" class="btn btn-info">Atras</a></li> -->
+                    <!-- <li class="next list-inline-item float-right"><a href="#" class="btn btn-info">Siguente</a></li> -->
                 </ul>
             </div>
         </div>
@@ -254,11 +271,46 @@
 </div>
 <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i>Guardar</button> 
 </form>
-
-
-
-
 <script type="text/javascript">
+    //------------------------------------------------------- Evento tipo de cambio -----------------------------------------------------
+    (function(){
+        var switchTipoCambio = document.getElementById("switchTipoCambio");
+        var contenedorTipoUnidadMonetaria = document.getElementById("adicionarUnidadMonetaria");
+        switchTipoCambio.addEventListener('change', function(e){
+            if(e.target.checked){
+                contenedorTipoUnidadMonetaria.classList.remove('esconder')
+                contenedorTipoUnidadMonetaria.classList.add('ver')
+            }else{
+                contenedorTipoUnidadMonetaria.classList.remove('ver')
+                contenedorTipoUnidadMonetaria.classList.add('esconder')
+            }
+        });
+    })();
+    //------------------------------------------------------- ExtraerDatosAlmacen -------------------------------------------------------
+    (function(){
+        var almacenSeleccionado = document.getElementById("seleccion_almacen");
+        console.log(almacenSeleccionado); 
+        almacenSeleccionado.addEventListener('change', function(){
+            var opcion_seleccionada = this.options[almacenSeleccionado.selectedIndex];
+            var imagenNombreId = opcion_seleccionada.value;
+            var separador = "JSIAM.";
+            var datoAlmacen = imagenNombreId.split(separador);
+            document.getElementById("almacenMultiaceroSeleccionado").value=datoAlmacen[0];
+            document.getElementById("contenedorImagenAlmacen").innerHTML = '<img src="assets/almacenes/'+datoAlmacen[2]+'" alt="almacen" class="img-thumbnail avatar-lg"> <h4>'+datoAlmacen[1]+'</h4>';
+        });
+    })();
+    //------------------------------------------------------- ExtraerDatosProveedor -------------------------------------------------------
+    (function(){
+        var proveedorSeleccionado = document.getElementById("proveedorCompra");
+        proveedorSeleccionado.addEventListener('change', function(){
+            var opcion_seleccionada = this.options[proveedorSeleccionado.selectedIndex];
+            var idImagenNombre = opcion_seleccionada.value;
+            var separador = "sjim._";
+            var datoProveedor = idImagenNombre.split(separador);
+            document.getElementById("idContactoProveedor").value=datoProveedor[0];
+            document.getElementById("contenedorImagenProveedor").innerHTML = '<img src="assets/logos/'+datoProveedor[1]+'" alt="logo" class="img-thumbnail avatar-lg"> <h4>'+datoProveedor[2]+'</h4>';
+        });
+    })();
     const datoProducto={};
     var room = 1;
     function agregar_producto_comprado() {
@@ -269,14 +321,21 @@
         var IdProducto      =  datoProducto[0];console.log(IdProducto);
         var ImagenProducto  =  datoProducto[1];console.log(ImagenProducto);
         room++;
-        
         //------------------------------------------------ Finaliza datos extraccion producto ------------------------------------------------
         var objTo = document.getElementById('resgistro_producto_comprado')
         var divtest = document.createElement("div");
         divtest.setAttribute("class", "form-group removeclass" + room);
         var rdiv = 'removeclass' + room;
-        divtest.innerHTML = '<div class="producto-comprado"><div class="producto-comprado-opciones"><label class="producto-comprado-nombre">'+ NombreProducto +'</label><input type="button" class="btn btn-danger eliminar_productoC" onclick="eliminar_producto_comprado('+ room +')" value="X"></div><div class="row"><div class="form-group col-md-3 producto-comprado-imagen"><label for="archivo_seleccionado">Imagen de producto</label><div class="img_compra_producto"><img src="../storage/imagenes/'+ImagenProducto+'" alt="shreyu" class="img-thumbnail avatar-lg"></div></div><div class="form-group col-md-9 producto-comprado-cuerpo"><input type="hidden" value="'+ IdProducto +'" name="id_producto[]"><div class="form-row"><div class="form-group col-md-4"><label for="cantidad">Cantidad</label><input type="number" id="cantidad" class="form-control" name="cantidad[]"/></div><div class="form-group col-md-4"><label for="fechaFabricacion">Fecha de Fabricación</label><input type="date" id="fechaFabricacion" class="form-control" name="fechaFabricacion[]"/></div><div class="form-group col-md-4"><label for="fechaCaducidad">Fecha de caducidad</label><input type="date" id="fechaCaducidad" class="form-control" name="fechaCaducidad[]"/></div></div><div class="form-row"><div class="form-group col-md-4"><label for="lote">Lote</label><input type="number" id="lote" class="form-control" name="lote[]"></div><div class="form-group col-md-4"><label for="costo">Costo</label><div class="form-row"><div class="form-group col-md-6"><input type="number" id="costo" class="form-control" name="costo[]"></div><div class="form-group col-md-6"><select class="form-control" data-toggle="select3" data-select3-id="1" tabindex="-1" aria-hidden="true" name="costo_unidad_moneda[]"><option data-select3-id="4">Seleccione</option><option value="Bolivianos" data-select3-id="15">Bolivianos</option><option value="Dolares" data-select3-id="16">Dolares</option></select></div></div></div><div class="form-group col-md-4"><label for="descuento">Descuento</label><div class="form-row"><div class="form-group col-md-6"><input type="number" class="form-control" id="descuento" name="descuento[]"/></div><div class="form-group col-md-6"><select class="form-control" data-toggle="select3" data-select3-id="1" tabindex="-1" aria-hidden="true" name="descuento_unidad_moneda[]"><option data-select3-id="4">Seleccione</option><option value="Bolivianos" data-select3-id="15">Bolivianos</option><option value="Dolares" data-select3-id="16">Dolares</option></select></div></div></div><div class="form-row col-12"><label for="identificador">Identificador de producto</label><textarea class="form-control" id="identificador" name="identificador[]" rows="3"></textarea></div></div></div></div></div>';
+        divtest.innerHTML = '<div class="row col-12 producto-comprado separador-compra-producto"><div class="row col-12"><div class="form-group col-md-3 contenedor-imagen-compra"><div class="img_compra_producto"><img src="../storage/imagenes/'+ImagenProducto+'" alt="shreyu" id="imagen-producto-compra"></div></div><div class="form-group col-md-9"><input type="hidden" value="'+ IdProducto +'" name="id_producto[]"><div class="form-row quitar-producto"><label for="archivo_seleccionado">Producto: <snpa class="nombre-producto-comprado">'+ NombreProducto +'</span></label><button type="button" class="btn btn-danger" onclick="eliminar_producto_comprado('+ room +')">Quitar producto <i class="mdi mdi-window-close"></i> </button></div><br><div class="form-row"><div class="form-group col-md-4"><label for="cantidad">Cantidad</label><input type="number" id="cantidad" class="form-control" placeholder="Ingrese cantidad" name="cantidad[]"/></div><div class="form-group col-md-4"><label for="fechaFabricacion">Fecha de Fabricación</label><input type="date" id="fechaFabricacion" class="form-control" name="fechaFabricacion[]"/></div><div class="form-group col-md-4"><label for="costo">Precio unitario</label><div class="form-row"><div class="form-group col-md-7"><input type="number" id="costo" class="form-control" placeholder="Ingrese costo unitario" name="costo[]"></div><p id="monedaCompraProducto">Bs.</p></div></div></div></div></div><div class="col-lg-12"><div class="accordion custom-accordion" id="custom-accordion-one"><div class="card mb-0 acordion-contenido"><div class="card-header" id="headingFour"><h5 class="m-0"><a class="custom-accordion-title d-block py-1" data-toggle="collapse" href="#acordion'+ room +'" aria-expanded="false" aria-controls="'+ room +'">Adicionar detalle de producto<i class="dripicons-align-center text-success separa-acordion"></i></a></h5></div><div id="acordion'+ room +'" class="acordion-contenido-dentro collapse" aria-labelledby="headingFour" data-parent="#custom-accordion-one"><div class="form-row"><div class="form-group col-md-4"><label for="lote">Lote</label><input type="number" id="lote" class="form-control" placeholder="Ingrese lote de productos" name="lote[]"></div><div class="form-group col-md-4"><label for="color">Color</label><input type="number" id="color" class="form-control" placeholder="Ingrese lote de productos" name="color[]"></div><div class="form-group col-md-4"><label for="descuento">Descuento</label><div class="form-row"><div class="form-group col-md-9"><input type="number" class="form-control" id="descuento" placeholder="Ingrese descuento" name="descuento[]"/></div><div class="form-group col-md-3"><p id="monedaCompraProducto">Bs.</p></div></div></div></div><div class="form-row"><div class="form-group col-md-4"><label for="fechaCaducidad">Fecha de caducidad</label><input type="date" id="fechaCaducidad" class="form-control" name="fechaCaducidad[]"/></div><div class="form-group col-md-4"><label for="utilizacion">Utilización</label><input type="text" id="utilizacion" class="form-control" placeholder="modo_utilizacion" name="utilizacion[]"/></div><div class="form-group col-md-4"><label for="descuento">Accesorios</label><br><button type="button" class="btn btn-outline-success btn-rounded" onclick="accesoriosProducto('+room+')"><i class="uil-cloud-computing"></i>Agregar</button></div></div><div class="form-row col-12"><label for="identificador">Accesorios de producto</label><a href="#" class="right-bar-toggle float-right eliminar-accesorios-producto"><i class="dripicons-cross noti-icon"></i></a><textarea class="form-control esconder" id="accesorios'+room+'" name="identificador[]" rows="3"></textarea></div></div></div></div></div> </div>';
+
         objTo.appendChild(divtest);
+        // document.getElementById("tablaprueba").insertRow(-1).innerHTML = '<td></td><td></td><td></td><td></td>';
+    }
+    function accesoriosProducto(id){
+        var nombre="accesorios"+id
+        console.log(nombre);
+        // document.getElementById(nombre).classList.remove('esconder');
+        document.getElementById(nombre).classList.add('ver');
     }
     function eliminar_producto_comprado(rid) {
         $('.removeclass' + rid).remove();
@@ -286,8 +345,8 @@
             var proveedorSeleccionando = $(this).val();
             console.log(proveedorSeleccionando);
             $.get('datos_proveedor/'+proveedorSeleccionando, function(data){
-             console.log(data);
-            })
+               console.log(data);
+           })
         })
     })
 </script>
