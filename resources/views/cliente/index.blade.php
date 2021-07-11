@@ -19,8 +19,8 @@
 
   <div class="row">  
     <div class="col-sm-4">
-      <a href="{{route('clientes.create')}}" class="btn btn-danger mb-2">
-        <i class="mdi mdi-plus-circle mr-2"></i> Agregar Cliente</a>
+      <a href="{{route('clientes.create')}}" class="btn btn-success mb-2">
+        <i class="mdi mdi-plus-circle mr-2"></i> Agregar Cliente </a>
     </div>
     <div class="col-12">
       <div class="card">

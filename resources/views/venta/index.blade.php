@@ -3,7 +3,6 @@
 @section('descripcion_pagina', 'Formulario Ventas')
 
 @section('content')
-
   {{-- <link href="{{asset('assets/css/vendor/dataTables.bootstrap4.css')}}" rel="stylesheet" type="text/css" /> --}}
   <link href="{{asset('assets/css/vendor/responsive.bootstrap4.css')}}" rel="stylesheet" type="text/css" />
   <link href="{{asset('assets/css/vendor/buttons.bootstrap4.css')}}" rel="stylesheet" type="text/css" />
@@ -19,11 +18,11 @@
     </div>
   </div>
   <!-- end page title -->
-
   <div class="row">  
     <div class="col-sm-4">
-      <a href="{{route('ventas.create')}}" class="btn btn-danger mb-2">
-        <i class="mdi mdi-cash-usd mr-2"></i> NUEVA FACTURA </a>
+      <a href="{{route('ventas.create')}}" class="btn btn-success mb-2">
+        <i class="mdi mdi-plus-circle mr-2"></i> Nueva Factura 
+      </a>
     </div>
     <div class="col-12">
       <div class="card">
