@@ -179,7 +179,7 @@
                                     <a href="{{url('/registro_sucursal')}}">Sucursal</a>
                                 </li>
                                 <li>
-                                    <a href="{{url('/registro_almacen')}}">Almacen</a>
+                                    <a href="{{url('/registro_almacen')}}">Almacén</a>
                                 </li>
                                 <li>
                                     <a href="{{route('auths.list')}}">Personal</a>
@@ -276,9 +276,9 @@
                                     <span class="menu-arrow"></span>
                                 </a>
                                 <ul class="side-nav-third-level" aria-expanded="false">
-                                    <li>
+                                    <!-- <li>
                                         <a href="{{url('/registro_almacenproducto')}}">Registrar</a>
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <a href="{{url('/listar_almacenproducto')}}">Listar</a>
                                     </li>

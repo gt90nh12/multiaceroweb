@@ -24,7 +24,12 @@ class CompraController extends Controller
      */
     public function index()
     {   
-        $compras = Compra::all();
+        $compras = DB::table('compras')
+        ->join('transacciones_movimiento_inventarios', 'transacciones_movimiento_inventarios.id_compras', '=', 'compras.id')
+        ->join('almacenes', 'almacenes.id', '=', 'transacciones_movimiento_inventarios.id_almacen')
+
+        ->select('almacenes.nombre as nombre_almacen','compras.id', 'compras.fecha_recepion_producto', 'compras.costo_total_compra', 'compras.recepion_producto', 'compras.documentacion')
+        ->get();
         return view('compra.listar')->with(compact('compras'));
     }
 
@@ -56,26 +61,22 @@ class CompraController extends Controller
         $rules = [
          'proveedor'=>'required',
          'descripcion_compra'=>'required',
-         'fecha_orden'=>'required',
          'metodo_entrega'=>'required',
          'costo_total_compra'=>'required|between:0,99.99',
-         'unidad_monetaria'=>'required',
          'seleccion_almacen'=>'required',
-         'direccion_entrega'=>'required',
-         'costo_transporte'=>'required',
-         'estado'=>'required',
+         // 'direccion_entrega'=>'required',
+         'fecha_recepion_producto'=>'required',
+         // 'costo_transporte'=>'required',
      ];
      $messages = [
          'proveedor.required' => 'Debe seleccionar el proveedor.',
          'descripcion_compra.required' => 'Debe ingresar la descripción de compra del producto.',
-         'fecha_orden.required' => 'Debe ingresar la fecha de entrega de producto por parte del proveedor.',
          'metodo_entrega.required' => 'Debe selccionar el metodo de entrega del producto.',
          'costo_total_compra.required' => 'Debe ingresar el costo total del producto.',
-         'unidad_monetaria.required' => 'Seleccione la unidad monetario del costo total de la compra.',
          'seleccion_.required' => 'Seleccione el alamacen que realiza la compra.',
-         'direccion_entrega'=>'La dirección de entrega es necesario',
-         'costo_transporte'=>'Debe ingresar el consto de transporte.',
-         'estado'=>'Debe seleccionar el estado de la compra de producto.',
+         // 'direccion_entrega'=>'La dirección de entrega es necesario',
+         'fecha_recepion_producto.required' => 'Debe ingresar la fecha de recepción de producto.',
+         // 'costo_transporte'=>'Debe ingresar el consto de transporte.',
      ];
      $validator = Validator::make($request->all(), $rules, $messages);
     if($validator->fails()):
@@ -103,17 +104,27 @@ class CompraController extends Controller
             $nombreArchivo = ($_FILES['documentacion']['name']);
         }
         /*-------------------------------------------------------------------------------*/
+        /*------------------------------- Unidad de medida  -----------------------------*/
+        if(e($request->input('switchTipoCambio'))){
+            $unidadMonetariaCostoCompra = e($request->input('unidad_monetaria_costo_compra'));
+            $tipoCambioCostoCompra = e($request->input('tipo_cambio_costo_compra'));
+        }else{
+            $unidadMonetariaCostoCompra = "Bs.";
+            $tipoCambioCostoCompra = 0;
+        }
+        /*-------------------------------------------------------------------------------*/
+
         $compra = new Compra;
         $compra->usuario=$usuario;
         $compra->descripcion_compra=e($request->input('descripcion_compra'));
-        $compra->fecha_orden=e($request->input('fecha_orden'));;
-        $compra->metodo_entrega=e($request->input('metodo_entrega'));;
+        $compra->metodo_entrega=e($request->input('metodo_entrega'));
         $compra->costo_total_compra=e($request->input('costo_total_compra'));
-        $compra->unidad_monetaria=e($request->input('unidad_monetaria'));
+        $compra->unidad_monetaria_costo_compra=$unidadMonetariaCostoCompra;
+        $compra->tipo_cambio_costo_compra = $tipoCambioCostoCompra;
         $compra->direccion_entrega=e($request->input('direccion_entrega'));
         $compra->costo_transporte=e($request->input('costo_transporte'));
-        $compra->fecha_esperada_recepion=e($request->input('fecha_esperada_recepion'));
-        $compra->conformidad=e($request->input('conformidad'));
+        $compra->fecha_recepion_producto=e($request->input('fecha_recepion_producto'));
+        $compra->recepion_producto=e($request->input('recepion_producto'));
         $compra->documentacion=$nombreArchivo;
         $compra->created_at=Carbon::now();
         $compra->updated_at=Carbon::now();
@@ -124,7 +135,7 @@ class CompraController extends Controller
             /*---------------------------------------------------------------------------------*/
             $transaccionMI = new transacciones_movimiento_inventarios;
             $transaccionMI->id_usuario=$usuario;
-            $transaccionMI->fecha_transaccion=e($request->input('fecha_orden'));
+            $transaccionMI->fecha_transaccion=e($request->input('fecha_recepion_producto'));
             $transaccionMI->observaciones=e($request->input('observaciones'));
             $transaccionMI->tipo_transaccion="compras";
             $transaccionMI->id_compras=$numeroRegistroTablaCompras;
@@ -161,6 +172,7 @@ class CompraController extends Controller
                     $i++;
                 }  
             endif;
+            return redirect()->route('listar_compra');
         endif;
     endif;
 }
@@ -215,8 +227,7 @@ class CompraController extends Controller
         ->where('id_productos',$id_productos)
         ->where('id_almacenes',$id_almacenes)
         ->select('id','cantidad_producto')
-        ->get();
-        // print_r($dato_almacen_producto);
+        ->get();{}
         if(empty($dato_almacen_producto[0])){
             echo "Registro nuevo en almacenpoductos";
             /*------ Numero de la tabla transaccion movimiento de inventarios------*/
@@ -249,7 +260,6 @@ class CompraController extends Controller
             $almacenProducto = AlmacenProducto::find($id_almacen_productos);
             $almacenProducto->cantidad_producto = $cantidadActual;
             $almacenProducto->updated_at = Carbon::now();
-            $almacenProducto->save();
             if($almacenProducto->save()){
                 return true;
             }else{

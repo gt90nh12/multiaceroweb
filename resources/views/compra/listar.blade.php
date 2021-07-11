@@ -13,6 +13,9 @@
   </div>
 </div>
 <div class="row">  
+  <div class="col-sm-4">
+    <a href="{{url('/registro_compra')}}" class="btn btn-success mb-2"><i class="mdi mdi-plus-circle mr-2"></i> Agregar compra</a>
+  </div>
   <div class="col-12">
     <div class="card">
       <div class="card-body">
@@ -22,9 +25,10 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Descripción</th>
-                  <th>Fecha recepión</th>
-                  <th>Conformidad</th>
+                  <th>Almacén</th>
+                  <th>Fecha recepción</th>
+                  <th>Costo total</th>
+                  <th>Entrega de producto</th>
                   <th>Documentación</th>
                   <th >Action</th>
                 </tr>
@@ -34,14 +38,14 @@
                 @foreach($compras as $item)
                 <tr>
                   <td>{{$item->id}}</td>
-                  <td>{{$item->descripcion_compra}}</td>
-                  <td>{{$item->fecha_esperada_recepion}}</td>
-                  <td>{{$item->conformidad}}</td>
+                  <td>{{$item->nombre_almacen}}</td>
+                  <td>{{$item->fecha_recepion_producto}}</td>
+                  <td>{{$item->costo_total_compra}}</td>
+                  <td>{{$item->recepion_producto}}</td>
                   <td>{{$item->documentacion}}</td>
                   <td class="table-action">
-                    <input type="radio" name="verproducto" id="myModal">
                     <a href="#" class="action-icon"> <i class="mdi mdi-eye"></i></a>
-                    <a href="#" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
+                    <!-- <a href="#" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a> -->
                   </td>
                 </tr>
                 @endforeach
