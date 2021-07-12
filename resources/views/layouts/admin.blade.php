@@ -19,7 +19,7 @@
         <!-- App js -->
         <script src="{{asset('assets/js/jquery/jquery.min.js')}}"></script>
     </head>
-    <body class="loading" data-layout="detached" data-layout-config='{"leftSidebarCondensed":false,"darkMode":true, "showRightSidebarOnStart": true}'>
+    <body class="loading" data-layout="detached" data-layout-config='{"leftSidebarCondensed":false,"darkMode":false, "showRightSidebarOnStart": true}'>
         <!-- Topbar Start -->
         <div class="navbar-custom topnav-navbar topnav-navbar-dark">
             <div class="container-fluid">
