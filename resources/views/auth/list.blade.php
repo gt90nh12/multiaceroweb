@@ -1,4 +1,4 @@
-@extends('layouts\admin')
+@extends(mb_strtolower('layouts/'.explode(' ',DB::table('empleados')->where('id',Auth::user()->id)->first()->cargo==='Administrador'?'Admin':DB::table('empleados')->where('id',Auth::user()->id)->first()->cargo)[0],'UTF-8'))
 @section('titulo_pagina', 'Clientes')
 @section('descripcion_pagina', 'Formulario Ventas')
 @section('content')

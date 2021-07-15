@@ -1,4 +1,4 @@
-@extends('layouts\admin')
+@extends(mb_strtolower('layouts/'.explode(' ',DB::table('empleados')->where('id',Auth::user()->id)->first()->cargo==='Administrador'?'Admin':DB::table('empleados')->where('id',Auth::user()->id)->first()->cargo)[0],'UTF-8'))
 @section('titulo_pagina', 'Clientes')
 @section('descripcion_pagina', 'Formulario Ventas')
 
@@ -214,7 +214,7 @@
                   <option value="{{$em[0]->cargo==='Administrador'?$em[0]->cargo:''}}" {{$em[0]->cargo==='Administrador'?'selected':''}}>{{$em[0]->cargo==='Administrador'?$em[0]->cargo:''}}</option>
                   <option value="Cajero" {{$em[0]->cargo==='Cajero'?'selected':''}} {{$em[0]->cargo==='Administrador'?'disabled':''}}>Cajero</option>
                   <option value="Almacenero" {{$em[0]->cargo==='Almacenero'?'selected':''}} {{$em[0]->cargo==='Administrador'?'disabled':''}}>Almacenero</option>
-                  <option value="Chofer" {{$em[0]->cargo==='Cajero'?'Chofer':''}} {{$em[0]->cargo==='Administrador'?'disabled':''}}>Chofer</option>
+                  <option value="Chofer" {{$em[0]->cargo==='Chofer'?'selected':''}} {{$em[0]->cargo==='Administrador'?'disabled':''}}>Chofer</option>
                   <option value="Ejecutivo de ventas" {{$em[0]->cargo==='Ejecutivo de ventas'?'selected':''}} {{$em[0]->cargo==='Administrador'?'disabled':''}}>Ejecutivo de ventas</option>
                 </select>
                 @error('cargo')

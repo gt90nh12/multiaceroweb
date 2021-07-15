@@ -25,7 +25,11 @@ Route::post('/modificar_datos_usuario', 'ConnectController@modificarDatosUsuario
 Route::get('/estado_datos_usuario{id}', 'ConnectController@estadoDatosUsuarios')->name('estado_datos_usuario');
 Route::post('/registro_administrador', 'ConnectController@registroAdministrador')->name('registro_administrador');
 
-//plantila administrador
+//Perosonal
+Route::get('/cajero', function(){return view('layouts.cajero');})->name('cargo.cajeros');
+Route::get('/almacenero', function(){return view('layouts.almacenero');})->name('cargo.almaceneros');
+Route::get('/chofer', function(){return view('layouts.chofer');})->name('cargo.choferes');
+Route::get('/ejecutivo_de_venta', function(){return view('layouts.ejecutivo');})->name('cargo.ejecutivo_de_ventas');
 
 //Router persona
 Route::get('/registro_login', 'PersonaController@registro')->name('registro_login'); // registro de persona desde el LOGIN

@@ -28,13 +28,29 @@ class AuthController extends Controller
 
   public function login(Request $request)
   { 
+    //  return $request;
     $credentials=$request->validate([
       'user'=>['required','string'],
       'password'=>['required','string']
     ]);
     if(!empty(User::where('user',$request->user)->where('status',1)->first())&&Auth::attempt($credentials)){
       request()->session()->regenerate();
-      return redirect()->intended(route('admin'));
+      $cargo=DB::table('empleados')->join('users','users.id','empleados.id_users')->where('empleados.id_users',User::where('user',$request->user)->first()->id)->first()->cargo;
+      if($cargo==='Cajero'){
+        return redirect()->intended(route('cargo.cajeros'));
+      }
+      if($cargo==='Almacenero'){
+        return redirect()->intended(route('cargo.almaceneros'));
+      }
+      if($cargo==='Chofer'){
+        return redirect()->intended(route('cargo.choferes'));
+      }
+      if($cargo==='Ejecutivo de ventas'){
+        return redirect()->intended(route('cargo.ejecutivo_de_ventas'));
+      }
+      if($cargo==='Administrador'){
+        return redirect()->intended(route('admin'));
+      }
     }
     throw ValidationException::withMessages([
       'user' => 'Estas credenciales no coiciden con nuestros registros o tiene algun pendiente administrativo, pase a Sistemas por favor.'
@@ -75,7 +91,7 @@ class AuthController extends Controller
       'fecha_inicio_actividad'=>['date','required'],
       'fecha_fin_actividad'=>['date','required'],
       'experiencia_meses'=>['required','numeric'],
-      'genero'=>'required',
+      'genero'=>'required'
     ]);
     $per->nombre=$request->nombre;
     $per->apellido_paterno=$request->apellido_paterno;
@@ -149,7 +165,7 @@ class AuthController extends Controller
       'fecha_inicio_actividad'=>['date','required'],
       'fecha_fin_actividad'=>['date','required'],
       'experiencia_meses'=>['required','numeric'],
-      'genero'=>'required',
+      'genero'=>'required'
     ]);
     $emp=Empleado::find($id);
     $emp->cargo=$request->cargo;
