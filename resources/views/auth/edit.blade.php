@@ -242,9 +242,9 @@
                   <select class="form-control" name="almacen">
                   <option value="{{$em[0]->cargo==='Administrador'?0:''}}" {{$em[0]->cargo==='Administsrador'?'selected':''}}>{{$em[0]->cargo==='Administrador'?'Todos':''}}</option>
                   @foreach ($su as $i)
-                    <optgroup label="Sucursal {{$i->numero_sucursal}}">
+                    <optgroup label="{{$i->nombre_sucursal}}">
                       @foreach ($al as $j)
-                        @if($j->empresa_id==$i->id)
+                        @if($j->id_sucursal==$i->id)
                           <option value="{{$j->id}}" {{$j->id===$em[0]->id_almacenes?'selected':''}} {{$em[0]->cargo==='Administrador'?'disabled':''}}>{{$j->nombre}}</option>
                         @endif
                       @endforeach

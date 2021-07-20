@@ -1,5 +1,6 @@
 const $rowInvoice=document.getElementById('invoice');
 const unoRoute=document.getElementById('unoRoute').value;
+const empresa=document.getElementById('empresa').value;
 const sucursal=document.getElementById('sucursal').value;
 const fa=document.getElementById('fa').value;
 t=new Date();
@@ -7,6 +8,7 @@ const renderInvoice=()=>{
   if(venta.length!==0&&Object.entries(cliente).length!==0){
     let templateTr="", empty1="";
     let inputProducto="", empty2="";c=0;
+    em=JSON.parse(empresa);
     venta.forEach(el=>{
       templateTr=`
       <tr>
@@ -38,8 +40,8 @@ const renderInvoice=()=>{
               <div class="col-sm-6">
                 <div class="float-left mt-3">
                   <img src="${assetGeneral}assets/images/logo-light.png" alt="" height="22px">
-                  <h4>${suc.nombre_empresa}</h4>
-                  <h5>Sucursal ${suc.numero_sucursal}</h5>
+                  <h4>${em.nombre_empresa}</h4>
+                  <h5>Sucursal ${suc.nombre_sucursal}</h5>
                   <address>
                     ${suc.pais} - ${suc.estado_departamento}<br>
                     ${suc.ciudad}<br>
@@ -51,7 +53,7 @@ const renderInvoice=()=>{
               </div><!-- end col -->
               <div class="col-sm-4 offset-sm-2">
                 <div class="mt-3 float-sm-right">
-                  <p class="font-12"><strong>NIT:</strong><span class="float-right">${suc.nit}</span></p>
+                  <p class="font-12"><strong>NIT:</strong><span class="float-right">${em.nit}</span></p>
                   <p class="font-12"><strong>N° FACTURA:</strong><span class="float-right">${fa}</span></p>
                   <p class="font-12"><strong>N° AUTORIZACION:</strong><span class="float-right">${suc.numero_autorizacion}</span></p>
                   <p class="font-18"><strong>ORIGINAL</strong></p>
@@ -203,11 +205,9 @@ unoCode=(url, options={})=>{
   });
 };
 imprimir=()=>{
-  console.log("start");
   mywindow = window.open('', 'Nueva_factura', 'height=600px,width=800px');
   mywindow.document.write('<html>');
   mywindow.document.write('<head>');
-  mywindow.document.write('<title>Factura</title>');
   mywindow.document.write(`<link href="${assetGeneral}assets/css/app-modern.min.css" rel="stylesheet" type="text/css" id="light-style" />`);
   mywindow.document.write('</head>');
   mywindow.document.write('<body>');

@@ -233,9 +233,9 @@
               <select class="form-control" name="almacen">
                 <option></option>
                 @foreach ($su as $i)
-                  <optgroup label="Sucursal {{$i->numero_sucursal}}">
+                  <optgroup label="{{$i->nombre_sucursal}}">
                     @foreach ($al as $j)
-                      @if($j->empresa_id==$i->id)
+                      @if($j->id_sucursal==$i->id)
                         <option value="{{$j->id}}">{{$j->nombre}}</option>
                       @endif
                     @endforeach
@@ -396,10 +396,9 @@
             </div>
           @enderror
         </div>
-        <button class="btn btn-primary" type="submit">Agregar Cliente</button>
-        <a href="{{route('auths.list')}}" class="btn btn-danger">
-          Cancelar
-        </a>
+        <a href="{{route('auths.list')}}" class="btn btn-danger">Cancelar</a>
+        <button class="btn btn-primary" type="submit">Agregar Nuevo Empleado</button>
+        
       </form>
     </div> <!-- end preview-->
   </div> <!-- end tab-content-->

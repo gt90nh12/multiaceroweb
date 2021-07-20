@@ -398,6 +398,7 @@
   <input type="hidden" id="rutaMiniClienteIndex" value="{{route('miniCliente.index')}}">
   <input type="hidden" id="rutaMiniClienteStore" value="{{route('miniCliente.store')}}">
   <input type="hidden" id="assetGeneral" value="{{asset('')}}">
+  <input type="hidden" id="empresa" value="{{$empresa}}">
   <input type="hidden" id="unoRoute" value="{{route('ventas.uno')}}">
   <input type="hidden" id="sucursal" value="{{$sucursal}}">
   <input type="hidden" id="ventasStore" value="{{route('ventas.store')}}">

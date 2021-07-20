@@ -8,12 +8,11 @@ use App\Cliente;
 use App\detalle_movimiento_inventario;
 use App\Factura;
 use App\Producto;
+use App\Empresa;
 use App\transacciones_movimiento_inventarios;
 use App\Venta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
-use function PHPUnit\Framework\returnSelf;
 
 class VentaController extends Controller
 {
@@ -30,30 +29,12 @@ class VentaController extends Controller
     $clientes_total=new Cliente();
     $caracteristicas=new Caracteristica();
     $fa=Factura::all()->last();
-    $sucursal=DB::table('sucursales')->select(
-    'sucursales.id',
-    'sucursales.numero_sucursal',
-    'sucursales.numero_autorizacion',
-    'sucursales.pais',
-    'sucursales.estado_departamento',
-    'sucursales.ciudad',
-    'sucursales.direccion',
-    'sucursales.telefono',
-    'sucursales.correo',
-    'empresas.nombre_empresa',
-    'empresas.actividad',
-    'empresas.nit',
-    'empresas.archivo_seleccionado',
-    )
-    ->Join('empresas', 
-    'empresas.id', 
-    '=', 
-    'sucursales.cod_empresa')
-    ->get();
+    $sucursal=DB::table('sucursales')->get();
     $todosLosProductos=Producto::all();
     $clientes_total=Cliente::all();
     $caracteristicas=Caracteristica::all();
-    return view('venta.create',compact('todosLosProductos','clientes_total','caracteristicas','sucursal','fa'));
+    $empresa=Empresa::find(1);
+    return view('venta.create',compact('todosLosProductos','clientes_total','caracteristicas','sucursal','fa','empresa'));
   }
 
   public function store(Request $request){
