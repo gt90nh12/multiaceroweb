@@ -17,8 +17,6 @@ class CreateAlmacenesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('usuario');
             $table->text('nombre');
-            $table->text('empresa_id');
-            $table->text('tipo_almacen');
             $table->text('descripcion');
             $table->text('imagen');
             $table->text('direccion');
@@ -29,6 +27,7 @@ class CreateAlmacenesTable extends Migration
             $table->time('horario_cerrado_t');
             $table->timestamps();
             $table->boolean('estado');
+            $table->integer('id_sucursal');
         });
     }
 

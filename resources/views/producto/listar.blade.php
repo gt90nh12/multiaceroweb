@@ -34,7 +34,7 @@
             <tbody>
               @foreach($productos as $item)
               <tr>
-                <td><img src="http://localhost/multiacero/storage/imagenes/{{ $item->imagen }}" alt="imagen producto" title="contact-img" class="rounded mr-1" height="48" /></td>
+                <td><img src="http://localhost/multiacero/public/assets/productos/{{ $item->imagen }}" alt="imagen producto" title="contact-img" class="rounded mr-1" height="48" /></td>
                 <td>{{$item->nombre}}</td>
                 <td>{{$item->procedencia_producto}}</td>
                 <td>{{$item->marca_producto}}</td>

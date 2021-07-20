@@ -20,6 +20,7 @@ class CreateDetalleMovimientoInventariosTable extends Migration
             $table->double('descuento')->nullable();
             $table->text('identificador_producto')->nullable();
             $table->bigInteger('id_producto');
+            $table->json('caracteristicas_producto')->nullable();
             $table->bigInteger('id_transacciones_movimiento_inventarios');
             $table->timestamps();
         });
