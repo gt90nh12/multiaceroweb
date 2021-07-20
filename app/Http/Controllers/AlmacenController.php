@@ -49,8 +49,6 @@ class AlmacenController extends Controller
         $usuario=1;
         $rules = [
             'nombre'=>'required',
-            'empresa_id'=>'required',
-            'tipo_almacen'=>'required',
             'descripcion'=>'required',
             'archivo_seleccionado'=>'required',
             'direccion'=>'required',
@@ -59,35 +57,36 @@ class AlmacenController extends Controller
             'horario_cerrado_m'=>'required',
             'horario_abierto_t'=>'required',
             'horario_cerrado_t'=>'required',
+            'id_sucursal'=>'required',
         ];
         $messages = [
-            'nombre.required' => 'Debe ingresar el nombre del almacen.',
-            'empresa_id.required' => 'Debe seleccionar la empresa a la que pertenece el almacen.',
-            'tipo_almacen.required' => 'Debe ingresar el tipo de almacen.',
-            'descripcion.required' => 'la descripción del del almacen es requerida.',
-            'archivo_seleccionado.required' => 'Debe ingresar la imagen del almacen.',
-            'direccion.required' => 'Debe ingresar la direccion de almacen.',
-            'telefono.required' => 'Debe ingresar el número de telefono de almacen.',
+            'nombre.required' => 'Debe ingresar el nombre del almacén.',
+            'descripcion.required' => 'la descripción del del almacén es requerida.',
+            'archivo_seleccionado.required' => 'Debe ingresar la imagen del almacén.',
+            'direccion.required' => 'Debe ingresar la dirección de almacén.',
+            'telefono.required' => 'Debe ingresar el número de telefono de almacén.',
             'horario_abierto_m.required' => 'Debe ingresar el horario de atención de inicio por la mañana.',
             'horario_cerrado_m.required' => 'Debe ingresar el horario de atención de finalización por la mañana.',
             'horario_abierto_t.required' => 'Debe ingresar el horario de atención de inicio por la tarde.',
             'horario_cerrado_t.required' => 'Debe ingresar el horario de atención de finalización por la tarde.',
+            'id_sucursal.required' => 'Debe seleccionar la sucursal a la que pertenece el almacén.',
         ];
          $validator = Validator::make($request->all(), $rules, $messages);
         if($validator->fails()):
             return back()->withErrors($validator)->with('message','Se ha producido un error de validacion')->with('typealert', 'danger');
             else:
                 /*------------------------- Almacenar imagen  -------------------------*/
-                $formato = array('.png', '.jpeg','.PNG','.JPEG','.JPG');
+                $formato = array('.png', '.jpeg','jpg','.PNG','.JPEG','.JPG');
                 $imagen = ($_FILES['archivo_seleccionado']['name']);
                 $extencion = substr($imagen, strrpos($imagen, '.'));
                 if(!in_array($extencion, $formato)) {
                     $data['documento_general']='El tipo de archivo no esta permitido.';
                     echo("El tipo de archivo no esta permitido");
                 }else {
-                    $ruta="assets/imagenes/".$_FILES['archivo_seleccionado']['name'];
+                    $ruta="assets/almacenes/".$_FILES['archivo_seleccionado']['name'];
                     $nombreArchivo = $_FILES['archivo_seleccionado']['name'];
                     move_uploaded_file($_FILES['archivo_seleccionado']['tmp_name'], $ruta);
+                    echo "Se almaceno la imagen";
                 }
                 if (e($request->input("archivo_seleccionado")) === ""){
                     $Nombreimagen = ($_FILES['archivo_seleccionado']['name']);
@@ -96,8 +95,6 @@ class AlmacenController extends Controller
                 $almacen = new almacene;
                     $almacen->usuario=$usuario;
                     $almacen->nombre=e($request->input('nombre'));
-                    $almacen->empresa_id=e($request->input('empresa_id'));;
-                    $almacen->tipo_almacen=e($request->input('tipo_almacen'));;
                     $almacen->descripcion=e($request->input('descripcion'));
                     $almacen->imagen=$Nombreimagen;
                     $almacen->direccion=e($request->input('direccion'));
@@ -107,8 +104,9 @@ class AlmacenController extends Controller
                     $almacen->horario_abierto_t=e($request->input('horario_abierto_t'));
                     $almacen->horario_cerrado_t=e($request->input('horario_cerrado_t'));
                     $almacen->created_at=Carbon::now();
-                    $almacen->updated_at=Carbon::now();
+                    // $almacen->updated_at=Carbon::now();
                     $almacen->estado=false;
+                    $almacen->id_sucursal=e($request->input('id_sucursal'));;
                 if($almacen->save()):
                    return back()->withErrors($validator)->with('message','Almacen registrado')->with('typealert', 'success');
                 endif;

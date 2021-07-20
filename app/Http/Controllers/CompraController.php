@@ -155,15 +155,31 @@ class CompraController extends Controller
                 $fechaFabricacion = $request->input('fechaFabricacion');
                 $fechaCaducidad = $request->input('fechaCaducidad');
                 $descuento = $request->input('descuento');
+                $color = $request->input('color');
                 $identificador = $request->input('identificador');
+                $caracteristicasProducto = $request->input('caracteristicas');
                 $longitud = count($id_producto);
                 for($i=0; $i<$longitud;){
+                    //------------- Armar caracteristicas de producto -------------\\
+                    $caracteristicas=[];
+                    $armarCaracteristicaProducto=[];
+                    $armarCaracteristicaProducto= array(
+                        "Lote"=>$lote[$i],
+                        "Fecha caducidad"=>$fechaCaducidad[$i],
+                        "color"=>$color[$i],
+                        "Identificador"=>$identificador[$i],
+                        "Caracteristicas"=>$caracteristicasProducto[$i]
+                    );
+                    array_push($caracteristicas, $armarCaracteristicaProducto);
+                    $caracteristicasProductoJson=json_encode($caracteristicas);
+                    //----- finaliza el armado de caracteristicas de producto -----\\
                     $detalleMI = new DetalleMovimientoInventarios;
                     $detalleMI->costo=$costo[$i];
                     $detalleMI->cantidad=$cantidad[$i];
                     $detalleMI->descuento=$descuento[$i];
                     $detalleMI->identificador_producto=$identificador[$i];
                     $detalleMI->id_producto=$id_producto[$i];
+                    $detalleMI->caracteristicas_producto=$caracteristicasProductoJson;
                     $detalleMI->id_transacciones_movimiento_inventarios=$numeroTMI;
                     $detalleMI->created_at=Carbon::now();
                     $detalleMI->updated_at=Carbon::now();

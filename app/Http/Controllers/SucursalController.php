@@ -75,29 +75,29 @@ class SucursalController extends Controller
             return back()->withErrors($validator)->with('message','Se ha producido un error de validacion')->with('typealert', 'danger');
             else:
                 /*------------------------- $sucursalar imagen  -------------------------*/
-                $formato = array('.png', '.jpeg','.PNG','.JPEG','.JPG');
+                $formato = array('.png', '.jpg', '.jpeg','.PNG','.JPEG','.JPG');
                 $imagen = ($_FILES['archivo_seleccionado']['name']);
                 $extencion = substr($imagen, strrpos($imagen, '.'));
                 if(!in_array($extencion, $formato)) {
                     $data['documento_general']='El tipo de archivo no esta permitido.';
                     echo("El tipo de archivo no esta permitido");
                 }else {
-                    $ruta="../storage/imagenes/".$_FILES['archivo_seleccionado']['name'];
+                    $ruta="assets/sucursal/".$_FILES['archivo_seleccionado']['name'];
                     $nombreArchivo = $_FILES['archivo_seleccionado']['name'];
                     move_uploaded_file($_FILES['archivo_seleccionado']['tmp_name'], $ruta);
+                    echo "Se almaceno la imagen";
                 }
                 if (e($request->input("archivo_seleccionado")) === ""){
                     $Nombreimagen = ($_FILES['archivo_seleccionado']['name']);
                 }
                 /*---------------------------------------------------------------------*/
                 /*------------------------- $empresaar imagen  -------------------------*/
-                $numeroRegistroTablaSucursal = empresa::count();
-                $cod_sucursal="emp".$numeroRegistroTablaSucursal;
+                $cod_empresa=1;
+                //El sistema podria soportar varias empresas, pero la variable cod_empresa deberia seleccionarse desde el formulario de sucursal.
+                //nota: Se agrega el numero 1 que hace referencia al registro de la primera empresa. 
                 /*---------------------------------------------------------------------*/
                 $sucursal = new Sucursale;
-                    // $sucursal->cod_sucursal=$cod_sucursal;
                     $sucursal->usuario=$usuario;
-                    $sucursal->id_empresa=e($request->input('id_empresa'));
                     $sucursal->nombre_sucursal=e($request->input('nombre_sucursal'));
                     $sucursal->archivo_seleccionado=$Nombreimagen;
                     $sucursal->descripcion=e($request->input('descripcion'));
@@ -113,6 +113,7 @@ class SucursalController extends Controller
                     $sucursal->created_at=Carbon::now();
                     $sucursal->updated_at=Carbon::now();
                     $sucursal->estado=false;
+                    $sucursal->id_empresa=$cod_empresa;
                 if($sucursal->save()):
                    return back()->withErrors($validator)->with('message','sucursal registrado')->with('typealert', 'success');
                 endif;

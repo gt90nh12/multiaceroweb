@@ -123,7 +123,7 @@ class ProductoController extends Controller
                     $data['documento_general']='El tipo de archivo no esta permitido.';
                     echo("El tipo de archivo no esta permitido");
                 }else {
-                    $ruta="../storage/imagenes/".$_FILES['imagen_producto']['name'];
+                    $ruta="../assets/productos/".$_FILES['imagen_producto']['name'];
                     $nombreArchivo = $_FILES['imagen_producto']['name'];
                     move_uploaded_file($_FILES['imagen_producto']['tmp_name'], $ruta);
                 }

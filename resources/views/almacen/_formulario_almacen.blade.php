@@ -20,30 +20,15 @@
                         </div>
                         <div class="form-group">
                             <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="empresa_id">Seleccione sucursal</label>
-                                    <select id="empresa_id" name="empresa_id" class="form-control" data-toggle="select3" data-select3-id="1" tabindex="-1" aria-hidden="true">
-                                        <option data-select2-id="3">Seleccione sucursal</option>
-                                        @if(!empty($sucursales))
-                                        @foreach($sucursales as $sucursal)
-                                        <option value="{{$sucursal->id}}">{{$sucursal->nombre_sucursal}}<spam> (Sucursal - {{$sucursal->codigo_punto_venta}}) </spam></option>
-                                        @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="tipo_almacen">Tipo almacén</label>
-                                    <div class="mt-2">
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="deposito" name="tipo_almacen" class="custom-control-input" value="deposito">
-                                            <label class="custom-control-label" for="deposito">Depósito</label>
-                                        </div>
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="almacen" name="tipo_almacen" class="custom-control-input" value="almacen">
-                                            <label class="custom-control-label" for="almacen">Almacén</label>
-                                        </div>
-                                    </div>
-                                </div>
+                                <label for="id_sucursal">Seleccione sucursal</label>
+                                <select id="id_sucursal" name="id_sucursal" class="form-control" data-toggle="select3" data-select3-id="1" tabindex="-1" aria-hidden="true">
+                                    <option data-select2-id="3">Seleccione sucursal</option>
+                                    @if(!empty($sucursales))
+                                    @foreach($sucursales as $sucursal)
+                                    <option value="{{$sucursal->id}}">{{$sucursal->nombre_sucursal}}<spam> (Sucursal - {{$sucursal->codigo_punto_venta}}) </spam></option>
+                                    @endforeach
+                                    @endif
+                                </select>
                             </div>
                         </div>
                     </div>

@@ -112,6 +112,7 @@ class AlmacenproductoController extends Controller
                     $detalleMI->descuento=0;
                     $detalleMI->identificador_producto="";
                     $detalleMI->id_producto=e($request->input('producto'));
+                    $detalleMI->caracteristicas_producto=null;
                     $detalleMI->id_transacciones_movimiento_inventarios=$numeroTMI;
                     $detalleMI->created_at=Carbon::now();
                     $detalleMI->updated_at=Carbon::now();
