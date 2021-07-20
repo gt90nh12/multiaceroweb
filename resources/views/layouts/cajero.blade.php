@@ -115,7 +115,7 @@
                         <h6 class="text-overflow m-0">Bienvenido !</h6>
                     </div>
                     <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <a href="{{route('auths.show',Auth::user()->id)}}" class="dropdown-item notify-item">
                         <i class="mdi mdi-account-circle mr-1"></i>
                         <span>Mi cuenta</span>
                     </a>

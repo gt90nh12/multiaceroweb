@@ -1,4 +1,3 @@
-
 @extends(mb_strtolower('layouts/'.explode(' ',DB::table('empleados')->where('id',Auth::user()->id)->first()->cargo==='Administrador'?'Admin':DB::table('empleados')->where('id',Auth::user()->id)->first()->cargo)[0],'UTF-8'))
 @section('titulo_pagina', 'Clientes')
 @section('descripcion_pagina', 'Formulario Ventas')
@@ -149,7 +148,7 @@
           <div class="col-lg-6">
             <div class="form-group mb-3">
               <label for="validationFechaNacimiento">Fecha de Nacimiento</label>
-              <input type="date" name="fecha_nacimiento" class="form-control" id="validationFechaNacimiento" value="{{old('fecha_nacimiento')}}">
+              <input type="date" name="fecha_nacimiento" class="form-control" id="validationFechaNacimiento" min="1960-01-01" value="{{old('fecha_nacimiento')}}">
               <div class="valid-feedback">
                 Muy Bien!
               </div>

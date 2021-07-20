@@ -33,13 +33,16 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-4">
-            <div class="text-center mt-sm-0 mt-3 text-sm-right">
-              <a href="{{route('auths.edit',$em[0]->id)}}" class="btn btn-light">
-                <i class="mdi mdi-account-edit mr-1"></i> Editar Empleado
-              </a>
-            </div>  
-          </div>
+          @if (DB::table('empleados')->where('id',Auth::user()->id)->first()->cargo==='Administrador')
+            <div class="col-sm-4">
+              <div class="text-center mt-sm-0 mt-3 text-sm-right">
+                <a href="{{route('auths.edit',$em[0]->id)}}" class="btn btn-light">
+                  <i class="mdi mdi-account-edit mr-1"></i> Editar Datos
+                </a>
+              </div>  
+            </div>
+          @endif
+
         </div>
       </div>
     </div>
