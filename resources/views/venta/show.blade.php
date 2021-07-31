@@ -18,7 +18,6 @@
         <!-- Profile -->
         <div class="card bg-primary">
             <div class="card-body profile-user-box">
-
                 <div class="row">
                     <div class="col-sm-8">
                         <div class="media">
@@ -41,22 +40,12 @@
                             </div> <!-- end media-body-->
                         </div>
                     </div> <!-- end col-->
-
-                    <div class="col-sm-4">
-                        <div class="text-center mt-sm-0 mt-3 text-sm-right">
-                            <a href="#" class="btn btn-light">
-                              <i class="mdi mdi-store mr-1"></i> Editar Venta
-                            </a>
-                        </div>  
-                    </div> <!-- end col-->
                 </div> <!-- end row -->
-
             </div> <!-- end card-body/ profile-user-box-->
         </div><!--end profile/ card -->
     </div> <!-- end col-->
   </div>
   <!-- end row -->
-
   <div class="row">
     <div class="col-lg-4">
         <!-- Personal-Information -->
@@ -86,9 +75,6 @@
     </div> <!-- end col-->
 
     <div class="col-lg-8">
-      
-
-      
     <div class="row">
       <div class="col-sm-4">
         <div class="card tilebox-one">
@@ -152,13 +138,4 @@
     </div> <!-- end row-->
   </div>
 </div>
-<div class="card tilebox-one">
-  <div class="card-body">
-      <h4 class="header-title mb-3">Frecuencia de ventas al Cliente: {{$cl->nombre_razon_social}}</h4>
-      {{-- <div style="height: 260px;" class="chartjs-chart"> --}}
-      <div id="datalabels-column" class="apex-charts" data-colors="#10c469"></div>    
-  </div>
-</div>
-<script src="{{asset('assets/js/vendor/apexcharts.min.js')}}"></script>
-<script src="{{asset('assets/js/pages/demo.apex-column.js')}}"></script>
 @stop

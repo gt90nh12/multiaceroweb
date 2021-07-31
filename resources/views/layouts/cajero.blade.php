@@ -119,12 +119,7 @@
                         <i class="mdi mdi-account-circle mr-1"></i>
                         <span>Mi cuenta</span>
                     </a>
-                    <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="mdi mdi-account-edit mr-1"></i>
-                        <span>Configuración</span>
-                    </a>
-                    <!-- item-->
+
                     <form action="{{route('auths.logout')}}" method="POST">
                       @csrf
                       <a href="javascript:void(0);" onclick="this.closest('form').submit()" class="dropdown-item notify-item">

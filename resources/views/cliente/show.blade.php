@@ -84,7 +84,6 @@ $tp=0;
             <i class="dripicons-basket float-right text-muted"></i>
               <h6 class="text-muted text-uppercase mt-0">N° Compras</h6>
               <h2 class="m-b-20">{{count($vCli)}}</h2>
-              <span class="badge badge-primary"> +11% </span> <span class="text-muted">Del periodo anterior</span>
           </div>
         </div>
       </div>
@@ -94,7 +93,6 @@ $tp=0;
             <i class="dripicons-box float-right text-muted"></i>
             <h6 class="text-muted text-uppercase mt-0">Total Ingresos</h6>
             <h2 class="m-b-20">Bs <span>{{$t}}</span></h2>
-            <span class="badge badge-danger"> -29% </span> <span class="text-muted">Del periodo anterior</span>
           </div>
         </div>
       </div>    
@@ -104,7 +102,6 @@ $tp=0;
             <i class="dripicons-jewel float-right text-muted"></i>
             <h6 class="text-muted text-uppercase mt-0">Total Productos<br>Comprados</h6>
             <h2 class="m-b-20">{{$tp}}</h2>
-            <span class="badge badge-primary"> +89% </span> <span class="text-muted">de sus compras</span>
           </div>
         </div>
       </div>
@@ -124,7 +121,7 @@ $tp=0;
             </thead>
             <tbody>
               @foreach ($vCli as $item)
-              <tr onclick="document.location='{{route('ventas.show',$item->id)}}';">
+              <tr>
                 <td>{{$item->id}}</td>
                 <td>{{$item->created_at}}</td>
                 <td><span class="badge badge-warning">{{$item->cantidad_productos}} Productos</span></td>
@@ -138,16 +135,4 @@ $tp=0;
     </div>
   </div>
 </div>
-
-<div class="card tilebox-one">
-  <div class="card-body">
-      <h4 class="header-title mb-3">Frecuencia de ventas al Cliente</h4>
-      {{-- <div style="height: 260px;" class="chartjs-chart"> --}}
-      <div id="datalabels-column" class="apex-charts" data-colors="#10c469"></div>
-          {{-- <canvas id="high-performing-product"></canvas> --}}  
-      </div>        
-  </div>
-</div>
-<script src="{{asset('assets/js/vendor/apexcharts.min.js')}}"></script>
-<script src="{{asset('assets/js/pages/demo.apex-column.js')}}"></script>
 @stop

@@ -1,20 +1,11 @@
 @extends(mb_strtolower('layouts/'.explode(' ',DB::table('empleados')->where('id',Auth::user()->id)->first()->cargo==='Administrador'?'Admin':DB::table('empleados')->where('id',Auth::user()->id)->first()->cargo)[0],'UTF-8'))
 @section('titulo_pagina', 'Clientes')
 @section('descripcion_pagina', 'Formulario Ventas')
-
 @section('content')
-
   <div class="card-body">
     <div class="row">
       <div class="col-12">
         <div class="page-title-box">
-          <div class="page-title-right">
-            <ol class="breadcrumb m-0">
-              <li class="breadcrumb-item"><a href="javascript: void(0);">Multiacero</a></li>
-              <li class="breadcrumb-item"><a href="javascript: void(0);">Clientes</a></li>
-              <li class="breadcrumb-item active">Editar Cliente</li>
-            </ol>
-          </div>
           <h4 class="page-title">Editar Cliente</h4>
         </div>
       </div>
@@ -58,7 +49,6 @@
                     $selected_ci = '';
                     $selected_nit = 'selected';
                     break;
-                    
                     default:
                     $selected_ci = '';
                     $selected_nit = '';
@@ -85,5 +75,4 @@
       </div> <!-- end preview-->
     </div> <!-- end tab-content-->
   </div>
-
 @endsection

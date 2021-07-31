@@ -1,13 +1,13 @@
 const $rowInvoice=document.getElementById('invoice');
 const unoRoute=document.getElementById('unoRoute').value;
 const empresa=document.getElementById('empresa').value;
-const sucursal=document.getElementById('sucursal').value;
+const su=document.getElementById('sucursal').value;
 const fa=document.getElementById('fa').value;
 t=new Date();
 const renderInvoice=()=>{
-  if(venta.length!==0&&Object.entries(cliente).length!==0){
-    let templateTr="", empty1="";
-    let inputProducto="", empty2="";c=0;
+  if(venta.length!==0&&Object.entries(cliente).length!==0&&clip==Math.pow(venta.length,2)){
+    let templateTr="",empty1="";
+    let inputProducto="",empty2="";c=0;
     em=JSON.parse(empresa);
     venta.forEach(el=>{
       templateTr=`
@@ -30,7 +30,7 @@ const renderInvoice=()=>{
       inputProducto=empty2+inputProducto;
       empty2=inputProducto;
     });
-    suc=JSON.parse(sucursal)[0];
+    alfa=JSON.parse(su).forEach(el=>al==el.id?suc=el:false);
     let templateInvoice=`
     <div class="col-12">
       <div class="card">
@@ -44,7 +44,7 @@ const renderInvoice=()=>{
                   <h5>Sucursal ${suc.nombre_sucursal}</h5>
                   <address>
                     ${suc.pais} - ${suc.estado_departamento}<br>
-                    ${suc.ciudad}<br>
+                    ${suc.municipio}<br>
                     ${suc.direccion}<br>
                     Correo: ${suc.correo}<br>
                     Telefono: ${suc.telefono}
@@ -161,7 +161,7 @@ const renderInvoice=()=>{
     <input type="hidden" name="totalFinal" value="${venta.totalFinal}"/>
     <input type="hidden" id="cod" name="cod" value=""/>
     <input type="hidden" name="id_cliente" value="${cliente.id}"/>
-    <input type="hidden" name="id_sucursal" value="${JSON.parse(sucursal)[0].id}"/>
+    <input type="hidden" name="id_sucursal" value="${suc.id}"/>
     <input type="hidden" name="id_cajero" value="${cajero.id}"/>
     <input type="hidden" name="nfa" value="${fa}"/>
     <button class="btn btn-primary type="submit" onclick="imprimir();">REALIZAR VENTA</button>

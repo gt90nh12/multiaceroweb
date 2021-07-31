@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\almacen_producto;
+use App\Almacene;
 use App\Caracteristica;
 use App\Cliente;
 use App\detalle_movimiento_inventario;
+use App\Empleado;
 use App\Factura;
 use App\Producto;
 use App\Empresa;
+use App\Sucursale;
 use App\transacciones_movimiento_inventarios;
 use App\Venta;
 use Illuminate\Http\Request;
@@ -25,16 +28,19 @@ class VentaController extends Controller
 
   public function create()
   {
-    $todosLosProductos=new Producto();
+    $pro_to=new Producto();
     $clientes_total=new Cliente();
+    $al=Almacene::all();
     $caracteristicas=new Caracteristica();
     $fa=Factura::all()->last();
-    $sucursal=DB::table('sucursales')->get();
-    $todosLosProductos=Producto::all();
+    $sucursal=Sucursale::all();
+    $pro_to=Producto::all();
     $clientes_total=Cliente::all();
+    $em=Empleado::all();
+    $al_pro=almacen_producto::all();
     $caracteristicas=Caracteristica::all();
     $empresa=Empresa::find(1);
-    return view('venta.create',compact('todosLosProductos','clientes_total','caracteristicas','sucursal','fa','empresa'));
+    return view('venta.create',compact('pro_to','clientes_total','al','caracteristicas','em','sucursal','al_pro','fa','empresa'));
   }
 
   public function store(Request $request){
@@ -50,24 +56,27 @@ class VentaController extends Controller
     $ve->tipo_cambio=0;
     $ve->monto_total_moneda=$request->totalFinal;
     $ve->id_clientes=$request->id_cliente;
-    $ve->id_sucursales=$request->id_sucursal;
-    $ve->id_cajeros=$request->id_cajero;
+    $ve->id_users=1;
     $ve->save();
+    $tr->id_usuario=0;
     $tr->fecha_transaccion=$date;
     $tr->observaciones='';
     $tr->tipo_transaccion='ventas';
     $tr->id_compras=0;
     $tr->id_ventas=Venta::all()->last()->id;
+    $tr->id_movimientos=0;
+    $tr->id_devoluciones=0;
+    $tr->id_almacen_producto=0;
     $tr->id_almacen=1;
     $tr->save();
     for($i=0; $i<$request->max; $i++){
       $de=new detalle_movimiento_inventario();
       $st=new almacen_producto();
       $j=explode(',',$request->$i);
-      $de->numero_transaccion=''; 
       $de->costo=$j[1];
       $de->cantidad=$j[2];
       $de->descuento=$request->descuentoTotal/$request->max;
+      $de->identificador_producto=0;
       $de->id_producto=$j[0];
       $st=almacen_producto::find($j[0]);
       $de->id_transacciones_movimiento_inventarios=transacciones_movimiento_inventarios::all()->last()->id;

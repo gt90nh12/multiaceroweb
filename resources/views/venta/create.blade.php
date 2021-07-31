@@ -2,38 +2,29 @@
 @section('titulo_pagina', 'Ventas')
 @section('descripcion_pagina', 'Formulario Ventas')
 @section('content')
-{{-- {{$todosLosProductos}} --}}
-{{-- {{$caracteristicas}} --}}
-<!-- third party css -->
-{{-- <link href="{{asset('assets/css/vendor/dataTables.bootstrap4.css')}}" rel="stylesheet" type="text/css" /> --}}
 <link href="{{asset('assets/css/vendor/responsive.bootstrap4.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('assets/css/vendor/buttons.bootstrap4.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('assets/css/vendor/select.bootstrap4.css')}}" rel="stylesheet" type="text/css" />
-<!-- third party css end -->
 <style>
   input[type="number"] {
     -webkit-appearance: textfield;
     -moz-appearance: textfield;
     appearance: textfield;
   }
-
   input[type=number]::-webkit-inner-spin-button,
   input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
   }
-
   .number-input {
     background: #fef4dc;
     border: 0px solid #ced4da;
     display: inline-flex;
     border-radius: 4px;
   }
-
   .number-input,
   .number-input * {
     box-sizing: border-box;
   }
-
   .number-input button {
     outline:none;
     -webkit-appearance: none;
@@ -47,7 +38,6 @@
     margin: 0;
     position: relative;
   }
-
   .number-input button:before,
   .number-input button:after {
     display: inline-block;
@@ -61,7 +51,6 @@
   .number-input button.plus:after {
     transform: translate(-50%, -50%) rotate(90deg);
   }
-
   .number-input input[type=number] {
     font-family: sans-serif;
     color: #37404a;
@@ -75,8 +64,6 @@
     text-align: center;
   }
 </style>
-
-<!-- start page title -->
 <div class="row">
   <div class="col-12">
     <div class="page-title-box">
@@ -84,13 +71,10 @@
     </div>
   </div>
 </div>
-<!-- end page title -->
-
 <div class="row">
   <div class="col-12">
       <div class="card">
           <div class="card-body">
-              <!-- Checkout Steps -->
               <ul class="nav nav-pills bg-nav-pills nav-justified mb-3">
                   <li class="nav-item">
                       <a href="#products-information" data-toggle="tab" aria-expanded="false"
@@ -112,13 +96,8 @@
                       </a>
                   </li>
               </ul>
-
-              <!-- Steps Information -->
               <div class="tab-content">
-
-                <!-- Products Content-->
                 <div class="tab-pane show active" id="products-information">
-
                   <p>
                     <button class="btn btn-primary ml-1" type="button"
                       data-toggle="collapse" data-target="#collapseExample"
@@ -127,7 +106,6 @@
                     </button>
                   </p>
                   <div class="collapse show" id="collapseExample">
-                    
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
@@ -135,10 +113,10 @@
                                 <div class="tab-content">
                                   <div class="tab-pane show active">
                                     <table id="basic-datatable" class="table activate-select dt-responsive nowrap">
-                                      
                                       <thead>
                                         <tr>
                                           <th style="width: 1px">Codigo</th>
+                                          <th>Almacen</th>
                                           <th>Nombre</th>
                                           <th>Marca</th>
                                           <th>Costo</th>
@@ -150,25 +128,32 @@
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        @foreach($todosLosProductos as $item)
-                                            <?php
-                                            $car="";
+                                        @foreach($pro_to as $item)
+                                          @foreach ($al_pro as $void)
+                                            @if($void->id_productos===$item->id&&(Auth::user()->id===1?$void->id_almacenes:$void->id_almacenes===$em[Auth::user()->id-1]->id_almacenes))
+                                              <?php
+                                              $car="";
                                               foreach ($caracteristicas as $key=>$val){
                                                 if($item->id==$val->id_producto)
                                                   $car=str_replace('null','',$car.$val->nombre.' '.$val->dato.' '.$val->unidad_medida.' | ');
                                               }
                                               $car=substr($car,0,-3);
-                                            ?>
+                                              foreach ($al as $key=>$val2){
+                                                if($val2->id===$void->id_almacenes)
+                                                  $ma=$val2;
+                                              }
+                                              ?>
                                           <tr>
                                             <td style="width: 1px">{{$item->cod_producto}}</td>
+                                            <td>{{$ma->nombre}}</td>
                                             <td>{{$item->nombre}}</td>
                                             <td>{{$item->marca_producto}}</td>
-                                            <td >{{$item->precio_venta}} Bs.</td>
+                                            <td>{{$item->precio_venta}} Bs.</td>
                                             <td>{{$item->material_producto}}</td>
                                             <td>{{$item->procedencia_producto}}</td>
                                             <td>{{$item->color_producto}}</td>
                                             <td>{{$car}}</td>
-                                            <td> <input onclick="checkProductos(event)" 
+                                            <td><input onclick="checkProductos(event)" 
                                               data-id={{$item->id}}
                                               data-codigo={{$item->cod_producto}}
                                               data-nombre="{{$item->nombre}}"
@@ -176,33 +161,28 @@
                                               data-origen={{$item->procedencia_producto}}
                                               data-color={{$item->color_producto}}
                                               data-precio={{$item->precio_venta}}
+                                              data-al="{{$void->id_almacenes}}"
                                               data-descripcion="{{$item->descripcion}}"
                                               data-item="{{$item}}"
                                               data-car="{{$car}}"
                                               data-img="{{$item->imagen}}"
                                               type="checkbox"></td>
                                             </tr>
+                                            @endif  
+                                          @endforeach
                                         @endforeach
                                       </tbody>
-
                                     </table>                                          
-                                  </div> <!-- end preview-->
-                                </div> <!-- end tab-content-->
-                              </div> <!-- end card body-->
-                            </div> <!-- end card -->
-                        </div><!-- end col-->
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
                     </div>
-                    <!-- end row-->
                   </div>
-                <!-- end row -->
                 </div>
-                  <!-- End Billing Information Content-->
-
-                  <!-- Customer Content-->
                   <div class="tab-pane" id="customer-information">
-
                     <div class="tab-pane show active" id="clientes-information">
-
                       <p>
                         <button class="btn btn-primary ml-1" type="button"
                           data-toggle="collapse" data-target="#collapseClientes"
@@ -211,14 +191,12 @@
                         </button>
                       </p>
                       <div class="collapse show" id="collapseClientes">
-
                         <div class="row">
                           <div class="col-12">
                             <div class="card">
                               <div class="card-body">
                                 <div class="tab-content">
                                   <div class="tab-pane show active">
-
                                     <table id="tablaClientes" class="table activate-select dt-responsive nowrap" style="width:100%">
                                       <thead>
                                         <tr>
@@ -241,22 +219,16 @@
                                         </tr>
                                       </tfoot>
                                     </table>
-
-                                  </div> <!-- end preview-->
-                                </div> <!-- end tab-content-->
-                              </div> <!-- end card body-->
-                            </div> <!-- end card -->
-                          </div><!-- end col-->
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <!-- end row-->
                       </div>
                     </div>
                   </div>
-                  <!-- End Shipping Information Content-->
-
-                  <!-- Billing Content-->
                   <div class="tab-pane" id="billing-information">
-
                     <div class="tab-pane show active" id="clientes-information">
                       <p>
                         <button class="btn btn-primary ml-1" type="button"
@@ -268,12 +240,10 @@
                       <div class="collapse show" id="collapseFactura">
                         <div class="row" id="invoice">
                       </div>
-                      <!-- end row -->
                       </div>
                     </div>
                   </div>
-                  <!-- End Payment Information Content-->
-              </div> <!-- end tab content-->
+              </div>
               <hr>
               <div class="row">                  
                 <div class="col-12">
@@ -297,37 +267,29 @@
                               </thead>
                               <tbody id ="tbodyProductos"></tbody>
                             </table>
-                          </div> <!-- end table-responsive-->
-                            <!-- Add note input-->
+                          </div>
                           <div class="mt-3">
                             <label for="example-textarea">Descripcion de la venta:</label>
                             <textarea class="form-control" id="example-textarea" rows="3" placeholder="Escriba aqui..."></textarea>
                           </div>
-                          <!-- action buttons-->
                           <div class="row mt-4">
-                            <div class="col-sm-6">
-                              {{-- <a href="apps-ecommerce-products.html" class="btn text-muted d-none d-sm-inline-block btn-link font-weight-semibold">
-                                <i class="mdi mdi-arrow-left"></i> Continuar compras </a> --}}
-                            </div> <!-- end col -->
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                               <div class="text-sm-right">
                                 <a class="btn btn-danger" onClick="borrarTodo();" >
                                   <i class="mdi mdi-cart-plus mr-1"></i> Vaciar Todo
                                 </a>
                               </div>
-                            </div> <!-- end col -->
-                          </div> <!-- end row-->
+                            </div>
+                          </div>
                         </div>
-                          <!-- end col -->
                         <div class="col-lg-4">
                           <div class="border p-3 mt-4 mt-lg-0 rounded">
-                            <h4 class="header-title mb-3">Resumen del pedido (Bs)</h4>
+                            <h4 class="header-title mb-3">Resumen de la venta (Bs)</h4>
                             <div class="table-responsive">
                               <table class="table mb-0">
                                 <tbody id="resumenVenta"></tbody>
                               </table>
                             </div>
-                            <!-- end table-responsive -->
                           </div>
                           <div class="alert alert-warning mt-3" role="alert">
                               Descuento <strong>Cliente</strong>?
@@ -338,13 +300,12 @@
                                 <button class="btn btn-warning" onclick="descuento();" type="button">Aplicar</button>
                             </div>
                           </div>
-                        </div> <!-- end col -->
-                      </div> <!-- end row -->
-                    </div> <!-- end card-body-->
-                  </div> <!-- end card-->
-                </div> <!-- end col -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <!-- CrearCliente modal-->
               <div id="crearCliente-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
                   <div class="modal-dialog">
                       <div class="modal-content">
@@ -385,14 +346,13 @@
                                 </div>
                               </form>
                           </div>
-                      </div><!-- /.modal-content -->
-                  </div><!-- /.modal-dialog -->
-              </div><!-- /.modal -->
-          </div> <!-- end card-body-->
-      </div> <!-- end card-->
-  </div> <!-- end col -->
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 </div>
-<!-- end row-->
   <input type="hidden" id="csrf_token" value="{{csrf_token()}}">
   <input type="hidden" id="fa" value="{{$fa?$fa->numero_factura+1:1}}">
   <input type="hidden" id="rutaMiniClienteIndex" value="{{route('miniCliente.index')}}">
@@ -409,11 +369,6 @@
   <script src="{{asset('assets/js/vendor/dataTables.buttons.min.js')}}"></script>
   <script src="{{asset('assets/js/vendor/buttons.bootstrap4.min.js')}}"></script>
   <script src="{{asset('assets/js/vendor/buttons.html5.min.js')}}"></script>
-  {{-- <script src="assets/js/vendor/buttons.flash.min.js"></script> --}}
-  {{-- <script src="assets/js/vendor/buttons.print.min.js"></script> --}}
-  {{-- <script src="assets/js/vendor/dataTables.keyTable.min.js"></script> --}}
-  {{-- <script src="assets/js/vendor/dataTables.select.min.js"></script> --}}
-  <!-- third party js ends -->
   <script src="{{asset('assets/js/pages/demo.datatable-init.js')}}"></script>
   <script src="{{asset('assets/js/pages/venta.js')}}"></script>
   <script src="{{asset('assets/js/pages/miniClientes.js')}}"></script>

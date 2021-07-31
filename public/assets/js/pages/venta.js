@@ -19,8 +19,9 @@ checkProductos=e=>{
     multiplicador=1;
     total=precio;
     car=e.target.dataset.car;
+    al=e.target.dataset.al;
     img=e.target.dataset.img;
-    data=[{id, codigo, nombre, producto, origen, color, precio, multiplicador, total, descripcion,car,img}];
+    data=[{id, codigo,nombre,producto,origen,color,precio,multiplicador,total,descripcion,car,img,al}];
     almacenProductos(data);
   }
 };
@@ -42,7 +43,7 @@ function renderizadoProductosCheck(venta){
   venta.totalFinal=0;
   $des.value=venta.descuentoTotal||"0";
   venta.forEach((element,i)=>{
-    venta.totalGeneral=venta.totalGeneral+venta[i].total;
+    venta.totalGeneral=venta.totalGeneral+venta[i].total,clip=0;
     venta.totalFinal=venta.totalGeneral-venta.descuentoTotal;
     let nuevocontenido=`
       <tr id="tr-productos">
@@ -88,7 +89,12 @@ function renderizadoProductosCheck(venta){
       </tr>
     `;
     contenido=contenido+nuevocontenido;
-
+    for(i=0;i<venta.length;i++){
+      for(j=0;j<venta.length;j++){
+        if(venta[i].al===venta[j].al)
+          clip++;
+      }
+    }
     $resumenVentaDOM.innerHTML=resumenVenta;
   });
   $trProductosDOM.innerHTML=contenido;
