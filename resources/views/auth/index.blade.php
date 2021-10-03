@@ -21,7 +21,7 @@
                         <div class="card">
                             <div class="card-header pt-4 pb-4 text-center bg-primary">
                                 <a href="index.html">
-                                    <span><img src="assets/images/logo.png" alt="" height="18"></span>
+                                    <span><img src="assets/images/LOGO_MULTIACERO.png" alt="" height="88"></span>
                                 </a>
                             </div>
                             <div class="card-body p-4">

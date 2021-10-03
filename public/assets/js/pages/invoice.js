@@ -1,8 +1,11 @@
 const $rowInvoice=document.getElementById('invoice');
 const unoRoute=document.getElementById('unoRoute').value;
 const empresa=document.getElementById('empresa').value;
+const sucursalUsuario=document.getElementById('sucursalUsuario').value;
+datoSucursal=JSON.parse(sucursalUsuario);
 const su=document.getElementById('sucursal').value;
 const fa=document.getElementById('fa').value;
+const suc="";
 t=new Date();
 const renderInvoice=()=>{
   if(venta.length!==0&&Object.entries(cliente).length!==0&&clip==Math.pow(venta.length,2)){
@@ -30,7 +33,7 @@ const renderInvoice=()=>{
       inputProducto=empty2+inputProducto;
       empty2=inputProducto;
     });
-    alfa=JSON.parse(su).forEach(el=>al==el.id?suc=el:false);
+    // alfa=JSON.parse(su).forEach(el=>al==el.id?suc=el:false);
     let templateInvoice=`
     <div class="col-12">
       <div class="card">
@@ -41,13 +44,13 @@ const renderInvoice=()=>{
                 <div class="float-left mt-3">
                   <img src="${assetGeneral}assets/images/logo-light.png" alt="" height="22px">
                   <h4>${em.nombre_empresa}</h4>
-                  <h5>Sucursal ${suc.nombre_sucursal}</h5>
+                  <h5>Sucursal ${datoSucursal[0].nombre_sucursal}</h5>
                   <address>
-                    ${suc.pais} - ${suc.estado_departamento}<br>
-                    ${suc.municipio}<br>
-                    ${suc.direccion}<br>
-                    Correo: ${suc.correo}<br>
-                    Telefono: ${suc.telefono}
+                    ${datoSucursal[0].pais} - ${datoSucursal[0].estado_departamento}<br>
+                    ${datoSucursal[0].municipio}<br>
+                    ${datoSucursal[0].direccion}<br>
+                    Correo: ${datoSucursal[0].correo}<br>
+                    Telefono: ${datoSucursal[0].telefono}
                   </address>
                 </div>
               </div><!-- end col -->

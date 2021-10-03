@@ -16,6 +16,8 @@ use App\transacciones_movimiento_inventarios;
 use App\Venta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Dompdf\Dompdf;
+use PDF;
 
 class VentaController extends Controller
 {
@@ -28,6 +30,20 @@ class VentaController extends Controller
 
   public function create()
   {
+    $usuarioautenticado = auth()->id();
+    // echo($usuarioautenticado);
+    if($usuarioautenticado==1){
+      $sucursalUsuario=DB::table('almacenes') ->select('sucursales.nombre_sucursal','sucursales.pais','sucursales.estado_departamento','sucursales.municipio','sucursales.direccion','sucursales.correo','sucursales.telefono')
+                                          ->join('sucursales','sucursales.id','=','almacenes.id_sucursal')
+                                          ->where('almacenes.id','=',1)
+                                          ->get();
+    }else{  
+      $sucursalUsuario=DB::table('almacenes') ->select('sucursales.nombre_sucursal','sucursales.pais','sucursales.estado_departamento','sucursales.municipio','sucursales.direccion','sucursales.correo','sucursales.telefono')
+                                          ->join('empleados','empleados.id_almacenes','=','almacenes.id')
+                                          ->join('sucursales','sucursales.id','=','almacenes.id_sucursal')
+                                          ->where('empleados.id','=',$usuarioautenticado)
+                                          ->get();
+    }
     $pro_to=new Producto();
     $clientes_total=new Cliente();
     $al=Almacene::all();
@@ -40,7 +56,7 @@ class VentaController extends Controller
     $al_pro=almacen_producto::all();
     $caracteristicas=Caracteristica::all();
     $empresa=Empresa::find(1);
-    return view('venta.create',compact('pro_to','clientes_total','al','caracteristicas','em','sucursal','al_pro','fa','empresa'));
+    return view('venta.create',compact('pro_to','clientes_total','al','caracteristicas','em','sucursal','al_pro','fa','empresa','sucursalUsuario'));
   }
 
   public function store(Request $request){
@@ -222,5 +238,30 @@ class VentaController extends Controller
       return CR4(ct($tmp1+$tmp2+$tmp3+$tmp4+$tmp5),$k.$d5Vff);
     }
     return g($request);
+  }
+  public function reporteGeneral(){
+    $todasLasVentas=new Venta();
+    $todasLasVentas=DB::table('clientes')->select()->join('ventas','ventas.id_clientes','=','clientes.id')->get();
+    // $todasLasVentas=Venta::all();
+    $fecha = date('Y-m-d');
+    $data = compact('todasLasVentas','fecha');
+    $pdf = PDF::loadView('venta.reporteGeneralVentas', $data);
+    // return $pdf->stream();
+    return $pdf->download('Venta_general'.time().'.pdf');
+
+//     return view('venta.index', compact('todasLasVentas'));
+
+//     // instantiate and use the dompdf class
+// $dompdf = new Dompdf();
+// $dompdf->loadHtml('hello world');
+
+// // (Optional) Setup the paper size and orientation
+// $dompdf->setPaper('A4', 'landscape');
+
+// // Render the HTML as PDF
+// $dompdf->render();
+
+// // Output the generated PDF to Browser
+// $dompdf->stream();
   }
 }

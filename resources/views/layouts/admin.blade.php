@@ -102,7 +102,7 @@
                     <a class="nav-link dropdown-toggle nav-user arrow-none mr-0" data-toggle="dropdown" id="topbar-userdrop" href="#" role="button" aria-haspopup="true"
                     aria-expanded="false">
                     <span class="account-user-avatar"> 
-                        <img src="{{str_replace('public','storage/personal',asset(DB::table('empleados')->where('id',Auth::user()->id)->first()->foto))}}" alt="user-image" class="rounded-circle">
+                        <img src="http://localhost/multiacero/storage/personal/{{ DB::table('empleados')->where('id',Auth::user()->id)->first()->foto }}" alt="user-image" class="rounded-circle">
                     </span>
                     <span>
                         <span class="account-user-name">{{Auth::user()->user}}</span>
@@ -152,7 +152,7 @@
 
                     <div class="leftbar-user">
                         <a href="javascript: void(0);">
-                            <img src="{{str_replace('public','storage/personal',asset(DB::table('empleados')->where('id',Auth::user()->id)->first()->foto))}}" alt="user-image" height="42" class="rounded-circle shadow-sm">
+                            <img src="http://localhost/multiacero/storage/personal/{{ DB::table('empleados')->where('id',Auth::user()->id)->first()->foto }}" alt="user-image" height="42" class="rounded-circle shadow-sm">
                             <span class="leftbar-user-name">{{Auth::user()->user}}</span>
                         </a>
                     </div>
@@ -351,12 +351,33 @@
                             </ul>
                         </li>
 
-                        <li class="side-nav-item">
-                            <a href="#" target="_blank" class="side-nav-link">
-                                <i class="uil-globe"></i>
-                                <span class="badge badge-light float-right">New</span>
-                                <span> Vehiculos </span>
+                         <li class="side-nav-item">
+                            <a href="javascript: void(0);" class="side-nav-link">
+                                <i class="mdi mdi-car-estate"></i>
+                                <span> Pedidos </span>
+                                <span class="menu-arrow"></span>
                             </a>
+                            <ul class="side-nav-second-level" aria-expanded="false">            
+                                <li class="side-nav-item">
+                                    <a href="javascript: void(0);" aria-expanded="false">Vehiculos
+                                        <span class="menu-arrow"></span>
+                                    </a>
+                                    <ul class="side-nav-third-level" aria-expanded="false">
+                                        <li>
+                                            <a href="{{url('/registrar_vehiculo')}}">Registrar</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{url('/listar_vehiculo')}}">Listar</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="{{url('/entrega_pedidos')}}">Registrar</a> 
+                                </li>
+                               <!--  <li>
+                                    <a href="#">Lista</a>
+                                </li> -->
+                            </ul>
                         </li>
 
                     </ul>

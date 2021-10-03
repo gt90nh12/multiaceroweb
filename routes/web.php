@@ -89,6 +89,7 @@ Route::get('ventas', 'VentaController@index')->name('ventas.index');
 Route::get('ventas/create', 'VentaController@create')->name('ventas.create');
 Route::post('ventas/store', 'VentaController@store')->name('ventas.store');
 Route::get('ventas/show/{id}', 'VentaController@show')->name('ventas.show');
+Route::get('reporteGeneral','VentaController@reporteGeneral')->name('reporteGeneral');
 
 //--------------------------- miniClientes------------------------------------------------------
 Route::get('miniclientes', 'miniClienteController@index')->name('miniCliente.index');
@@ -114,3 +115,14 @@ Route::post('/almacenar_tipo_producto', 'TipoProductoController@store')->name('a
 /* -------------------------------- SUCURSAL ------------------------------- */
 Route::get('/registro_sucursal', 'SucursalController@create')->name('registro_sucursal');
 Route::post('/almacenar_sucursal', 'SucursalController@store')->name('almacenar_sucursal');
+
+/* ------------------------------------ VEHICULOS ------------------------------------- */
+Route::get('/listar_vehiculo', 'VehiculoController@index')->name('listar_vehiculo');
+Route::get('/registrar_vehiculo', 'VehiculoController@create')->name('registrar_vehiculo');
+Route::post('/almacenar_vehiculo', 'VehiculoController@store')->name('almacenar_vehiculo');
+
+/* -------------------------------- ENTREGA DE PEDIDOS  ------------------------------- */
+Route::get('/entrega_pedidos', 'PedidoController@index')->name('entrega_pedidos');
+Route::get('/registrar_pedidos', 'PedidoController@create')->name('registrar_pedidos');
+Route::post('/almacenar_pedidos', 'PedidoController@store')->name('almacenar_pedidos');
+

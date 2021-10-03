@@ -78,6 +78,7 @@ class ConnectController extends Controller
             if(!in_array($extencion, $formato)) {
                 $data['documento_general']='El tipo de archivo no esta permitido.';
             }else {
+                // $ruta="../assets/productos/".$_FILES['imagen_producto']['name'];
                 $ruta="./../public/img/perfil_usuario/".$_FILES['direccion_imagen']['name'];
                 $nombreArchivo = $_FILES['direccion_imagen']['name'];
                 move_uploaded_file($_FILES['direccion_imagen']['tmp_name'], $ruta);

@@ -19,9 +19,12 @@
   </div>
   <!-- end page title -->
   <div class="row">  
-    <div class="col-sm-4">
+    <div class="col-sm-12">
       <a href="{{route('ventas.create')}}" class="btn btn-success mb-2">
         <i class="mdi mdi-plus-circle mr-2"></i> Nueva Factura 
+      </a>
+      <a href="{{route('reporteGeneral')}}" class="btn btn-info mb-2">
+        <i class="mdi mdi-file-document-outline mr-2"></i> Reporte General 
       </a>
     </div>
     <div class="col-12">
@@ -44,6 +47,7 @@
                     </tr>
                   </thead>
                   <tbody>
+                    @if($todasLasVentas)
                     @foreach($todasLasVentas as $item)
                       <tr>
                         <td>{{$item->id}}</td>
@@ -59,6 +63,7 @@
                         </td>
                       </tr>
                     @endforeach
+                    @endif
                   </tbody>
                 </table>                                          
               </div> <!-- end preview-->
