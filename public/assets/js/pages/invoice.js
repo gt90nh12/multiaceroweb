@@ -42,7 +42,7 @@ const renderInvoice=()=>{
             <div class="row">
               <div class="col-sm-6">
                 <div class="float-left mt-3">
-                  <img src="${assetGeneral}assets/images/logo-light.png" alt="" height="22px">
+                  <img src="${assetGeneral}assets/images/LOGO_MULTIACERO.png" alt="" height="100px">
                   <h4>${em.nombre_empresa}</h4>
                   <h5>Sucursal ${datoSucursal[0].nombre_sucursal}</h5>
                   <address>

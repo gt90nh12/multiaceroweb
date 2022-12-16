@@ -24,12 +24,19 @@ class CompraController extends Controller
      */
     public function index()
     {   
+        DB::enableQueryLog();
         $compras = DB::table('compras')
         ->join('transacciones_movimiento_inventarios', 'transacciones_movimiento_inventarios.id_compras', '=', 'compras.id')
         ->join('almacenes', 'almacenes.id', '=', 'transacciones_movimiento_inventarios.id_almacen')
 
         ->select('almacenes.nombre as nombre_almacen','compras.id', 'compras.fecha_recepion_producto', 'compras.costo_total_compra', 'compras.recepion_producto', 'compras.documentacion')
         ->get();
+        $consultaBaseDeDatosJson = json_encode((DB::getQueryLog()));
+        /*---------------------- Activida de logs del sistema ---------------------*/
+        $actividadUsuario = "Visualiza la lista de compras.";
+        $actividadBaseDeDatos = $consultaBaseDeDatosJson;
+        $this->user_activity($actividadUsuario,$actividadBaseDeDatos);
+        /*------------- finaliza la actividad de registro del usuario -------------*/
         return view('compra.listar')->with(compact('compras'));
     }
 
@@ -40,12 +47,19 @@ class CompraController extends Controller
      */
     public function create()
     {
+        DB::enableQueryLog();
         $contactoProveedores = DB::table('contacto_proveedores')
         ->join('proveedores', 'proveedores.id', '=', 'contacto_proveedores.id')
         ->select('proveedores.id as id_proveedores','proveedores.logo', 'proveedores.nombre as proveedor', 'contacto_proveedores.id', 'contacto_proveedores.persona', 'contacto_proveedores.cargo')
         ->get();
         $productos = Producto::all();
         $almacenes = Almacene::all();
+        $consultaBaseDeDatosJson = json_encode((DB::getQueryLog()));
+        /*---------------------- Activida de logs del sistema ---------------------*/
+        $actividadUsuario = "Ingresa a realizar compra.";
+        $actividadBaseDeDatos = $consultaBaseDeDatosJson;
+        $this->user_activity($actividadUsuario,$actividadBaseDeDatos);
+        /*------------- finaliza la actividad de registro del usuario -------------*/
         return view('compra.registro_compra')->with(compact('productos','contactoProveedores','almacenes'));
     }
 
@@ -283,9 +297,47 @@ class CompraController extends Controller
             }
         }
     }
-
     public function proveedor($id){
         return Proveedor::select('id','logo','nombre')
         ->where('id','=',$id)->get();
     }
+
+    /*------------- Lo necesario para realizar logs del sistema -------------*/
+    public function user_activity($actividadUsuario,$actividadBaseDeDatos)
+    {
+        $activityLog = [
+            'name'=>$this->nombre_usuario_autenticado(),
+            'image'=>$this->imagen_usuario_autenticado(),
+            'registro_db_id'=>auth()->user()->persona_id,
+            'description'=>$actividadUsuario,
+            'date_time'=> date('Y-m-d H:i:s'),
+            'created_at'=>Carbon::now(),
+            'consulta'=>$actividadBaseDeDatos,
+        ];
+        DB::table('activity_logs')->insert($activityLog);
+    }
+    public function nombre_usuario_autenticado(){
+        $Id_Persona_Atenticada = auth()->user()->id;
+        $DatosEnElSistema = DB::table('empleados')
+        ->select('nombre','apellido_paterno','apellido_materno')
+        ->join('users', 'users.id', '=', 'empleados.id_users')
+        ->join('personas', 'personas.id', '=', 'empleados.id_personas')
+        ->where('empleados.id_users', '=', $Id_Persona_Atenticada)
+        ->get();
+        $NombreUsuarioEnElSistema = $DatosEnElSistema[0]->nombre." ".$DatosEnElSistema[0]->apellido_paterno." ".$DatosEnElSistema[0]->apellido_materno;
+        return($NombreUsuarioEnElSistema);
+    }
+    public function imagen_usuario_autenticado(){
+        $Id_Persona_Atenticada = auth()->user()->id;
+        $DatosEnElSistema = DB::table('empleados')
+        ->select('foto')
+        ->join('users', 'users.id', '=', 'empleados.id_users')
+        ->join('personas', 'personas.id', '=', 'empleados.id_personas')
+        ->where('empleados.id_users', '=', $Id_Persona_Atenticada)
+        ->get();
+        $ImagenUsuarioEnElSistema = $DatosEnElSistema[0]->foto;
+        return($ImagenUsuarioEnElSistema);
+    }
+    /*-------------------- Finaliza los logs del sistema --------------------*/
+
 }

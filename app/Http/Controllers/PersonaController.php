@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator, Hash, Auth;
-// use App\Persona;
+//use App\Persona;
 use Carbon\carbon;
+use App\Producto;
+use App\ActivityLogs;
 
 
 class PersonaController extends Controller
@@ -158,6 +160,9 @@ class PersonaController extends Controller
     {
         return view('almacen/lista');
 
-    }
-    
+    }   
+    public function logs(){
+        $logs=ActivityLogs::all();
+        return view('sistema/listaLogs')->with(compact('logs'));
+    } 
 }

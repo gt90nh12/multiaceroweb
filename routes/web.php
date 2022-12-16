@@ -1,8 +1,10 @@
 <?php
 
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'AuthController@index')->name('auths.index')->middleware('guest');
+Route::get('/login_personal', 'AuthController@auteticacionusuario')->name('login_personal');
 Route::get('auths/list', 'AuthController@list')->name('auths.list')->middleware('auth');
 Route::post('auths/login', 'AuthController@login')->name('auths.login');
 Route::get('/admin', 'PersonaController@admin')->name('admin')->middleware('auth');
@@ -12,6 +14,13 @@ Route::post('auths/store', 'AuthController@store')->name('auths.store');
 Route::get('auths/show/{id}', 'AuthController@show')->name('auths.show');
 Route::get('auths/{id}/edit', 'AuthController@edit')->name('auths.edit');
 Route::put('auths/update/{id}', 'AuthController@update')->name('auths.update');
+Route::get('/equipo', 'AuthController@listarpersonal')->name('equipo');
+ //RUTAS PLANTILLA INICIAL
+
+ Route::get('/conocenos', 'EquipoController@conocenos')->name('conocenos');
+ Route::get('/loginchofer', 'EquipoController@loginchofer')->name('loginchofer');
+ Route::get('/detalleproductos{id}', 'EquipoController@detalleproductos')->name('detalleproductos');
+ 
 
 //Router Auth or auth
 Route::get('/login', 'ConnectController@getLogin')->name('login');
@@ -24,6 +33,9 @@ Route::get('/actualizar_registro_usuario{id}', 'ConnectController@actualizarDato
 Route::post('/modificar_datos_usuario', 'ConnectController@modificarDatosUsuarios')->name('modificar_datos_usuario');
 Route::get('/estado_datos_usuario{id}', 'ConnectController@estadoDatosUsuarios')->name('estado_datos_usuario');
 Route::post('/registro_administrador', 'ConnectController@registroAdministrador')->name('registro_administrador');
+Route::get('/copia_seguridad', 'ConnectController@backup')->name('copia_seguridad');
+
+
 
 //Perosonal
 Route::get('/cajero', function(){return view('layouts.cajero');})->name('cargo.cajeros');
@@ -50,7 +62,7 @@ Route::get('/registro_producto', 'ProductoController@create')->name('registro_pr
 Route::post('/almacenar_producto', 'ProductoController@store')->name('almacenar_producto');
 Route::get('/listar_producto', 'ProductoController@index')->name('listar_producto');
 Route::get('producto_caracteristicas/{id}', 'ProductoController@caracteristica_producto'); // ruta de ajax para obtener las caracteristicas del producto
-
+Route::get('/listarproductos', 'ProductoController@listarproductos')->name('listarproductos');
 
 /* ------------------------- REGISTRO DE ALMACEN ------------------------- */
 Route::get('/registro_almacen', 'AlmacenController@create')->name('registro_almacen');
@@ -72,6 +84,7 @@ Route::get('/registro_compra', 'CompraController@create')->name('registro_compra
 Route::post('/almacenar_compra', 'CompraController@store')->name('almacenar_compra');
 Route::get('/listar_compra', 'CompraController@index')->name('listar_compra');
 Route::Get('datos_proveedor/{id}', 'CompraController@proveedor'); // ruta de ajax para obtener la imagen del producto
+
 
 
 //---------------------------------- CLIENTES -------------------------------------------------
@@ -126,3 +139,11 @@ Route::get('/entrega_pedidos', 'PedidoController@index')->name('entrega_pedidos'
 Route::get('/registrar_pedidos', 'PedidoController@create')->name('registrar_pedidos');
 Route::post('/almacenar_pedidos', 'PedidoController@store')->name('almacenar_pedidos');
 
+/*-----------------------------------Dashboard-------------------------------------------*/
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
+/* -------------------- LOGS "Actividad de usuario en el sistema"  -------------------- */
+Route::get('/logs', 'PersonaController@logs')->name('logs');
+
+/* ------------------------------ Monitoreo de vehiculos  ----------------------------- */
+Route::get('/trazabilidad', 'ConnectController@traceability')->name('trazabilidad');

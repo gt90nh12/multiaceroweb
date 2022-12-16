@@ -39,7 +39,7 @@ class ClienteController extends Controller
   public function show($id)
   {
     $vCli=DB::table('clientes')->select()->join('ventas', 'ventas.id_clientes','=','clientes.id')->where('clientes.id', '=', $id)->get();
-    return view('cliente.show', compact('vCli',));
+    return view('cliente.show', compact('vCli'));
   }
 
   public function edit($id)

@@ -12,12 +12,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\DB;
+use Carbon\carbon;
 
 class AuthController extends Controller
 {
   public function index()
   {
     return view('auth.index');
+  }
+  public function auteticacionusuario()
+  {
+    return view('auth.autenticacion');
   }
 
   public function list()
@@ -35,7 +40,16 @@ class AuthController extends Controller
     ]);
     if(!empty(User::where('user',$request->user)->where('status',1)->first())&&Auth::attempt($credentials)){
       request()->session()->regenerate();
+      DB::enableQueryLog();
       $cargo=DB::table('empleados')->join('users','users.id','empleados.id_users')->where('empleados.id_users',User::where('user',$request->user)->first()->id)->first()->cargo;
+      DB::enableQueryLog();
+      $consultaBaseDeDatosJson = json_encode((DB::getQueryLog()));
+      /*---------------------- Activida de logs del sistema ---------------------*/
+      $actividadUsuario = "Inicia sesión.";
+      $actividadBaseDeDatos = $consultaBaseDeDatosJson;
+      $this->user_activity($actividadUsuario,$actividadBaseDeDatos);
+      /*------------- finaliza la actividad de registro del usuario -------------*/
+
       if($cargo==='Cajero'){
         return redirect()->intended(route('cargo.cajeros'));
       }
@@ -208,10 +222,65 @@ class AuthController extends Controller
   }
 
   public function logout(Request $request){
+    /*---------------------- Activida de logs del sistema ---------------------*/
+    $actividadUsuario = "Cerrar sesión.";
+    $actividadBaseDeDatos = 0;
+    $this->user_activity($actividadUsuario,$actividadBaseDeDatos);
+    /*------------- finaliza la actividad de registro del usuario -------------*/
     $request->session()->invalidate();
     $request->session()->regenerateToken();
+    DB::enableQueryLog();
     Auth::logout();
     return redirect(route('auths.index'));
   }
+  public function listarpersonal()
+  {
+    $personal=DB::table('empleados')
+    ->select('personas.nombre as nombre_personal', 'almacenes.nombre as nombre_almacen', 'empleados.foto','personas.apellido_paterno','personas.apellido_materno','empleados.cargo','personas.telefono_movil','personas.telefono_fijo','almacenes.direccion')
+    ->join('personas','personas.id','=','empleados.id_personas')
+    ->join('almacenes','almacenes.id','=','empleados.id_almacenes')
+    ->join('users','users.id','=','empleados.id_users')
+    ->where('users.status','=','1')
+    ->get();
+    return view('multiacero.equipo', compact('personal'));
+  }
+  /*----------------------- Almacena logs del sistema ----------------------*/
+  public function user_activity($actividadUsuario,$actividadBaseDeDatos)
+  {
+    $activityLog = [
+      'name'=>$this->nombre_usuario_autenticado(),
+      'image'=>$this->imagen_usuario_autenticado(),
+      'registro_db_id'=>auth()->user()->persona_id,
+      'description'=>$actividadUsuario,
+      'date_time'=> date('Y-m-d H:i:s'),
+      'created_at'=>Carbon::now(),
+      'consulta'=>$actividadBaseDeDatos,
+    ];
+    DB::table('activity_logs')->insert($activityLog);
+  }
+  /*------------- Lo necesario para realizar logs del sistema -------------*/
+  public function nombre_usuario_autenticado(){
+    $Id_Persona_Atenticada = auth()->user()->id;
+    $DatosEnElSistema = DB::table('empleados')
+    ->select('nombre','apellido_paterno','apellido_materno')
+    ->join('users', 'users.id', '=', 'empleados.id_users')
+    ->join('personas', 'personas.id', '=', 'empleados.id_personas')
+    ->where('empleados.id_users', '=', $Id_Persona_Atenticada)
+    ->get();
+    $NombreUsuarioEnElSistema = $DatosEnElSistema[0]->nombre." ".$DatosEnElSistema[0]->apellido_paterno." ".$DatosEnElSistema[0]->apellido_materno;
+    return($NombreUsuarioEnElSistema);
+  }
+  public function imagen_usuario_autenticado(){
+    $Id_Persona_Atenticada = auth()->user()->id;
+    $DatosEnElSistema = DB::table('empleados')
+    ->select('foto')
+    ->join('users', 'users.id', '=', 'empleados.id_users')
+    ->join('personas', 'personas.id', '=', 'empleados.id_personas')
+    ->where('empleados.id_users', '=', $Id_Persona_Atenticada)
+    ->get();
+    $ImagenUsuarioEnElSistema = $DatosEnElSistema[0]->foto;
+    return($ImagenUsuarioEnElSistema);
+  }
+  /*-------------------- Finaliza los logs del sistema --------------------*/
 
-}
+} 

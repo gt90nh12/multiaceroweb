@@ -48,7 +48,7 @@ function renderizadoProductosCheck(venta){
     let nuevocontenido=`
       <tr id="tr-productos">
         <td id="eventoEjemplo" >
-          <img src="${assetGeneral}assets/images/products/${element.img}" alt="${element.nombre}"
+          <img src="${assetGeneral}assets/productos/${element.img}" alt="${element.nombre}"
           title="Caracteriticas: ${element.car}" class="rounded mr-3" height="64" />
           <p class="m-0 d-inline-block align-middle font-16">
               <a href="javascript: void(0);"

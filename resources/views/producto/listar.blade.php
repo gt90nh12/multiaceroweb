@@ -57,7 +57,6 @@
 </div>
 
 
-
 <script src="{{asset('assets/js/vendor/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('assets/js/vendor/dataTables.bootstrap4.js')}}"></script>
 <script src="{{asset('assets/js/vendor/dataTables.responsive.min.js')}}"></script>

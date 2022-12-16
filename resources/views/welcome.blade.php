@@ -7,7 +7,7 @@
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{ ('images/favicon.ico ') }}">
+        <link rel="shortcut icon" href="{{ ('images/LOGO_KAPA.png') }}">
 
         <!-- App css -->
         <link href="{{ ('assets/css/icons.min.css ') }}" rel="stylesheet" type="text/css" />

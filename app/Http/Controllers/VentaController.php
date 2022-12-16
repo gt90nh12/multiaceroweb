@@ -16,6 +16,7 @@ use App\transacciones_movimiento_inventarios;
 use App\Venta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\carbon;
 use Dompdf\Dompdf;
 use PDF;
 
@@ -23,8 +24,15 @@ class VentaController extends Controller
 {
   public function index()
   { 
+    DB::enableQueryLog();
     $todasLasVentas=new Venta();
     $todasLasVentas=DB::table('clientes')->select()->join('ventas','ventas.id_clientes','=','clientes.id')->get();
+    $consultaBaseDeDatosJson = json_encode((DB::getQueryLog()));
+    /*---------------------- Activida de logs del sistema ---------------------*/
+    $actividadUsuario = "Visualiza la lista de ventas.";
+    $actividadBaseDeDatos = $consultaBaseDeDatosJson;
+    $this->user_activity($actividadUsuario,$actividadBaseDeDatos);
+    /*------------- finaliza la actividad de registro del usuario -------------*/
     return view('venta.index', compact('todasLasVentas'));
   }
 
@@ -32,17 +40,18 @@ class VentaController extends Controller
   {
     $usuarioautenticado = auth()->id();
     // echo($usuarioautenticado);
+    DB::enableQueryLog();
     if($usuarioautenticado==1){
       $sucursalUsuario=DB::table('almacenes') ->select('sucursales.nombre_sucursal','sucursales.pais','sucursales.estado_departamento','sucursales.municipio','sucursales.direccion','sucursales.correo','sucursales.telefono')
-                                          ->join('sucursales','sucursales.id','=','almacenes.id_sucursal')
-                                          ->where('almacenes.id','=',1)
-                                          ->get();
+      ->join('sucursales','sucursales.id','=','almacenes.id_sucursal')
+      ->where('almacenes.id','=',1)
+      ->get();
     }else{  
       $sucursalUsuario=DB::table('almacenes') ->select('sucursales.nombre_sucursal','sucursales.pais','sucursales.estado_departamento','sucursales.municipio','sucursales.direccion','sucursales.correo','sucursales.telefono')
-                                          ->join('empleados','empleados.id_almacenes','=','almacenes.id')
-                                          ->join('sucursales','sucursales.id','=','almacenes.id_sucursal')
-                                          ->where('empleados.id','=',$usuarioautenticado)
-                                          ->get();
+      ->join('empleados','empleados.id_almacenes','=','almacenes.id')
+      ->join('sucursales','sucursales.id','=','almacenes.id_sucursal')
+      ->where('empleados.id','=',$usuarioautenticado)
+      ->get();
     }
     $pro_to=new Producto();
     $clientes_total=new Cliente();
@@ -56,6 +65,12 @@ class VentaController extends Controller
     $al_pro=almacen_producto::all();
     $caracteristicas=Caracteristica::all();
     $empresa=Empresa::find(1);
+    $consultaBaseDeDatosJson = json_encode((DB::getQueryLog()));
+    /*---------------------- Activida de logs del sistema ---------------------*/
+    $actividadUsuario = "Ingresa a crear nueva factura.";
+    $actividadBaseDeDatos = $consultaBaseDeDatosJson;
+    $this->user_activity($actividadUsuario,$actividadBaseDeDatos);
+    /*------------- finaliza la actividad de registro del usuario -------------*/
     return view('venta.create',compact('pro_to','clientes_total','al','caracteristicas','em','sucursal','al_pro','fa','empresa','sucursalUsuario'));
   }
 
@@ -164,104 +179,138 @@ class VentaController extends Controller
         "e","f","g","h","i","j","k","l","m","n",
         "o","p","q","r","s","t","u","v","w","x",
         "y","z","+","/"];
-      $c=1;
-      $w="";
-      while ($c>0){
-        $c=floor($v/64);
-        $r=$v%64;
-        $w=$dic[$r].$w;
-        $v=$c;
+        $c=1;
+        $w="";
+        while ($c>0){
+          $c=floor($v/64);
+          $r=$v%64;
+          $w=$dic[$r].$w;
+          $v=$c;
+        }
+        return $w;
       }
-      return $w;
+      function CR4($m,$k,$un=false){
+        $st=range(0,255);
+        $x=0;
+        $y=0;
+        $i1=0;
+        $i2=0;
+        $mE="";
+        for($i=0;$i<=255;$i++){
+          $i2=(ord($k[$i1])+$st[$i]+$i2)%256;
+          $aux=$st[$i];
+          $st[$i]=$st[$i2];
+          $st[$i2]=$aux;
+          $i1=($i1+1)%strlen($k);
+        }
+        for($i=0;$i<strlen($m);$i++){
+          $x=($x+1)%256;
+          $y=($st[$x]+$y)%256;
+          $aux=$st[$x];
+          $st[$x]=$st[$y];
+          $st[$y]=$aux;
+          $mH=strtoupper(dechex((ord($m[$i]))^$st[($st[$x]+$st[$y])%256]));
+          $mE=$mE.($un?"":"-").(strlen($mH)===1?'0'.$mH:$mH);
+        }
+        return $un?$mE:substr($mE,1,strlen($mE));
+      }
+      function g($d){
+        $k=$d->f;
+        $iN=VffD($d->b,2);
+        $nc=VffD($d->c,2);
+        $f=VffD(date('Ymd'),2);
+        $m=VffD(round($d->e),2);
+        $sVV5=VffD($iN+$nc+$f+$m,5);
+        $d5Vff=substr($sVV5,strlen($sVV5)-5);
+        $n=str_split($d5Vff);
+        for($i=0;$i<5;$i++){
+          $n[$i]=$n[$i]+1;
+        }
+        $st1=substr($k,0,$n[0]);
+        $st2=substr($k,$n[0],$n[1]);
+        $st3=substr($k,$n[0]+$n[1],$n[2]);
+        $st4=substr($k,$n[0]+$n[1]+$n[2],$n[3]);
+        $st5=substr($k,$n[0]+$n[1]+$n[2]+$n[3],$n[4]);
+        $RC4=CR4($d->a.$st1.$iN.$st2.$nc.$st3.$f.$st4.$m.$st5,$k.$d5Vff,1);    
+        $chars=str_split($RC4);
+        $mT=0;$sp1=0;$sp2=0;$sp3=0;$sp4=0;$sp5=0;$tmp=1;
+        for($i=0;$i<strlen($RC4);$i++){
+          $mT+=ord($chars[$i]);
+          switch($tmp){
+            case 1: $sp1+=ord($chars[$i]);break;
+            case 2: $sp2+=ord($chars[$i]);break;
+            case 3: $sp3+=ord($chars[$i]);break;
+            case 4: $sp4+=ord($chars[$i]);break;
+            case 5: $sp5+=ord($chars[$i]);break;
+          }            
+          $tmp=($tmp<5)?$tmp+1:1;
+        }
+        $tmp1=floor($mT*$sp1/$n[0]);
+        $tmp2=floor($mT*$sp2/$n[1]);
+        $tmp3=floor($mT*$sp3/$n[2]);
+        $tmp4=floor($mT*$sp4/$n[3]);
+        $tmp5=floor($mT*$sp5/$n[4]);
+        return CR4(ct($tmp1+$tmp2+$tmp3+$tmp4+$tmp5),$k.$d5Vff);
+      }
+      return g($request);
     }
-    function CR4($m,$k,$un=false){
-      $st=range(0,255);
-      $x=0;
-      $y=0;
-      $i1=0;
-      $i2=0;
-      $mE="";
-      for($i=0;$i<=255;$i++){
-        $i2=(ord($k[$i1])+$st[$i]+$i2)%256;
-        $aux=$st[$i];
-        $st[$i]=$st[$i2];
-        $st[$i2]=$aux;
-        $i1=($i1+1)%strlen($k);
-      }
-      for($i=0;$i<strlen($m);$i++){
-        $x=($x+1)%256;
-        $y=($st[$x]+$y)%256;
-        $aux=$st[$x];
-        $st[$x]=$st[$y];
-        $st[$y]=$aux;
-        $mH=strtoupper(dechex((ord($m[$i]))^$st[($st[$x]+$st[$y])%256]));
-        $mE=$mE.($un?"":"-").(strlen($mH)===1?'0'.$mH:$mH);
-      }
-      return $un?$mE:substr($mE,1,strlen($mE));
+    public function reporteGeneral(){
+      $todasLasVentas=new Venta();
+      $todasLasVentas=DB::table('clientes')->select()->join('ventas','ventas.id_clientes','=','clientes.id')->get();
+      // $todasLasVentas=Venta::all();
+      $fecha = date('Y-m-d');
+      $data = compact('todasLasVentas','fecha');
+      $pdf = PDF::loadView('venta.reporteGeneralVentas', $data);
+      // return $pdf->stream();
+      return $pdf->download('Venta_general'.time().'.pdf');
+
+      //     return view('venta.index', compact('todasLasVentas'));
+      //     // instantiate and use the dompdf class
+      // $dompdf = new Dompdf();
+      // $dompdf->loadHtml('hello world');
+      // // (Optional) Setup the paper size and orientation
+      // $dompdf->setPaper('A4', 'landscape');
+      // // Render the HTML as PDF
+      // $dompdf->render();
+      // // Output the generated PDF to Browser
+      // $dompdf->stream();
     }
-    function g($d){
-      $k=$d->f;
-      $iN=VffD($d->b,2);
-      $nc=VffD($d->c,2);
-      $f=VffD(date('Ymd'),2);
-      $m=VffD(round($d->e),2);
-      $sVV5=VffD($iN+$nc+$f+$m,5);
-      $d5Vff=substr($sVV5,strlen($sVV5)-5);
-      $n=str_split($d5Vff);
-      for($i=0;$i<5;$i++){
-        $n[$i]=$n[$i]+1;
-      }
-      $st1=substr($k,0,$n[0]);
-      $st2=substr($k,$n[0],$n[1]);
-      $st3=substr($k,$n[0]+$n[1],$n[2]);
-      $st4=substr($k,$n[0]+$n[1]+$n[2],$n[3]);
-      $st5=substr($k,$n[0]+$n[1]+$n[2]+$n[3],$n[4]);
-      $RC4=CR4($d->a.$st1.$iN.$st2.$nc.$st3.$f.$st4.$m.$st5,$k.$d5Vff,1);    
-      $chars=str_split($RC4);
-      $mT=0;$sp1=0;$sp2=0;$sp3=0;$sp4=0;$sp5=0;$tmp=1;
-      for($i=0;$i<strlen($RC4);$i++){
-        $mT+=ord($chars[$i]);
-        switch($tmp){
-          case 1: $sp1+=ord($chars[$i]);break;
-          case 2: $sp2+=ord($chars[$i]);break;
-          case 3: $sp3+=ord($chars[$i]);break;
-          case 4: $sp4+=ord($chars[$i]);break;
-          case 5: $sp5+=ord($chars[$i]);break;
-        }            
-        $tmp=($tmp<5)?$tmp+1:1;
-      }
-      $tmp1=floor($mT*$sp1/$n[0]);
-      $tmp2=floor($mT*$sp2/$n[1]);
-      $tmp3=floor($mT*$sp3/$n[2]);
-      $tmp4=floor($mT*$sp4/$n[3]);
-      $tmp5=floor($mT*$sp5/$n[4]);
-      return CR4(ct($tmp1+$tmp2+$tmp3+$tmp4+$tmp5),$k.$d5Vff);
+    /*---------------------- Almacena logs del sistema ----------------------*/
+    public function user_activity($actividadUsuario,$actividadBaseDeDatos)
+    {
+      $activityLog = [
+        'name'=>$this->nombre_usuario_autenticado(),
+        'image'=>$this->imagen_usuario_autenticado(),
+        'registro_db_id'=>auth()->user()->persona_id,
+        'description'=>$actividadUsuario,
+        'date_time'=> date('Y-m-d H:i:s'),
+        'created_at'=>Carbon::now(),
+        'consulta'=>$actividadBaseDeDatos,
+      ];
+      DB::table('activity_logs')->insert($activityLog);
     }
-    return g($request);
+    /*------------- Lo necesario para realizar logs del sistema -------------*/
+    public function nombre_usuario_autenticado(){
+      $Id_Persona_Atenticada = auth()->user()->id;
+      $DatosEnElSistema = DB::table('empleados')
+      ->select('nombre','apellido_paterno','apellido_materno')
+      ->join('users', 'users.id', '=', 'empleados.id_users')
+      ->join('personas', 'personas.id', '=', 'empleados.id_personas')
+      ->where('empleados.id_users', '=', $Id_Persona_Atenticada)
+      ->get();
+      $NombreUsuarioEnElSistema = $DatosEnElSistema[0]->nombre." ".$DatosEnElSistema[0]->apellido_paterno." ".$DatosEnElSistema[0]->apellido_materno;
+      return($NombreUsuarioEnElSistema);
+    }
+    public function imagen_usuario_autenticado(){
+      $Id_Persona_Atenticada = auth()->user()->id;
+      $DatosEnElSistema = DB::table('empleados')
+      ->select('foto')
+      ->join('users', 'users.id', '=', 'empleados.id_users')
+      ->join('personas', 'personas.id', '=', 'empleados.id_personas')
+      ->where('empleados.id_users', '=', $Id_Persona_Atenticada)
+      ->get();
+      $ImagenUsuarioEnElSistema = $DatosEnElSistema[0]->foto;
+      return($ImagenUsuarioEnElSistema);
+    }
+    /*-------------------- Finaliza los logs del sistema --------------------*/
   }
-  public function reporteGeneral(){
-    $todasLasVentas=new Venta();
-    $todasLasVentas=DB::table('clientes')->select()->join('ventas','ventas.id_clientes','=','clientes.id')->get();
-    // $todasLasVentas=Venta::all();
-    $fecha = date('Y-m-d');
-    $data = compact('todasLasVentas','fecha');
-    $pdf = PDF::loadView('venta.reporteGeneralVentas', $data);
-    // return $pdf->stream();
-    return $pdf->download('Venta_general'.time().'.pdf');
-
-//     return view('venta.index', compact('todasLasVentas'));
-
-//     // instantiate and use the dompdf class
-// $dompdf = new Dompdf();
-// $dompdf->loadHtml('hello world');
-
-// // (Optional) Setup the paper size and orientation
-// $dompdf->setPaper('A4', 'landscape');
-
-// // Render the HTML as PDF
-// $dompdf->render();
-
-// // Output the generated PDF to Browser
-// $dompdf->stream();
-  }
-}

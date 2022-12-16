@@ -104,7 +104,7 @@ class ProductoController extends Controller
             for($i=0; $i<$longitud; $i++){
                 $carateristicaProducto=[
                     // 'cod_producto'=>$cod_producto,
-                    'id_producto'=>$numeroRegistroTablaProducto,
+                    'id_producto'=>$numeroRegistroTablaProducto + 1,
                     'nombre'=> $nombreCaracteristica[$i],
                     'dato'=> $datoCaracteristica[$i],
                     'unidad_medida'=> $unidadMedidaCaracteristica[$i],
@@ -207,5 +207,10 @@ class ProductoController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function listarproductos()
+    {
+        $productos = Producto::all();
+        return view('multiacero.listarproductos')->with(compact('productos'));
     }
 }

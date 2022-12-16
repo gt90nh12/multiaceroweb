@@ -103,12 +103,24 @@
                             <option data-select="unidad_factor_almacen">Seleccionar unidad.</option>
                             <option>Toneladas</option>
                             <option>Kilo</option>
+                            <option>Metro lineal</option>
+                            <option>Caja</option>
+                            <option>Bolsa</option>
+                            <option>Juego</option>
+                            <option>Metro</option>
+                            <option>Paquete</option>
+                            <option>Unidad</option>
+                            <option>Rollo</option>
+                            <option>Par 2 unidades</option>
                         </select>
                         <label for="embalaje" class="col-form-label">Embalaje</label>
                         <select id="embalaje" name="embalaje" class="form-control">
                             <option data-select="unidad_factor_almacen">Seleccionar tipo embalaje.</option>
                             <option>Palets</option>
                             <option>Paquetes</option>
+                            <option>Bobina</option>
+                            <option>Bolsa</option>
+                            <option>Ninguno</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6 claseselect">

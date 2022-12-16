@@ -46,8 +46,9 @@
                                         <option data-select2-id="3">Seleccione pais</option>
                                         <option value="Argentina">Argentina</option>
                                         <option value="Bolivia">Bolivia</option>
-                                        <option value="Brasil">Brasil</option>
-                                        <option value="Brasil">Peru</option>
+                                        <option value="Brazil">Brasil</option>
+                                        <option value="Peru">Peru</option>
+                                        <option value="Rep. Checa">Republica Checa</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">
@@ -60,6 +61,9 @@
                                         <option value="Arequipa">Arequipa</option>
                                         <option value="Arequipa">La Paz</option>
                                         <option value="Santa Cruz">Santa Cruz</option>
+                                        <option value="Sao Paulo">Sao Paulo</option>
+                                        <option value="Rio Grande">Rio Grande</option>
+                                        <option value="Rio Grande">Extranjero</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">

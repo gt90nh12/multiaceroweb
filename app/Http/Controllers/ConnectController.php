@@ -278,4 +278,10 @@ class ConnectController extends Controller
 
        
     }
+    public function backup(){
+        return view('parametricas.backup');   
+    }
+    public function traceability(){
+        return view('trazabilidad.traceability');   
+    }
 }

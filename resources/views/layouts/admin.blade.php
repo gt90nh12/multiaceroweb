@@ -282,14 +282,6 @@
                                 </li>
                             </ul>
                         </li>
-
-                        <li class="side-nav-item">
-                            <a href="{{route('clientes.index')}}" class="side-nav-link">
-                                <i class="dripicons-user"></i>
-                                <span> Clientes </span>
-                            </a>
-                        </li>
-
                         <li class="side-nav-item">
                             <a href="javascript: void(0);" class="side-nav-link">
                                 <i class="uil-copy-alt"></i>
@@ -379,6 +371,39 @@
                                 </li> -->
                             </ul>
                         </li>
+                        <li class="side-nav-item">
+                            <a href="{{route('trazabilidad')}}" class="side-nav-link">
+                                <i class="uil-location-point"></i>
+                                <span>Trazabilidad</span>
+                            </a>
+                            <!--<ul class="side-nav-second-level mm-collapse" aria-expanded="false">
+                                <li>
+                                    <a href="maps-google.html">Google Maps</a>
+                                </li>
+                                <li>
+                                    <a href="maps-vector.html">Vector Maps</a>
+                                </li>
+                            </ul>-->
+                        </li>
+                        <li class="side-nav-item">
+                            <a href="{{route('clientes.index')}}" class="side-nav-link">
+                                <i class="dripicons-user"></i>
+                                <span> Clientes </span>
+                            </a>
+                        </li>
+                        <li class="side-nav-title side-nav-item">Sistema</li>
+                        <li class="side-nav-item">
+                            <a href="{{route('copia_seguridad')}}" class="side-nav-link">
+                                <i class="dripicons-stack "></i>
+                                <span> Backup </span>
+                            </a>
+                        </li>
+                        <li class="side-nav-item">
+                            <a href="{{route('logs')}}" class="side-nav-link">
+                                <i class="dripicons-to-do"></i>
+                                <span> Logs </span>
+                            </a>
+                        </li>
 
                     </ul>
 
@@ -425,7 +450,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-6">
-                                    2021 © Multiacero
+                                    2022 © Multiacero
                                 </div>
                             <!-- <div class="col-md-6">
                                 <div class="text-md-right footer-links d-none d-md-block">

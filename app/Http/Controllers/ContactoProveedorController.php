@@ -85,9 +85,11 @@ class ContactoProveedorController extends Controller
             $contacto_proveedor->estado=false;
             $contacto_proveedor->id_proveedor=e($request->input('proveedor'));;
             if($contacto_proveedor->save()):
-             return back()->withErrors($validator)->with('message','Personal registrado')->with('typealert', 'success');
-         endif;
+           return back()->withErrors($validator)->with('message','Personal registrado')->with('typealert', 'success');
+        endif;
+        //print_r($contacto_proveedor);
      endif;
+
  }
 
     /**
